@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { BackgroundPattern } from "@/components/common/BackgroundPattern";
+import ClientProviders from "@/components/providers/ClientProviders";
 
 export const metadata: Metadata = {
   title: "Dr. Vivek Shetty - Senior Consultant Head & Neck Oncology",
@@ -32,10 +34,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="font-sans antialiased">
-        <Header />
-        <main>{children}</main>
-        <Footer />
+      <body className="font-sans antialiased min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 relative overflow-x-hidden" style={{ fontFamily: 'Montserrat, Helvetica Neue, Helvetica, Arial, sans-serif' }}>
+        <BackgroundPattern />
+        
+        <div className="relative z-10">
+          <ClientProviders>
+            <Header />
+            <main>{children}</main>
+            <Footer />
+          </ClientProviders>
+        </div>
       </body>
     </html>
   );

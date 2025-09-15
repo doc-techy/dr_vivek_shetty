@@ -1,5 +1,4 @@
 import { AboutSection } from '@/components/sections/AboutSection';
-import { StatsSection } from '@/components/sections/StatsSection';
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
 
 export const metadata = {
@@ -11,7 +10,6 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen">
       <AboutSection />
-      <StatsSection />
       <TestimonialsSection />
     </div>
   );

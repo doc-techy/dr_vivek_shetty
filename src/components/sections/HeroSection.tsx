@@ -2,148 +2,120 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, Play, Star, Award, Users, Calendar, X } from 'lucide-react';
-import { useState } from 'react';
+import { ArrowRight, Play, Star, Award, Users, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 export function HeroSection() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center bg-gradient-to-br from-primary-50 via-white to-primary-100 overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232563eb' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }} />
-      </div>
+    <section id="home" className="relative min-h-screen flex items-center pt-20">
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="container-custom relative z-10">
+        <div className="grid lg:grid-cols-2 gap-20 items-center" style={{ minHeight: 'calc(100vh - 160px)' }}>
           {/* Left Content */}
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <div className="inline-flex items-center px-4 py-2 bg-primary-100 text-primary-700 rounded-full text-sm font-medium">
-                <Award className="w-4 h-4 mr-2" />
-                Senior Consultant - Head & Neck Oncology
-              </div>
-              
+          <div className={`space-y-6 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            {/* Main Heading */}
+            <div className="space-y-6">
               <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                Expert Care in{' '}
-                <span className="gradient-text">Head & Neck</span>{' '}
-                Oncology
+                Expert Surgical
+                <br />
+                <span className="text-blue-600">Oncology Care</span>
               </h1>
               
-              <p className="text-xl text-gray-600 leading-relaxed">
-                Dr. Vivek Shetty brings 9 years of specialized experience in surgical oncology 
-                and reconstructive surgery. Providing compassionate, world-class care at SPARSH Hospital, Bangalore.
+              <p className="text-lg lg:text-xl text-gray-600 leading-relaxed max-w-2xl">
+                Dr. Vivek Shetty is a highly experienced Senior Consultant specializing in head and neck surgical oncology with over 9 years of dedicated practice. 
+                He provides comprehensive advanced surgical care, complex reconstructive procedures, and personalized treatment plans at SPARSH Hospital, Bangalore. 
+                His expertise encompasses the latest minimally invasive techniques and state-of-the-art surgical interventions for optimal patient outcomes.
               </p>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-6">
+            {/* Professional Stats */}
+            <div className="grid grid-cols-3 gap-8 py-6 border-t border-b border-gray-200">
               <div className="text-center">
-                <div className="text-3xl font-bold text-primary-600">9+</div>
-                <div className="text-sm text-gray-600">Years Experience</div>
+                <div className="text-2xl lg:text-3xl font-bold text-blue-600 mb-1">11+</div>
+                <div className="text-sm lg:text-base text-gray-600 font-medium">Years Experience</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-primary-600">500+</div>
-                <div className="text-sm text-gray-600">Successful Surgeries</div>
+                <div className="text-2xl lg:text-3xl font-bold text-blue-600 mb-1">1000+</div>
+                <div className="text-sm lg:text-base text-gray-600 font-medium">Surgeries</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-primary-600">98%</div>
-                <div className="text-sm text-gray-600">Patient Satisfaction</div>
+                <div className="text-2xl lg:text-3xl font-bold text-blue-600 mb-1">98%</div>
+                <div className="text-sm lg:text-base text-gray-600 font-medium">Success Rate</div>
               </div>
             </div>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
-                href="/appointment"
-                className="inline-flex items-center justify-center px-8 py-4 bg-primary-600 text-white rounded-lg font-semibold hover:bg-primary-700 transition-all duration-200 transform hover:scale-105"
+                href="#appointment"
+                className="group inline-flex items-center justify-center px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl"
               >
-                Book Appointment
-                <ArrowRight className="w-5 h-5 ml-2" />
+                Book Consultation
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
               </Link>
               
               <button
                 onClick={() => setIsVideoOpen(true)}
-                className="inline-flex items-center justify-center px-8 py-4 border-2 border-primary-600 text-primary-600 rounded-lg font-semibold hover:bg-primary-600 hover:text-white transition-all duration-200"
+                className="inline-flex items-center justify-center px-8 py-4 bg-white border-2 border-blue-600 text-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-300"
               >
                 <Play className="w-5 h-5 mr-2" />
                 Watch Introduction
               </button>
             </div>
 
-            {/* Quick Info */}
-            <div className="flex flex-wrap gap-6 text-sm text-gray-600">
-              <div className="flex items-center">
-                <Users className="w-4 h-4 mr-2 text-primary-600" />
-                <span>MBBS, MS, Fellowship</span>
-              </div>
-              <div className="flex items-center">
-                <Calendar className="w-4 h-4 mr-2 text-primary-600" />
-                <span>Mon-Sat: 9AM-6PM</span>
-              </div>
-              <div className="flex items-center">
-                <Star className="w-4 h-4 mr-2 text-primary-600" />
-                <span>English, Hindi, Kannada</span>
-              </div>
-            </div>
           </div>
 
-          {/* Right Content - Doctor Image */}
-          <div className="relative">
-            <div className="relative z-10">
-              {/* Doctor Image */}
-              <div className="w-full h-[500px] lg:h-[600px] bg-gradient-to-br from-primary-200 to-primary-300 rounded-2xl flex items-center justify-center relative overflow-hidden">
-                <div className="text-center text-primary-700">
-                  <div className="w-80 h-80 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg overflow-hidden">
-                    <Image
-                      src="/images/dr_vivek_profile_pic.jpg"
-                      alt="Dr. Vivek Shetty - Senior Consultant Head & Neck Oncology"
-                      width={320}
-                      height={320}
-                      className="w-full h-full object-cover rounded-full"
-                      priority
-                    />
-                  </div>
-                  <h3 className="text-3xl font-bold">Dr. Vivek Shetty</h3>
-                  <p className="text-xl">Senior Consultant</p>
-                  <p className="text-lg">Head & Neck Oncology</p>
-                </div>
-                
-                {/* Floating Elements */}
-                <div className="absolute top-8 right-8 w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg float-animation">
-                  <Award className="w-8 h-8 text-primary-600" />
-                </div>
-                <div className="absolute bottom-8 left-8 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg float-animation" style={{ animationDelay: '1s' }}>
-                  <Star className="w-6 h-6 text-primary-600" />
+          {/* Right Content - Full Image Container */}
+          <div className={`relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className="flex flex-col h-full space-y-6">
+              <div className="relative w-full max-w-md mx-auto lg:max-w-lg xl:max-w-xl flex-1">
+                <div className="w-full h-full max-h-96 lg:max-h-[500px] xl:max-h-[600px] rounded-2xl overflow-hidden shadow-xl">
+                  <Image
+                    src="/images/dr_vivek_profile_pic.jpg"
+                    alt="Dr. Vivek Shetty - Senior Consultant Head & Neck Oncology"
+                    width={600}
+                    height={600}
+                    className="w-full h-full object-cover"
+                    priority
+                  />
                 </div>
               </div>
+              
+              {/* Professional Badge */}
+              <div className="inline-flex items-center px-4 py-3 bg-blue-50 border border-blue-200 text-blue-800 rounded-lg font-medium text-sm lg:text-base max-w-full">
+                <Award className="w-4 h-4 mr-2 flex-shrink-0" />
+                <span className="truncate">Senior Consultant - Head & Neck Oncology</span>
+              </div>
             </div>
-
-            {/* Background Decoration */}
-            <div className="absolute -top-4 -right-4 w-72 h-72 bg-primary-200 rounded-full opacity-20 -z-10"></div>
-            <div className="absolute -bottom-8 -left-8 w-64 h-64 bg-primary-300 rounded-full opacity-20 -z-10"></div>
           </div>
         </div>
       </div>
 
-      {/* Video Modal */}
+      {/* Modern Video Modal */}
       {isVideoOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg p-6 max-w-4xl w-full">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-semibold">Dr. Vivek Shetty - Introduction</h3>
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-3xl p-8 max-w-4xl w-full shadow-2xl border border-gray-200">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-xl lg:text-2xl font-bold text-gray-900">Dr. Vivek Shetty - Introduction</h3>
               <button
                 onClick={() => setIsVideoOpen(false)}
-                className="text-gray-500 hover:text-gray-700"
+                className="w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-colors duration-200"
               >
-                <X className="w-6 h-6" />
+                <X className="w-6 h-6 text-gray-600" />
               </button>
             </div>
-            <div className="aspect-video bg-gray-200 rounded-lg flex items-center justify-center">
-              <p className="text-gray-600">Video placeholder - Would contain actual introduction video</p>
+            <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center border-2 border-dashed border-gray-300">
+              <div className="text-center">
+                <Play className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                <p className="text-gray-600 font-medium">Video placeholder - Would contain actual introduction video</p>
+              </div>
             </div>
           </div>
         </div>
