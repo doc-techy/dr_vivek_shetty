@@ -50,11 +50,11 @@ export function AboutSection() {
   ];
 
   return (
-    <section id="about" className="pb-12" style={{ minHeight: 'calc(100vh - 80px)' }}>
+    <section id="about" className="pt-16 pb-12" style={{ minHeight: 'calc(100vh - 80px)' }}>
       <div className="container-custom h-full">
         {/* Header */}
         <div className="text-center mb-8">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
           Academic Excellence & <span className="text-green-600">Professional Mastery</span>
           </h2>
           
