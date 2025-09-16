@@ -8,93 +8,168 @@ import {
   Zap, 
   Activity, 
   Users, 
-  Award,
-  ArrowRight,
-  Sparkles,
   Plus,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Stethoscope,
+  Scissors,
+  Eye,
+  Layers,
+  Target,
+  Sparkles,
+  Wrench
 } from 'lucide-react';
 import { useState } from 'react';
 
 export function ServicesSection() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const itemsPerPage = 3;
+  const itemsPerPage = 6;
 
-  const categories = [
-    { id: 'all', label: 'All Services', icon: Sparkles },
-    { id: 'surgical', label: 'Surgical Procedures', icon: Microscope },
-    { id: 'treatment', label: 'Cancer Treatment', icon: Zap },
-    { id: 'reconstructive', label: 'Reconstruction', icon: Heart },
-  ];
 
   const services = [
     {
       id: 1,
       category: 'surgical',
-      icon: Brain,
+      icon: Stethoscope,
       title: 'Thyroid & Parathyroid Surgery',
       subtitle: 'Expert Endocrine Surgery',
       description: 'Minimally invasive thyroidectomy and parathyroidectomy with nerve monitoring for optimal outcomes.',
       features: ['Scarless Surgery', 'Nerve Monitoring', 'Same-day Discharge'],
-      gradient: 'from-blue-600 via-cyan-500 to-teal-400',
+      gradient: 'from-sky-400 via-blue-300 to-indigo-200',
       pattern: 'radial',
     },
     {
       id: 2,
       category: 'surgical',
-      icon: Microscope,
+      icon: Scissors,
       title: 'Oral Cancer Surgery',
       subtitle: 'Comprehensive Care',
       description: 'Advanced surgical management of oral cavity cancers with immediate reconstruction options.',
       features: ['Tongue Preservation', 'Mandible Reconstruction', 'Speech Therapy'],
-      gradient: 'from-purple-600 via-pink-500 to-rose-400',
+      gradient: 'from-purple-400 via-violet-300 to-fuchsia-200',
       pattern: 'dots',
     },
     {
       id: 3,
       category: 'treatment',
-      icon: Zap,
+      icon: Target,
       title: 'Laryngeal Cancer Treatment',
       subtitle: 'Voice Preservation',
       description: 'Specialized treatments focusing on cancer cure while preserving voice and swallowing function.',
       features: ['Laser Surgery', 'Voice Rehabilitation', 'Organ Preservation'],
-      gradient: 'from-emerald-600 via-green-500 to-lime-400',
+      gradient: 'from-rose-400 via-pink-300 to-red-200',
       pattern: 'grid',
     },
     {
       id: 4,
       category: 'surgical',
-      icon: Shield,
+      icon: Eye,
       title: 'Salivary Gland Surgery',
       subtitle: 'Precision Surgery',
       description: 'Expert management of parotid and submandibular gland tumors with facial nerve preservation.',
       features: ['Nerve Monitoring', 'Cosmetic Approach', 'Minimal Scarring'],
-      gradient: 'from-orange-600 via-amber-500 to-yellow-400',
+      gradient: 'from-orange-400 via-amber-300 to-yellow-200',
       pattern: 'waves',
     },
     {
       id: 5,
       category: 'reconstructive',
-      icon: Heart,
+      icon: Layers,
       title: 'Microvascular Reconstruction',
       subtitle: 'Advanced Restoration',
       description: 'Free flap reconstruction for complex head and neck defects after cancer surgery.',
       features: ['Free Tissue Transfer', 'Functional Restoration', 'Aesthetic Results'],
-      gradient: 'from-rose-600 via-pink-500 to-fuchsia-400',
+      gradient: 'from-emerald-400 via-green-300 to-teal-200',
       pattern: 'circles',
     },
     {
       id: 6,
       category: 'treatment',
-      icon: Users,
+      icon: Brain,
       title: 'Skull Base Surgery',
       subtitle: 'Complex Procedures',
       description: 'Multidisciplinary approach for tumors at the skull base with advanced navigation technology.',
       features: ['Endoscopic Approach', 'Navigation System', 'Team Approach'],
-      gradient: 'from-indigo-600 via-blue-500 to-sky-400',
+      gradient: 'from-cyan-400 via-sky-300 to-blue-200',
       pattern: 'hexagon',
+    },
+    {
+      id: 7,
+      category: 'treatment',
+      icon: Sparkles,
+      title: 'Oral Cancer Management',
+      subtitle: 'Comprehensive Treatment',
+      description: 'Complete management of oral cavity cancers with multidisciplinary approach and advanced surgical techniques.',
+      features: ['Early Detection', 'Surgical Resection', 'Adjuvant Therapy'],
+      gradient: 'from-red-400 via-orange-300 to-yellow-200',
+      pattern: 'dots',
+    },
+    {
+      id: 8,
+      category: 'surgical',
+      icon: Wrench,
+      title: 'Thyroid Surgeries',
+      subtitle: 'Endocrine Excellence',
+      description: 'Advanced thyroid surgical procedures including total thyroidectomy with nerve monitoring and minimal scarring.',
+      features: ['Nerve Preservation', 'Minimal Incision', 'Same Day Surgery'],
+      gradient: 'from-teal-400 via-cyan-300 to-sky-200',
+      pattern: 'grid',
+    },
+    {
+      id: 9,
+      category: 'surgical',
+      icon: Shield,
+      title: 'Salivary Gland Neoplasm Management',
+      subtitle: 'Precision Care',
+      description: 'Expert management of benign and malignant salivary gland tumors with facial nerve preservation.',
+      features: ['Facial Nerve Monitoring', 'Tumor Resection', 'Functional Preservation'],
+      gradient: 'from-violet-400 via-purple-300 to-indigo-200',
+      pattern: 'waves',
+    },
+    {
+      id: 10,
+      category: 'treatment',
+      icon: Zap,
+      title: 'Laryngo-pharyngeal Cancer Management',
+      subtitle: 'Voice & Swallowing Focus',
+      description: 'Comprehensive treatment of laryngeal and pharyngeal cancers with emphasis on functional preservation.',
+      features: ['Voice Preservation', 'Swallowing Function', 'Quality of Life'],
+      gradient: 'from-lime-400 via-green-300 to-emerald-200',
+      pattern: 'circles',
+    },
+    {
+      id: 11,
+      category: 'surgical',
+      icon: Activity,
+      title: 'Advanced Neck Surgeries',
+      subtitle: 'Complex Procedures',
+      description: 'Sophisticated neck dissections and complex cervical procedures with advanced surgical techniques.',
+      features: ['Selective Dissection', 'Nerve Sparing', 'Minimal Morbidity'],
+      gradient: 'from-slate-400 via-gray-300 to-zinc-200',
+      pattern: 'hexagon',
+    },
+    {
+      id: 12,
+      category: 'reconstructive',
+      icon: Heart,
+      title: 'Reconstruction of Head and Neck Defects',
+      subtitle: 'Aesthetic & Functional Restoration',
+      description: 'Comprehensive reconstruction using local, regional, and free tissue transfer techniques.',
+      features: ['Aesthetic Results', 'Functional Restoration', 'Minimal Donor Site Morbidity'],
+      gradient: 'from-pink-400 via-rose-300 to-red-200',
+      pattern: 'radial',
+    },
+    {
+      id: 13,
+      category: 'reconstructive',
+      icon: Microscope,
+      title: 'Microvascular Surgery',
+      subtitle: 'Advanced Reconstruction',
+      description: 'Free tissue transfer and microvascular reconstruction for complex head and neck defects.',
+      features: ['Free Flap Surgery', 'Vascular Anastomosis', 'Tissue Engineering'],
+      gradient: 'from-amber-400 via-yellow-300 to-orange-200',
+      pattern: 'dots',
     },
   ];
 
@@ -106,11 +181,6 @@ export function ServicesSection() {
 
   const goToPrev = () => {
     setCurrentIndex((prev) => (prev - 1 + totalPages) % totalPages);
-  };
-
-  const getCurrentServices = () => {
-    const startIndex = currentIndex * itemsPerPage;
-    return services.slice(startIndex, startIndex + itemsPerPage);
   };
 
   const getPattern = (pattern: string) => {
@@ -127,54 +197,63 @@ export function ServicesSection() {
   return (
     <section id="services" className="pb-12">
       <div className="container-custom">
-        {/* Header */}
-        <div className="text-center mb-10">
-          {/* <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full border border-blue-200/50 mb-6">
-            <Sparkles className="w-4 h-4 mr-2 text-blue-600" />
-            <span className="text-sm font-semibold text-blue-700">Head & Neck Surgical Excellence</span>
-          </div> */}
+        {/* Modern Header */}
+        <div className="text-center mb-16 relative">
+          {/* Background Decoration */}
+          <div className="absolute inset-0 flex items-center justify-center opacity-5">
+            <div className="w-96 h-96 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full blur-3xl"></div>
+          </div>
           
-          <h2 className="text-5xl lg:text-6xl font-bold mb-6">
-            <span className="text-gray-900">Specialized </span>
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Oncology Services
-            </span>
-          </h2>
-          
+          <div className="relative z-10">
+            {/* Subtitle Badge */}
+            {/* <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded-full border border-blue-200/50 mb-6 shadow-lg backdrop-blur-sm">
+              <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mr-3 animate-pulse"></div>
+              <span className="text-sm font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                Expert Medical Services
+              </span>
+            </div> */}
+            
+            {/* Main Heading */}
+            <h2 className="text-3xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-3 md:mb-4">
+              Specialized Services & <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Expertise</span>
+            </h2>
+            
+            {/* Description */}
+            <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
+              Comprehensive head and neck oncology services with cutting-edge surgical techniques and compassionate care
+            </p>
+            
+            {/* Stats */}
+            {/* <div className="flex flex-wrap justify-center gap-8 lg:gap-12">
+              <div className="text-center group">
+                <div className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-1 group-hover:scale-110 transition-transform duration-300">
+                  13+
+                </div>
+                <p className="text-sm text-gray-500 font-medium">Specialized Services</p>
+              </div>
+              <div className="text-center group">
+                <div className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-1 group-hover:scale-110 transition-transform duration-300">
+                  9+
+                </div>
+                <p className="text-sm text-gray-500 font-medium">Years Experience</p>
+              </div>
+              <div className="text-center group">
+                <div className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-pink-600 to-blue-600 bg-clip-text text-transparent mb-1 group-hover:scale-110 transition-transform duration-300">
+                  500+
+                </div>
+                <p className="text-sm text-gray-500 font-medium">Successful Cases</p>
+              </div>
+            </div> */}
+          </div>
         </div>
 
-        {/* Category Filter
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {categories.map((category) => {
-            const Icon = category.icon;
-            return (
-              <button
-                key={category.id}
-                onClick={() => setSelectedCategory(category.id)}
-                className={`
-                  px-6 py-3 rounded-full font-medium text-sm transition-all duration-300
-                  flex items-center gap-2 group
-                  ${selectedCategory === category.id
-                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/25 scale-105'
-                    : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 hover:border-gray-300'
-                  }
-                `}
-              >
-                <Icon className={`w-4 h-4 transition-transform duration-300 ${
-                  selectedCategory === category.id ? 'animate-pulse' : 'group-hover:rotate-12'
-                }`} />
-                {category.label}
-              </button>
-            );
-          })}
-        </div> */}
 
         {/* Services Carousel */}
         <div className="relative mb-8 bg-transparent shadow-none">
-          {/* Navigation Arrows */}
+          {/* Navigation Arrows - Close to content */}
           <button
             onClick={goToPrev}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-14 h-14 bg-white rounded-full shadow-xl hover:shadow-2xl flex items-center justify-center text-gray-600 hover:text-blue-600 transition-all duration-500 hover:scale-110 hover:-translate-x-1"
+            className="absolute -left-8 top-1/2 -translate-y-1/2 z-10 w-14 h-14 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full shadow-xl hover:shadow-2xl flex items-center justify-center text-white hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-110"
             aria-label="Previous services"
           >
             <ChevronLeft className="w-7 h-7 transition-transform duration-300" />
@@ -182,99 +261,89 @@ export function ServicesSection() {
 
           <button
             onClick={goToNext}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-14 h-14 bg-white rounded-full shadow-xl hover:shadow-2xl flex items-center justify-center text-gray-600 hover:text-blue-600 transition-all duration-500 hover:scale-110 hover:translate-x-1"
+            className="absolute -right-8 top-1/2 -translate-y-1/2 z-10 w-14 h-14 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-xl hover:shadow-2xl flex items-center justify-center text-white hover:from-purple-600 hover:to-pink-600 transition-all duration-300 hover:scale-110"
             aria-label="Next services"
           >
             <ChevronRight className="w-7 h-7 transition-transform duration-300" />
           </button>
 
           {/* Services Container */}
-          <div className="overflow-hidden">
-            <div className="flex transition-all duration-700 ease-out" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
-              {Array.from({ length: totalPages }, (_, pageIndex) => {
-                const startIndex = pageIndex * itemsPerPage;
-                const pageServices = services.slice(startIndex, startIndex + itemsPerPage);
+          <div className="relative">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 px-12">
+              {services.slice(currentIndex * itemsPerPage, (currentIndex + 1) * itemsPerPage).map((service, index) => {
+                const Icon = service.icon;
+                const isHovered = hoveredIndex === index;
                 
                 return (
-                  <div key={pageIndex} className="w-full flex-shrink-0">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 px-12">
-                      {pageServices.map((service, index) => {
-                        const Icon = service.icon;
-                        const isHovered = hoveredIndex === index;
-                        
-                        return (
-                          <div
-                            key={service.id}
-                            className="group relative animate-slide-in-right"
-                            onMouseEnter={() => setHoveredIndex(index)}
-                            onMouseLeave={() => setHoveredIndex(null)}
-                            style={{ animationDelay: `${index * 100}ms` }}
-                          >
-                {/* Card Container */}
-                <div className="relative h-full bg-white rounded-3xl shadow-xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 border border-gray-100 group-hover:border-transparent">
-                  {/* Background Pattern */}
-                  <div 
-                    className="absolute inset-0 opacity-50"
-                    style={{
-                      backgroundImage: getPattern(service.pattern),
-                      backgroundSize: '40px 40px'
+                  <div
+                    key={`${service.id}-${currentIndex}`}
+                    className="group relative"
+                    onMouseEnter={() => setHoveredIndex(index)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                    style={{ 
+                      animation: `flipIn 0.6s ease-in-out both`,
                     }}
-                  />
-                  
-                  {/* Gradient Background */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-5 group-hover:opacity-10 transition-opacity duration-500`} />
-                  
-                  {/* Content */}
-                  <div className="relative p-7">
-                    {/* Icon */}
-                    <div className="mb-5">
-                      <div className={`
-                        w-14 h-14 rounded-xl bg-gradient-to-br ${service.gradient}
-                        flex items-center justify-center shadow-lg
-                        transform transition-all duration-500
-                        ${isHovered ? 'scale-110 rotate-3' : ''}
-                      `}>
-                        <Icon className="w-7 h-7 text-white" />
-                      </div>
-                    </div>
-
-                    {/* Title & Subtitle */}
-                    <div className="mb-3">
-                      <h3 className="text-lg lg:text-xl font-bold text-gray-900 mb-1">
-                        {service.title}
-                      </h3>
-                      <p className={`text-sm font-medium bg-gradient-to-r ${service.gradient} bg-clip-text text-transparent`}>
-                        {service.subtitle}
-                      </p>
-                    </div>
-
-                    {/* Description */}
-                    <p className="text-sm lg:text-base text-gray-600 mb-5 leading-relaxed">
-                      {service.description}
-                    </p>
-
-                    {/* Features */}
-                    <div className="space-y-1.5">
-                      {service.features.map((feature, idx) => (
-                        <div key={idx} className="flex items-center text-sm text-gray-700">
+                  >
+                    {/* Card Container */}
+                    <div className={`relative h-full bg-gradient-to-br ${service.gradient} rounded-2xl shadow-lg overflow-hidden transition-all duration-500 hover:shadow-xl hover:-translate-y-1 border border-white/50 group-hover:border-white transform-gpu`}>
+                      {/* Background Pattern */}
+                      <div 
+                        className="absolute inset-0 opacity-20"
+                        style={{
+                          backgroundImage: getPattern(service.pattern),
+                          backgroundSize: '40px 40px'
+                        }}
+                      />
+                      
+                      {/* White Content Overlay */}
+                      <div className="absolute inset-0 bg-white/60 backdrop-blur-sm group-hover:bg-white/50 transition-all duration-500"></div>
+                      
+                      {/* Content */}
+                      <div className="relative p-5">
+                        {/* Icon */}
+                        <div className="mb-4">
                           <div className={`
-                            w-4 h-4 rounded-full bg-gradient-to-r ${service.gradient}
-                            flex items-center justify-center mr-2 flex-shrink-0
-                            transform transition-all duration-300
-                            ${isHovered ? 'scale-110' : ''}
+                            w-12 h-12 rounded-lg bg-gradient-to-br ${service.gradient}
+                            flex items-center justify-center shadow-md
+                            transform transition-all duration-500
+                            ${isHovered ? 'scale-110 rotate-3' : ''}
                           `}>
-                            <Plus className="w-2.5 h-2.5 text-white" />
+                            <Icon className="w-6 h-6 text-white" />
                           </div>
-                          <span>{feature}</span>
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
 
-                          </div>
-                        );
-                      })}
+                        {/* Title & Subtitle */}
+                        <div className="mb-3">
+                          <h3 className="text-base lg:text-lg font-bold text-gray-900 mb-1">
+                            {service.title}
+                          </h3>
+                          <p className={`text-xs font-medium bg-gradient-to-r ${service.gradient} bg-clip-text text-transparent`}>
+                            {service.subtitle}
+                          </p>
+                        </div>
+
+                        {/* Description */}
+                        <p className="text-xs lg:text-sm text-gray-600 mb-4 leading-relaxed">
+                          {service.description}
+                        </p>
+
+                        {/* Features */}
+                        <div className="space-y-1">
+                          {service.features.map((feature, idx) => (
+                            <div key={idx} className="flex items-center text-xs text-gray-700">
+                              <div className={`
+                                w-3 h-3 rounded-full bg-gradient-to-r ${service.gradient}
+                                flex items-center justify-center mr-2 flex-shrink-0
+                                transform transition-all duration-300
+                                ${isHovered ? 'scale-110' : ''}
+                              `}>
+                                <Plus className="w-2 h-2 text-white" />
+                              </div>
+                              <span>{feature}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 );
@@ -300,6 +369,36 @@ export function ServicesSection() {
         </div>
 
       </div>
+
+      {/* CSS Animations */}
+      <style jsx>{`
+        @keyframes flipIn {
+          0% {
+            transform: perspective(600px) rotateY(-90deg) scale(0.8);
+            opacity: 0;
+            filter: blur(4px);
+          }
+          25% {
+            transform: perspective(600px) rotateY(-45deg) scale(0.9);
+            opacity: 0.3;
+            filter: blur(2px);
+          }
+          50% {
+            transform: perspective(600px) rotateY(0deg) scale(1.05);
+            opacity: 0.8;
+            filter: blur(0px);
+          }
+          75% {
+            transform: perspective(600px) rotateY(5deg) scale(1.02);
+            opacity: 0.95;
+          }
+          100% {
+            transform: perspective(600px) rotateY(0deg) scale(1);
+            opacity: 1;
+            filter: blur(0px);
+          }
+        }
+      `}</style>
     </section>
   );
 }
