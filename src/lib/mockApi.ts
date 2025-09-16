@@ -75,17 +75,17 @@ export const mockApi = {
     await delay(1500); // Simulate network delay
     
     // Simulate validation
-    if (!formData.patient_name || !formData.patient_email || !formData.patient_phone) {
+    if (!formData.name || !formData.email || !formData.phone) {
       return {
         success: false,
         error: 'Please fill in all required fields',
       };
     }
 
-    if (!formData.appointment_time) {
+    if (!formData.date || !formData.time) {
       return {
         success: false,
-        error: 'Please select an appointment time',
+        error: 'Please select an appointment date and time',
       };
     }
 
@@ -93,7 +93,7 @@ export const mockApi = {
     const availableResponse = await this.getAvailableSlots();
     if (availableResponse.success && availableResponse.data) {
       const isSlotAvailable = availableResponse.data.available_slots.some(
-        slot => slot.time === formData.appointment_time && slot.available
+        slot => slot.time === formData.time && slot.available
       );
 
       if (!isSlotAvailable) {
@@ -107,14 +107,14 @@ export const mockApi = {
     // Create mock appointment
     const newAppointment: BookedAppointment = {
       appointment_id: `apt_${Date.now()}`,
-      patient_name: formData.patient_name,
-      patient_email: formData.patient_email,
-      patient_phone: formData.patient_phone,
-      appointment_date: formData.appointment_date,
-      appointment_time: formData.appointment_time,
+      patient_name: formData.name,
+      patient_email: formData.email,
+      patient_phone: formData.phone,
+      appointment_date: formData.date,
+      appointment_time: formData.time,
       reason: formData.reason,
       status: 'pending',
-      notes: formData.notes,
+      notes: formData.message,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     };
