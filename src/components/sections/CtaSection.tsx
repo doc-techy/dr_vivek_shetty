@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight, Phone, Calendar, MessageCircle, Mail, CheckCircle } from 'lucide-react';
+import { ArrowRight, Phone, Calendar, MessageCircle, Mail, CheckCircle, Award, Microscope, Heart, Users } from 'lucide-react';
 import { useState } from 'react';
 
 export function CtaSection() {
@@ -25,13 +25,102 @@ export function CtaSection() {
   };
 
   return (
-    <section className="pb-20">
-      <div className="container-custom">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-12">
-            Ready to Schedule Your <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Consultation?</span>
-          </h2>
+    <section className="py-20 min-h-screen flex flex-col items-center justify-center">
+      <div className="w-full px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="flex justify-center items-center mb-12">
+            <h2 className="text-4xl lg:text-5xl xl:text-7xl font-bold text-gray-900 whitespace-nowrap">
+              Ready to Schedule Your <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Consultation?</span>
+            </h2>
+          </div>
+        </div>
+      </div>
+        
+      {/* Why Choose Dr. Vivek Shetty Section - True Full Width */}
+      <div className="mb-16 w-full px-1 lg:px-2 xl:px-4">
+            <div className="bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 rounded-2xl p-8 lg:p-12 text-white shadow-2xl relative overflow-hidden">
+              {/* Animated Background */}
+              <div className="absolute inset-0 opacity-5">
+                <div className="absolute inset-0 animate-pulse" style={{
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='40' cy='40' r='3'/%3E%3C/g%3E%3C/svg%3E")`,
+                }} />
+              </div>
 
+              <div className="relative z-10">
+                {/* Header */}
+                <div className="text-center mb-6">
+                  <div className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-3">
+                    <span className="text-base lg:text-lg font-semibold text-blue-200">Why Choose Dr. Vivek Shetty?</span>
+                  </div>
+                  <p className="text-sm text-blue-100 max-w-3xl mx-auto">
+                    Leading expertise with exceptional patient outcomes and compassionate care
+                  </p>
+                </div>
+
+                {/* Key Points Grid */}
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-20">
+                  <div className="text-center group hover:scale-105 transition-all duration-500">
+                    <div className="relative mb-3">
+                      <div className="w-12 h-12 bg-gradient-to-r from-blue-400 to-blue-600 rounded-xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-xl transition-all duration-500">
+                        <Award className="w-6 h-6 text-white" />
+                      </div>
+                    </div>
+                    <h4 className="text-sm lg:text-base font-bold text-white mb-1 group-hover:text-yellow-300 transition-colors duration-300">
+                      9+ Years Experience
+                    </h4>
+                    <p className="text-blue-100 group-hover:text-white transition-colors duration-300 text-xs lg:text-sm leading-tight">
+                      Extensive expertise in head & neck surgical oncology
+                    </p>
+                  </div>
+                  
+                  <div className="text-center group hover:scale-105 transition-all duration-500">
+                    <div className="relative mb-3">
+                      <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-green-600 rounded-xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-xl transition-all duration-500">
+                        <Microscope className="w-6 h-6 text-white" />
+                      </div>
+                    </div>
+                    <h4 className="text-sm lg:text-base font-bold text-white mb-1 group-hover:text-yellow-300 transition-colors duration-300">
+                      Advanced Fellowship
+                    </h4>
+                    <p className="text-blue-100 group-hover:text-white transition-colors duration-300 text-xs lg:text-sm leading-tight">
+                      RGUHS specialized training in surgical oncology
+                    </p>
+                  </div>
+                  
+                  <div className="text-center group hover:scale-105 transition-all duration-500">
+                    <div className="relative mb-3">
+                      <div className="w-12 h-12 bg-gradient-to-r from-purple-400 to-purple-600 rounded-xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-xl transition-all duration-500">
+                        <Heart className="w-6 h-6 text-white" />
+                      </div>
+                    </div>
+                    <h4 className="text-sm lg:text-base font-bold text-white mb-1 group-hover:text-yellow-300 transition-colors duration-300">
+                      Patient-Centered Care
+                    </h4>
+                    <p className="text-blue-100 group-hover:text-white transition-colors duration-300 text-xs lg:text-sm leading-tight">
+                      Compassionate approach with quality of life focus
+                    </p>
+                  </div>
+                  
+                  <div className="text-center group hover:scale-105 transition-all duration-500">
+                    <div className="relative mb-3">
+                      <div className="w-12 h-12 bg-gradient-to-r from-orange-400 to-orange-600 rounded-xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-xl transition-all duration-500">
+                        <Users className="w-6 h-6 text-white" />
+                      </div>
+                    </div>
+                    <h4 className="text-sm lg:text-base font-bold text-white mb-1 group-hover:text-yellow-300 transition-colors duration-300">
+                      Multilingual Support
+                    </h4>
+                    <p className="text-blue-100 group-hover:text-white transition-colors duration-300 text-xs lg:text-sm leading-tight">
+                      English, Hindi, and Kannada communication
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+      </div>
+        
+      <div className="w-full px-4">
+        <div className="max-w-4xl mx-auto text-center">
           <div className="grid md:grid-cols-3 gap-6 mb-12">
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20">
               <Calendar className="w-12 h-12 text-blue-600 mx-auto mb-4" />
@@ -84,13 +173,7 @@ export function CtaSection() {
               Book Appointment
               <ArrowRight className="w-5 h-5 ml-2" />
             </Link>
-            
-            <Link
-              href="/about"
-              className="inline-flex items-center justify-center px-8 py-4 border-2 border-blue-600 text-blue-600 rounded-lg font-semibold hover:bg-blue-600 hover:text-white transition-all duration-200"
-            >
-              Learn More About Dr. Shetty
-            </Link>
+          
           </div>
 
           <div className="mt-12 text-center">
@@ -101,10 +184,10 @@ export function CtaSection() {
               SPARSH Hospital, Hennur Road, Bangalore | Languages: English, Hindi, Kannada
             </p>
           </div>
-        </div>
+
 
         {/* Newsletter Subscription Section */}
-        <div className="mt-20 max-w-5xl mx-auto">
+        <div className="mt-16">
           <div className="relative bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 rounded-3xl p-8 text-white shadow-2xl overflow-hidden">
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-10">
@@ -205,6 +288,7 @@ export function CtaSection() {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </section>
   );

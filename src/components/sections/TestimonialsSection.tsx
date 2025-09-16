@@ -145,102 +145,81 @@ export function TestimonialsSection() {
 
   return (
     <section className="pt-16 pb-20">
+      {/* Header with container */}
       <div className="container-custom">
         <div className="text-center mb-16">
           <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-            Patient <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Testimonials</span>
+            Patient <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Testimonials and Reviews</span>
           </h2>
         </div>
+      </div>
 
-        {/* Infinite Scrolling Testimonials */}
-        <div className="relative overflow-hidden">
-          <div 
-            ref={scrollContainerRef}
-            className="flex gap-8 scroll-animation"
-            style={{
-              width: 'max-content',
-              scrollBehavior: 'auto',
-              overflowX: 'hidden',
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none',
-              WebkitOverflowScrolling: 'touch'
-            }}
-          >
-            {duplicatedTestimonials.map((testimonial, index) => (
-              <div
-                key={`${testimonial.name}-${index}`}
-                className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 hover:shadow-xl transition-all duration-300 border border-white/20 flex-shrink-0 w-80"
-              >
-                <div className="flex items-center mb-4">
-                  <Quote className="w-8 h-8 text-primary-600 mr-2" />
-                  <div className="flex">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
+      {/* Edge-to-edge Infinite Scrolling Testimonials */}
+      <div className="relative overflow-hidden w-full">
+        <div 
+          ref={scrollContainerRef}
+          className="flex gap-7 scroll-animation pl-7"
+          style={{
+            width: 'max-content',
+            scrollBehavior: 'auto',
+            overflowX: 'hidden',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+            WebkitOverflowScrolling: 'touch'
+          }}
+        >
+          {duplicatedTestimonials.map((testimonial, index) => (
+            <div
+              key={`${testimonial.name}-${index}`}
+              className="bg-white/80 backdrop-blur-sm rounded-xl p-5 hover:shadow-xl transition-all duration-300 border border-white/20 flex-shrink-0 w-80"
+            >
+              <div className="flex items-center mb-4">
+                <Quote className="w-7 h-7 text-primary-600 mr-2" />
+                <div className="flex">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                  ))}
                 </div>
-                
-                <p className="text-gray-600 mb-6 italic text-sm leading-relaxed">
-                  "{testimonial.content}"
+              </div>
+              
+              <p className="text-gray-600 mb-5 italic text-sm leading-relaxed">
+                "{testimonial.content}"
+              </p>
+              
+              <div className="border-t border-gray-200 pt-4">
+                <h4 className="font-semibold text-gray-900 text-sm">{testimonial.name}</h4>
+                <p className="text-xs text-gray-600">{testimonial.role}</p>
+                <p className="text-xs text-primary-600 font-medium mt-1">
+                  {testimonial.treatment}
                 </p>
-                
-                <div className="border-t border-gray-200 pt-4">
-                  <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
-                  <p className="text-sm text-gray-600">{testimonial.role}</p>
-                  <p className="text-xs text-primary-600 font-medium mt-1">
-                    {testimonial.treatment}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          {/* Gradient overlays for smooth edges */}
-          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent pointer-events-none z-10"></div>
-          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent pointer-events-none z-10"></div>
-        </div>
-
-        <style jsx>{`
-          div::-webkit-scrollbar {
-            display: none;
-          }
-          
-          @keyframes scroll {
-            0% {
-              transform: translateX(0);
-            }
-            100% {
-              transform: translateX(-33.333%);
-            }
-          }
-          
-          .scroll-animation {
-            animation: scroll 60s linear infinite;
-          }
-        `}</style>
-{/* 
-        <div className="text-center mt-12">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 max-w-3xl mx-auto border border-white/20 shadow-lg">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
-              Overall Patient Satisfaction
-            </h3>
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="text-4xl font-bold text-blue-600 mb-2">98%</div>
-                <p className="text-gray-600">Patient Satisfaction Rate</p>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-blue-600 mb-2">4.9/5</div>
-                <p className="text-gray-600">Average Rating</p>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-blue-600 mb-2">500+</div>
-                <p className="text-gray-600">Happy Patients</p>
               </div>
             </div>
-          </div>
-        </div> */}
+          ))}
+        </div>
+        
+        {/* Gradient overlays for smooth edges */}
+        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent pointer-events-none z-10"></div>
+        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent pointer-events-none z-10"></div>
       </div>
+
+      <style jsx>{`
+        div::-webkit-scrollbar {
+          display: none;
+        }
+        
+        @keyframes scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-33.333%);
+          }
+        }
+        
+        .scroll-animation {
+          animation: scroll 60s linear infinite;
+        }
+      `}</style>
     </section>
   );
 }
