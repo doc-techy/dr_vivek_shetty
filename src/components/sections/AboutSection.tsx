@@ -50,110 +50,93 @@ export function AboutSection() {
   ];
 
   return (
-    <section id="about" className="pt-16 pb-12" style={{ minHeight: 'calc(100vh - 80px)' }}>
-      <div className="container-custom h-full">
+    <section id="about" className="pt-8 pb-8 md:pt-16 md:pb-12">
+      <div className="container-custom">
         {/* Header */}
-        <div className="text-center mb-8">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-          Academic Excellence & <span className="text-green-600">Professional Mastery</span>
+        <div className="text-center mb-6 md:mb-8">
+          <h2 className="text-3xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-3 md:mb-4">
+            Academic Excellence & <span className="text-green-600">Professional Mastery</span>
           </h2>
           
-          <p className="text-base lg:text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-sm md:text-2xl lg:text-3xl text-gray-600 max-w-5xl mx-auto leading-relaxed px-4">
             A dedicated specialist with comprehensive education and extensive clinical experience in head and neck oncology.
           </p>
         </div>
 
-        {/* Main Content Container */}
-        <div className="rounded-3xl shadow-2xl border border-gray-100 p-8" style={{ backgroundColor: '#eff6ff' }}>
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Left Side - Education */}
-            <div className="space-y-8">
-              <div className="text-center lg:text-left">
-                <div className="inline-flex items-center px-4 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl text-base font-bold mb-4 shadow-xl">
-                  <GraduationCap className="w-5 h-5 mr-3" />
-                  Educational Journey
-                </div>
-                <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-3">Academic Excellence</h3>
-                <p className="text-base lg:text-lg text-gray-600 leading-relaxed">Comprehensive medical education from prestigious institutions</p>
-              </div>
+        {/* Mobile-Optimized Content */}
+        <div className="bg-blue-50/80 backdrop-blur-sm rounded-2xl md:rounded-3xl border border-gray-100 p-4 md:p-8">
+          
+          {/* Mobile: Single Column, Desktop: Two Columns */}
+          <div className="space-y-8 md:grid md:grid-cols-2 md:gap-8 md:space-y-0">
 
-              <div className="relative">
-                {/* Timeline Line */}
-                <div className="absolute left-6 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-200 via-blue-400 to-blue-600 rounded-full"></div>
-                
-              <div className="space-y-6">
-                {education.map((edu, index) => (
-                  <div key={index} className="relative group">
-                    {/* Timeline Dot */}
-                    <div className="absolute left-5 w-4 h-4 bg-blue-600 rounded-full border-3 border-white shadow-xl z-10 group-hover:scale-125 transition-transform duration-300"></div>
-                    
-                    {/* Content */}
-                    <div className="ml-16">
-                      <div className="flex items-center mb-3">
-                        <h4 className="text-lg lg:text-xl font-bold text-gray-900">{edu.degree}</h4>
-                        <div className="ml-4 bg-blue-100 text-blue-800 px-3 py-1.5 rounded-full text-sm font-semibold">
-                          {edu.year}
-                        </div>
-                      </div>
-                      <h5 className="text-base lg:text-lg font-bold text-blue-700 mb-2 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                        {edu.institution}
-                      </h5>
-                      <p className="text-gray-600 text-base font-medium flex items-center">
-                        <MapPin className="w-5 h-5 mr-2 text-blue-500" />
-                        {edu.location}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              </div>
-            </div>
-
-            {/* Right Side - Experience */}
-            <div className="space-y-8">
-              <div className="text-center lg:text-left">
-                <div className="inline-flex items-center px-4 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-xl text-base font-bold mb-4 shadow-xl">
-                  <Calendar className="w-5 h-5 mr-3" />
+          <div className="space-y-4 md:space-y-6">
+              <div className="text-center">
+                <div className="inline-flex items-center px-3 py-2 md:px-6 md:py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-lg md:rounded-xl text-sm md:text-lg lg:text-xl font-bold mb-3 md:mb-4">
+                  <Calendar className="w-4 h-4 md:w-6 md:h-6 mr-2 md:mr-3" />
                   Professional Journey
                 </div>
-                <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-3">Clinical Experience</h3>
-                <p className="text-base lg:text-lg text-gray-600 leading-relaxed">Extensive practice in leading healthcare institutions</p>
+                <h3 className="text-lg md:text-2xl lg:text-3xl font-bold text-gray-900 mb-2 md:mb-3">Clinical Experience</h3>
               </div>
 
-              <div className="relative">
-                {/* Timeline Line */}
-                <div className="absolute left-6 top-0 bottom-0 w-1 bg-gradient-to-b from-green-200 via-green-400 to-green-600 rounded-full"></div>
-                
-              <div className="space-y-6">
+              {/* Compact Experience Timeline for Mobile */}
+              <div className="space-y-3 md:space-y-4">
                 {experience.map((exp, index) => (
-                  <div key={index} className="relative group">
-                    {/* Timeline Dot */}
-                    <div className="absolute left-5 w-4 h-4 bg-green-600 rounded-full border-3 border-white shadow-xl z-10 group-hover:scale-125 transition-transform duration-300"></div>
-                    
-                    {/* Content */}
-                    <div className="ml-16">
-                      <div className="flex items-center mb-3">
-                        <h4 className="text-lg lg:text-xl font-bold text-gray-900">{exp.position}</h4>
-                        <div className="ml-4 bg-green-100 text-green-800 px-3 py-1.5 rounded-full text-sm font-semibold">
-                          {exp.duration}
-                        </div>
+                  <div key={index} className="bg-white/70 backdrop-blur-sm rounded-xl p-3 md:p-4 border border-green-200/50">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
+                      <h4 className="text-base md:text-lg lg:text-xl font-bold text-gray-900">{exp.position}</h4>
+                      <div className="bg-green-100 text-green-800 px-2 py-1 md:px-3 md:py-1.5 rounded-full text-xs md:text-sm font-semibold mt-1 sm:mt-0 w-fit">
+                        {exp.duration}
                       </div>
-                      <h5 className="text-base lg:text-lg font-bold text-green-700 mb-2 bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-                        {exp.hospital}
-                      </h5>
-                      <p className="text-gray-600 text-base font-medium flex items-center">
-                        <MapPin className="w-5 h-5 mr-2 text-green-500" />
-                        {exp.location}
-                      </p>
                     </div>
+                    <h5 className="text-sm md:text-base lg:text-lg font-semibold text-green-700 mb-1">
+                      {exp.hospital}
+                    </h5>
+                    <p className="text-xs md:text-sm lg:text-base text-gray-600 flex items-center">
+                      <MapPin className="w-3 h-3 md:w-4 md:h-4 mr-1 text-green-500 flex-shrink-0" />
+                      {exp.location}
+                    </p>
                   </div>
                 ))}
               </div>
+            </div>
+            
+            {/* Education Section */}
+            <div className="space-y-4 md:space-y-6">
+              <div className="text-center">
+                <div className="inline-flex items-center px-3 py-2 md:px-6 md:py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg md:rounded-xl text-sm md:text-xl lg:text-2xl font-bold mb-3 md:mb-4">
+                  <GraduationCap className="w-4 h-4 md:w-7 md:h-7 mr-2 md:mr-3" />
+                  Educational Journey
+                </div>
+                <h3 className="text-lg md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 md:mb-3">Academic Excellence</h3>
+              </div>
+
+              {/* Compact Education Timeline for Mobile */}
+              <div className="space-y-3 md:space-y-4">
+                {education.map((edu, index) => (
+                  <div key={index} className="bg-white/70 backdrop-blur-sm rounded-xl p-3 md:p-4 border border-blue-200/50">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
+                      <h4 className="text-base md:text-lg lg:text-xl font-bold text-gray-900">{edu.degree}</h4>
+                      <div className="bg-blue-100 text-blue-800 px-2 py-1 md:px-3 md:py-1.5 rounded-full text-xs md:text-sm font-semibold mt-1 sm:mt-0 w-fit">
+                        {edu.year}
+                      </div>
+                    </div>
+                    <h5 className="text-sm md:text-base lg:text-lg font-semibold text-blue-700 mb-1">
+                      {edu.institution}
+                    </h5>
+                    <p className="text-xs md:text-sm lg:text-base text-gray-600 flex items-center">
+                      <MapPin className="w-3 h-3 md:w-4 md:h-4 mr-1 text-blue-500 flex-shrink-0" />
+                      {edu.location}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
-        </div>
 
+            {/* Experience Section */}
+           
+          </div>
+
+        </div>
       </div>
     </section>
   );
