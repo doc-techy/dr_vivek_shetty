@@ -11,10 +11,10 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navigation = [
+    { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
     { name: 'Services', href: '#services' },
     { name: 'Videos', href: '#videos' },
-    { name: 'Blogs', href: '/blogs' },
   ];
 
   const scrollToSection = (href: string) => {

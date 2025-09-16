@@ -315,50 +315,68 @@ export function VideoSection() {
   };
 
   return (
-    <div className="container-custom pb-16">
+    <div className="container-custom pt-8 pb-16">
       {/* Header */}
-      <div className="text-center mb-8">
+      <div className="text-center mb-4">
         <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
           Educational <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Videos and Blogs</span>
         </h2>
         
         {/* Content Type Toggle Switch */}
-        <div className="flex justify-center mb-6">
-          <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-1 flex border border-gray-200/50">
+        <div className="flex justify-center mb-2">
+          <div className="bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 rounded-xl p-1 flex border border-gray-200/50 shadow-md backdrop-blur-sm min-w-[320px]">
             <button
               onClick={() => setContentType('videos')}
-              className={`flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-500 ease-in-out transform ${
+              className={`flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-700 ease-in-out transform relative overflow-hidden ${
                 contentType === 'videos'
-                  ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg scale-105 animate-pulse'
-                  : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50/50 hover:scale-102 active:scale-95'
+                  ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg scale-105'
+                  : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50/70 hover:scale-102 active:scale-98'
               }`}
+              style={{
+                flex: '1',
+                position: 'relative',
+              }}
             >
-              <Play className={`w-4 h-4 transition-all duration-500 ${contentType === 'videos' ? 'rotate-12' : 'rotate-0'}`} />
-              Videos
+              <div className={`absolute inset-0 bg-gradient-to-r from-white/20 to-transparent transition-all duration-700 ${
+                contentType === 'videos' ? 'opacity-100' : 'opacity-0'
+              }`}></div>
+              <Play className={`w-4 h-4 transition-all duration-700 ease-in-out relative z-10 ${
+                contentType === 'videos' ? 'rotate-12 scale-110' : 'rotate-0 scale-100'
+              }`} />
+              <span className="relative z-10">Videos</span>
             </button>
             <button
               onClick={() => setContentType('blogs')}
-              className={`flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-500 ease-in-out transform ${
+              className={`flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-700 ease-in-out transform relative overflow-hidden ${
                 contentType === 'blogs'
-                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg scale-105 animate-pulse'
-                  : 'text-gray-700 hover:text-purple-600 hover:bg-purple-50/50 hover:scale-102 active:scale-95'
+                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg scale-105'
+                  : 'text-gray-700 hover:text-purple-600 hover:bg-purple-50/70 hover:scale-102 active:scale-98'
               }`}
+              style={{
+                flex: '1',
+                position: 'relative',
+              }}
             >
-              <BookOpen className={`w-4 h-4 transition-all duration-500 ${contentType === 'blogs' ? 'rotate-12' : 'rotate-0'}`} />
-              Blogs
+              <div className={`absolute inset-0 bg-gradient-to-r from-white/20 to-transparent transition-all duration-700 ${
+                contentType === 'blogs' ? 'opacity-100' : 'opacity-0'
+              }`}></div>
+              <BookOpen className={`w-4 h-4 transition-all duration-700 ease-in-out relative z-10 ${
+                contentType === 'blogs' ? 'rotate-12 scale-110' : 'rotate-0 scale-100'
+              }`} />
+              <span className="relative z-10">Blogs</span>
             </button>
           </div>
         </div>
       </div>
 
       {/* Modern Filter Section */}
-      <div className="mb-8">
+      <div className="mb-6">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
           {/* Filter Toggle */}
           <div className="flex items-center gap-3">
-            <div className="text-sm text-gray-500">
+            {/* <div className="text-sm text-gray-500">
               {filteredData.length} {contentType === 'videos' ? 'video' : 'blog'}{filteredData.length !== 1 ? 's' : ''} found
-            </div>
+            </div> */}
           </div>
         </div>
 
