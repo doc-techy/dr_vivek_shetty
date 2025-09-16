@@ -25,13 +25,13 @@ export function AppointmentBooking({ className = '' }: AppointmentBookingProps) 
 
   // Form state
   const [formData, setFormData] = useState({
-    patient_name: '',
-    patient_email: '',
-    patient_phone: '',
-    appointment_date: '',
-    appointment_time: '',
+    name: '',
+    email: '',
+    phone: '',
+    date: '',
+    time: '',
     reason: '',
-    notes: '',
+    message: '',
   });
 
   // Form validation
@@ -43,7 +43,7 @@ export function AppointmentBooking({ className = '' }: AppointmentBookingProps) 
     tomorrow.setDate(tomorrow.getDate() + 1);
     setFormData(prev => ({
       ...prev,
-      appointment_date: tomorrow.toISOString().split('T')[0],
+      date: tomorrow.toISOString().split('T')[0],
     }));
   }, []);
 
@@ -53,13 +53,13 @@ export function AppointmentBooking({ className = '' }: AppointmentBookingProps) 
       const timer = setTimeout(() => {
         clearBookingState();
         setFormData({
-          patient_name: '',
-          patient_email: '',
-          patient_phone: '',
-          appointment_date: '',
-          appointment_time: '',
+          name: '',
+          email: '',
+          phone: '',
+          date: '',
+          time: '',
           reason: '',
-          notes: '',
+          message: '',
         });
       }, 5000);
       return () => clearTimeout(timer);
@@ -81,28 +81,28 @@ export function AppointmentBooking({ className = '' }: AppointmentBookingProps) 
   const validateForm = (): boolean => {
     const errors: Record<string, string> = {};
 
-    if (!formData.patient_name.trim()) {
-      errors.patient_name = 'Name is required';
+    if (!formData.name.trim()) {
+      errors.name = 'Name is required';
     }
 
-    if (!formData.patient_email.trim()) {
-      errors.patient_email = 'Email is required';
-    } else if (!apiUtils.isValidEmail(formData.patient_email)) {
-      errors.patient_email = 'Please enter a valid email address';
+    if (!formData.email.trim()) {
+      errors.email = 'Email is required';
+    } else if (!apiUtils.isValidEmail(formData.email)) {
+      errors.email = 'Please enter a valid email address';
     }
 
-    if (!formData.patient_phone.trim()) {
-      errors.patient_phone = 'Phone number is required';
-    } else if (!apiUtils.isValidPhone(formData.patient_phone)) {
-      errors.patient_phone = 'Please enter a valid 10-digit phone number';
+    if (!formData.phone.trim()) {
+      errors.phone = 'Phone number is required';
+    } else if (!apiUtils.isValidPhone(formData.phone)) {
+      errors.phone = 'Please enter a valid 10-digit phone number';
     }
 
-    if (!formData.appointment_date) {
-      errors.appointment_date = 'Appointment date is required';
+    if (!formData.date) {
+      errors.date = 'Appointment date is required';
     }
 
-    if (!formData.appointment_time) {
-      errors.appointment_time = 'Appointment time is required';
+    if (!formData.time) {
+      errors.time = 'Appointment time is required';
     }
 
     if (!formData.reason.trim()) {
@@ -130,7 +130,7 @@ export function AppointmentBooking({ className = '' }: AppointmentBookingProps) 
 
   // Refresh available slots when date changes
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData(prev => ({ ...prev, appointment_date: e.target.value, appointment_time: '' }));
+    setFormData(prev => ({ ...prev, date: e.target.value, time: '' }));
     fetchAvailableSlots();
   };
 
@@ -183,105 +183,105 @@ export function AppointmentBooking({ className = '' }: AppointmentBookingProps) 
         {/* Personal Information */}
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <label htmlFor="patient_name" className="block text-sm font-semibold text-gray-700 mb-2">
+            <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
               <User className="w-4 h-4 inline mr-2" />
               Full Name *
             </label>
             <input
               type="text"
-              id="patient_name"
-              name="patient_name"
-              value={formData.patient_name}
+              id="name"
+              name="name"
+              value={formData.name}
               onChange={handleInputChange}
               className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
-                formErrors.patient_name ? 'border-red-300' : 'border-gray-300'
+                formErrors.name ? 'border-red-300' : 'border-gray-300'
               }`}
               placeholder="Enter your full name"
             />
-            {formErrors.patient_name && (
-              <p className="mt-1 text-sm text-red-600">{formErrors.patient_name}</p>
+            {formErrors.name && (
+              <p className="mt-1 text-sm text-red-600">{formErrors.name}</p>
             )}
           </div>
 
           <div>
-            <label htmlFor="patient_phone" className="block text-sm font-semibold text-gray-700 mb-2">
+            <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
               <Phone className="w-4 h-4 inline mr-2" />
               Phone Number *
             </label>
             <input
               type="tel"
-              id="patient_phone"
-              name="patient_phone"
-              value={formData.patient_phone}
+              id="phone"
+              name="phone"
+              value={formData.phone}
               onChange={handleInputChange}
               className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
-                formErrors.patient_phone ? 'border-red-300' : 'border-gray-300'
+                formErrors.phone ? 'border-red-300' : 'border-gray-300'
               }`}
               placeholder="Enter your phone number"
             />
-            {formErrors.patient_phone && (
-              <p className="mt-1 text-sm text-red-600">{formErrors.patient_phone}</p>
+            {formErrors.phone && (
+              <p className="mt-1 text-sm text-red-600">{formErrors.phone}</p>
             )}
           </div>
         </div>
 
         <div>
-          <label htmlFor="patient_email" className="block text-sm font-semibold text-gray-700 mb-2">
+          <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
             <Mail className="w-4 h-4 inline mr-2" />
             Email Address *
           </label>
           <input
             type="email"
-            id="patient_email"
-            name="patient_email"
-            value={formData.patient_email}
+            id="email"
+            name="email"
+            value={formData.email}
             onChange={handleInputChange}
             className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
-              formErrors.patient_email ? 'border-red-300' : 'border-gray-300'
+              formErrors.email ? 'border-red-300' : 'border-gray-300'
             }`}
             placeholder="Enter your email address"
           />
-          {formErrors.patient_email && (
-            <p className="mt-1 text-sm text-red-600">{formErrors.patient_email}</p>
+          {formErrors.email && (
+            <p className="mt-1 text-sm text-red-600">{formErrors.email}</p>
           )}
         </div>
 
         {/* Appointment Details */}
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <label htmlFor="appointment_date" className="block text-sm font-semibold text-gray-700 mb-2">
+            <label htmlFor="date" className="block text-sm font-semibold text-gray-700 mb-2">
               <Calendar className="w-4 h-4 inline mr-2" />
               Appointment Date *
             </label>
             <input
               type="date"
-              id="appointment_date"
-              name="appointment_date"
-              value={formData.appointment_date}
+              id="date"
+              name="date"
+              value={formData.date}
               onChange={handleDateChange}
               min={new Date().toISOString().split('T')[0]}
               className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
-                formErrors.appointment_date ? 'border-red-300' : 'border-gray-300'
+                formErrors.date ? 'border-red-300' : 'border-gray-300'
               }`}
             />
-            {formErrors.appointment_date && (
-              <p className="mt-1 text-sm text-red-600">{formErrors.appointment_date}</p>
+            {formErrors.date && (
+              <p className="mt-1 text-sm text-red-600">{formErrors.date}</p>
             )}
           </div>
 
           <div>
-            <label htmlFor="appointment_time" className="block text-sm font-semibold text-gray-700 mb-2">
+            <label htmlFor="time" className="block text-sm font-semibold text-gray-700 mb-2">
               <Clock className="w-4 h-4 inline mr-2" />
               Available Time Slots *
             </label>
             <select
-              id="appointment_time"
-              name="appointment_time"
-              value={formData.appointment_time}
+              id="time"
+              name="time"
+              value={formData.time}
               onChange={handleInputChange}
               disabled={loading}
               className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
-                formErrors.appointment_time ? 'border-red-300' : 'border-gray-300'
+                formErrors.time ? 'border-red-300' : 'border-gray-300'
               } ${loading ? 'bg-gray-100' : ''}`}
             >
               <option value="">Select a time slot</option>
@@ -297,8 +297,8 @@ export function AppointmentBooking({ className = '' }: AppointmentBookingProps) 
                 Loading available slots...
               </p>
             )}
-            {formErrors.appointment_time && (
-              <p className="mt-1 text-sm text-red-600">{formErrors.appointment_time}</p>
+            {formErrors.time && (
+              <p className="mt-1 text-sm text-red-600">{formErrors.time}</p>
             )}
           </div>
         </div>
@@ -332,13 +332,13 @@ export function AppointmentBooking({ className = '' }: AppointmentBookingProps) 
         </div>
 
         <div>
-          <label htmlFor="notes" className="block text-sm font-semibold text-gray-700 mb-2">
+          <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
             Additional Notes
           </label>
           <textarea
-            id="notes"
-            name="notes"
-            value={formData.notes}
+            id="message"
+            name="message"
+            value={formData.message}
             onChange={handleInputChange}
             rows={4}
             className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"

@@ -7,27 +7,31 @@ import {
   Calendar, 
   BarChart3, 
   Users, 
-  Settings, 
   Clock,
   CheckCircle,
   XCircle,
-  AlertCircle
+  AlertCircle,
+  Settings,
+  Shield,
+  TrendingUp
 } from 'lucide-react';
 
 const navigation = [
   { name: 'Dashboard', href: '/admin/dashboard', icon: BarChart3 },
+  { name: 'Analytics', href: '/admin/analytics', icon: TrendingUp },
   { name: 'Appointments', href: '/admin/appointments', icon: Calendar },
   { name: 'Pending', href: '/admin/appointments?status=pending', icon: Clock },
   { name: 'Confirmed', href: '/admin/appointments?status=confirmed', icon: CheckCircle },
   { name: 'Cancelled', href: '/admin/appointments?status=cancelled', icon: XCircle },
-  { name: 'Settings', href: '/admin/settings', icon: Settings },
+  { name: 'Availability', href: '/admin/availability', icon: Settings },
+  { name: 'Blocked Slots', href: '/admin/blocked-slots', icon: Shield },
 ];
 
 export default function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="fixed left-0 top-16 bottom-0 w-64 bg-white border-r border-gray-200 overflow-y-auto">
+    <aside className="fixed left-0 top-0 bottom-0 w-64 bg-white border-r border-gray-200 overflow-y-auto">
       <nav className="p-4 space-y-2">
         {navigation.map((item) => {
           const isActive = pathname === item.href || 

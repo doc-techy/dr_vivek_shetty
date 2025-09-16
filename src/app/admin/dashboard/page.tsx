@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useAuth } from '@/contexts/AuthContext';
 import { apiClient, BookedAppointment } from '@/lib/api';
 import { 
   Calendar, 
@@ -9,7 +10,8 @@ import {
   XCircle, 
   Clock,
   TrendingUp,
-  AlertCircle
+  AlertCircle,
+  RefreshCw
 } from 'lucide-react';
 
 interface AppointmentStats {
@@ -22,8 +24,8 @@ interface AppointmentStats {
 
 interface RecentAppointment {
   appointment_id: string;
-  patient_name: string;
-  patient_email: string;
+  patient_name?: string;
+  patient_email?: string;
   appointment_date: string;
   appointment_time: string;
   status: string;
@@ -31,47 +33,79 @@ interface RecentAppointment {
 }
 
 export default function AdminDashboard() {
+  const { user, tokens } = useAuth();
   const [stats, setStats] = useState<AppointmentStats | null>(null);
   const [recentAppointments, setRecentAppointments] = useState<RecentAppointment[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [user, setUser] = useState<any>(null);
+  const [refreshing, setRefreshing] = useState(false);
 
-  useEffect(() => {
-    const fetchDashboardData = async () => {
-      const accessToken = localStorage.getItem('accessToken');
-      if (!accessToken) return;
+  const fetchDashboardData = async (isRefresh = false) => {
+    console.log('🔍 Dashboard fetch triggered', { isRefresh });
+    console.log('🔍 Tokens available:', !!tokens);
+    console.log('🔍 Access token available:', !!tokens?.access);
+    
+    if (!tokens?.access) {
+      console.log('❌ No access token available');
+      setError('No authentication token available. Please login.');
+      setLoading(false);
+      return;
+    }
 
-      try {
+    try {
+      if (isRefresh) {
+        setRefreshing(true);
+      } else {
         setLoading(true);
-        
-        // Load user data
-        const userData = localStorage.getItem('user');
-        if (userData) {
-          setUser(JSON.parse(userData));
-        }
+      }
+      console.log('🔄 Starting API calls...');
 
         // Fetch statistics
-        const statsResponse = await apiClient.getAppointmentStats(accessToken);
+        console.log('📊 Fetching appointment stats...');
+        const statsResponse = await apiClient.getAppointmentStats(tokens.access);
+        console.log('📊 Stats response:', statsResponse);
+        
         if (statsResponse.success && statsResponse.data) {
+          console.log('✅ Stats loaded successfully:', statsResponse.data.stats);
           setStats(statsResponse.data.stats);
+        } else {
+          console.log('❌ Stats failed:', statsResponse.error);
+          // Don't set error for stats failure, just show 0 values
+          setStats({
+            total: 0,
+            pending: 0,
+            confirmed: 0,
+            completed: 0,
+            cancelled: 0
+          });
         }
 
         // Fetch recent appointments
-        const appointmentsResponse = await apiClient.getAppointments(1, 5);
+        console.log('📅 Fetching appointments...');
+        const appointmentsResponse = await apiClient.getAppointments(1, 5, tokens.access);
+        console.log('📅 Appointments response:', appointmentsResponse);
+        
         if (appointmentsResponse.success && appointmentsResponse.data) {
+          console.log('✅ Appointments loaded successfully:', appointmentsResponse.data.appointments);
           setRecentAppointments(appointmentsResponse.data.appointments);
+        } else {
+          console.log('❌ Appointments failed:', appointmentsResponse.error);
+          // Don't set error for appointments failure, just show empty list
+          setRecentAppointments([]);
         }
-      } catch (err) {
-        setError('Failed to load dashboard data');
-        console.error('Dashboard error:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
+    } catch (err) {
+      console.error('💥 Dashboard error:', err);
+      setError('Failed to load dashboard data');
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+      console.log('🏁 Dashboard loading completed');
+    }
+  };
 
+  useEffect(() => {
     fetchDashboardData();
-  }, []);
+  }, [tokens]);
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -103,10 +137,31 @@ export default function AdminDashboard() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
-        <p className="text-gray-600">Overview of appointment management system</p>
+      {/* Dashboard Header */}
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
+            <p className="text-gray-600 mt-1">Welcome back, {user?.username || 'Admin'}</p>
+          </div>
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={() => fetchDashboardData(true)}
+              disabled={refreshing}
+              className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50"
+              title="Refresh data"
+            >
+              <RefreshCw className={`h-5 w-5 ${refreshing ? 'animate-spin' : ''}`} />
+            </button>
+            <div className="text-right">
+              <p className="text-sm text-gray-500">Last updated</p>
+              <p className="text-sm font-medium text-gray-900">{new Date().toLocaleDateString()}</p>
+            </div>
+            <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+              <Users className="h-5 w-5 text-blue-600" />
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Error Message */}
@@ -118,69 +173,67 @@ export default function AdminDashboard() {
       )}
 
       {/* Stats Cards */}
-      {stats && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-center">
-              <div className="p-2 bg-blue-100 rounded-lg">
-                <Calendar className="h-6 w-6 text-blue-600" />
-              </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Total Appointments</p>
-                <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
-              </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="bg-white rounded-lg shadow p-6">
+          <div className="flex items-center">
+            <div className="p-2 bg-blue-100 rounded-lg">
+              <Calendar className="h-6 w-6 text-blue-600" />
             </div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-center">
-              <div className="p-2 bg-yellow-100 rounded-lg">
-                <Clock className="h-6 w-6 text-yellow-600" />
-              </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Pending</p>
-                <p className="text-2xl font-bold text-yellow-600">{stats.pending}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-center">
-              <div className="p-2 bg-green-100 rounded-lg">
-                <CheckCircle className="h-6 w-6 text-green-600" />
-              </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Confirmed</p>
-                <p className="text-2xl font-bold text-green-600">{stats.confirmed}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-center">
-              <div className="p-2 bg-blue-100 rounded-lg">
-                <TrendingUp className="h-6 w-6 text-blue-600" />
-              </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Completed</p>
-                <p className="text-2xl font-bold text-blue-600">{stats.completed}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="flex items-center">
-              <div className="p-2 bg-red-100 rounded-lg">
-                <XCircle className="h-6 w-6 text-red-600" />
-              </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Cancelled</p>
-                <p className="text-2xl font-bold text-red-600">{stats.cancelled}</p>
-              </div>
+            <div className="ml-4">
+              <p className="text-sm font-medium text-gray-600">Total Appointments</p>
+              <p className="text-2xl font-bold text-gray-900">{stats?.total || 0}</p>
             </div>
           </div>
         </div>
-      )}
+
+        <div className="bg-white rounded-lg shadow p-6">
+          <div className="flex items-center">
+            <div className="p-2 bg-yellow-100 rounded-lg">
+              <Clock className="h-6 w-6 text-yellow-600" />
+            </div>
+            <div className="ml-4">
+              <p className="text-sm font-medium text-gray-600">Pending</p>
+              <p className="text-2xl font-bold text-yellow-600">{stats?.pending || 0}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-lg shadow p-6">
+          <div className="flex items-center">
+            <div className="p-2 bg-green-100 rounded-lg">
+              <CheckCircle className="h-6 w-6 text-green-600" />
+            </div>
+            <div className="ml-4">
+              <p className="text-sm font-medium text-gray-600">Confirmed</p>
+              <p className="text-2xl font-bold text-green-600">{stats?.confirmed || 0}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-lg shadow p-6">
+          <div className="flex items-center">
+            <div className="p-2 bg-blue-100 rounded-lg">
+              <TrendingUp className="h-6 w-6 text-blue-600" />
+            </div>
+            <div className="ml-4">
+              <p className="text-sm font-medium text-gray-600">Completed</p>
+              <p className="text-2xl font-bold text-blue-600">{stats?.completed || 0}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-lg shadow p-6">
+          <div className="flex items-center">
+            <div className="p-2 bg-red-100 rounded-lg">
+              <XCircle className="h-6 w-6 text-red-600" />
+            </div>
+            <div className="ml-4">
+              <p className="text-sm font-medium text-gray-600">Cancelled</p>
+              <p className="text-2xl font-bold text-red-600">{stats?.cancelled || 0}</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* Recent Appointments */}
       <div className="bg-white rounded-lg shadow">
@@ -199,8 +252,8 @@ export default function AdminDashboard() {
                         <Users className="h-5 w-5 text-gray-600" />
                       </div>
                       <div>
-                        <p className="font-medium text-gray-900">{appointment.patient_name}</p>
-                        <p className="text-sm text-gray-600">{appointment.patient_email}</p>
+                        <p className="font-medium text-gray-900">{appointment.patient_name || 'N/A'}</p>
+                        <p className="text-sm text-gray-600">{appointment.patient_email || 'N/A'}</p>
                         <p className="text-sm text-gray-500">
                           {appointment.appointment_date} at {appointment.appointment_time}
                         </p>

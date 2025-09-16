@@ -4,6 +4,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { BackgroundPattern } from "@/components/common/BackgroundPattern";
 import ClientProviders from "@/components/providers/ClientProviders";
+import ConditionalLayout from "@/components/layout/ConditionalLayout";
 
 export const metadata: Metadata = {
   title: "Dr. Vivek Shetty - Senior Consultant Head & Neck Oncology",
@@ -39,9 +40,9 @@ export default function RootLayout({
         
         <div className="relative z-10">
           <ClientProviders>
-            <Header />
-            <main>{children}</main>
-            <Footer />
+            <ConditionalLayout>
+              {children}
+            </ConditionalLayout>
           </ClientProviders>
         </div>
       </body>

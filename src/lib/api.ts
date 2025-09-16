@@ -20,10 +20,12 @@ export const API_CONFIG = {
     
     // Appointment related endpoints
     APPOINTMENTS: '/appointments/',
-    APPOINTMENT_DETAIL: '/appointments/',
+    APPOINTMENT_DETAIL: '/appointment/',
     APPOINTMENT_STATS: '/appointments/stats/',
     CONFIRM_APPOINTMENT: '/appointments/',
     CANCEL_APPOINTMENT: '/appointments/',
+    ADMIN_APPOINTMENT_ACTION: '/admin/appointments/',
+    APPOINTMENT_ACTION_PAGE: '/appointment-action/',
     
     // Available slots (public endpoints)
     AVAILABLE_SLOTS: '/available-slots/',
@@ -37,11 +39,11 @@ export const API_CONFIG = {
     BLOCKED_SLOTS_SUMMARY: '/blocked-slots/summary/',
     
     // Email template management (admin only)
-    EMAIL_TEMPLATES: '/email-templates/',
-    EMAIL_TEMPLATES_TEST: '/email-templates/test/',
-    EMAIL_TEMPLATES_VALIDATE: '/email-templates/validate/',
-    EMAIL_TEMPLATES_PREVIEW: '/email-templates/preview/',
-    EMAIL_TEMPLATES_STATS: '/email-templates/statistics/',
+    // EMAIL_TEMPLATES: '/email-templates/',
+    // EMAIL_TEMPLATES_TEST: '/email-templates/test/',
+    // EMAIL_TEMPLATES_VALIDATE: '/email-templates/validate/',
+    // EMAIL_TEMPLATES_PREVIEW: '/email-templates/preview/',
+    // EMAIL_TEMPLATES_STATS: '/email-templates/statistics/',
   }
 } as const;
 
@@ -68,23 +70,23 @@ export interface AvailableSlotsResponse {
 }
 
 export interface AppointmentFormData {
-  patient_name: string;
-  patient_email: string;
-  patient_phone: string;
-  appointment_date: string;
-  appointment_time: string;
-  reason: string;
-  notes?: string;
+  name: string;
+  email: string;
+  phone: string;
+  date: string;
+  time: string;
+  message?: string;
+  reason?: string;
 }
 
 export interface BookedAppointment {
   appointment_id: string;
-  patient_name: string;
-  patient_email: string;
-  patient_phone: string;
+  patient_name?: string;
+  patient_email?: string;
+  patient_phone?: string;
   appointment_date: string;
   appointment_time: string;
-  reason: string;
+  reason?: string;
   status: 'pending' | 'confirmed' | 'cancelled' | 'completed';
   notes?: string;
   created_at: string;
@@ -101,7 +103,7 @@ export class ApiClient {
 
   constructor(baseUrl: string = API_CONFIG.BASE_URL) {
     this.baseUrl = baseUrl;
-    this.useMock = shouldUseMockApi();
+    this.useMock = false; // Force to use real API instead of mock
   }
 
   private async request<T>(
@@ -123,22 +125,51 @@ export class ApiClient {
     };
 
     try {
+      console.log('🌐 Making API request to:', url);
+      console.log('🌐 Request config:', {
+        method: config.method || 'GET',
+        headers: config.headers
+      });
+      
       const response = await fetch(url, config);
+      console.log('🌐 Response status:', response.status, response.statusText);
+      
       const data = await response.json();
+      console.log('🌐 Response data:', data);
 
       if (!response.ok) {
+        console.log('❌ API request failed:', {
+          status: response.status,
+          statusText: response.statusText,
+          data
+        });
+        
+        // Provide more specific error messages
+        let errorMessage = data.error || `HTTP ${response.status}: ${response.statusText}`;
+        
+        if (response.status === 500) {
+          errorMessage = 'Server error. Please try again later or contact support.';
+        } else if (response.status === 404) {
+          errorMessage = 'Service temporarily unavailable. Please try again later.';
+        } else if (response.status === 401) {
+          errorMessage = 'Authentication required. Please refresh the page and try again.';
+        } else if (response.status === 400) {
+          errorMessage = data.error || 'Invalid data provided. Please check your information and try again.';
+        }
+        
         return {
           success: false,
-          error: data.error || `HTTP ${response.status}: ${response.statusText}`,
+          error: errorMessage,
         };
       }
 
+      console.log('✅ API request successful');
       return {
         success: true,
         data,
       };
     } catch (error) {
-      console.error('API Request failed:', error);
+      console.error('💥 API Request failed:', error);
       return {
         success: false,
         error: error instanceof Error ? error.message : 'Network error',
@@ -164,11 +195,19 @@ export class ApiClient {
     });
   }
 
-  async getAppointments(page: number = 1, limit: number = 10): Promise<ApiResponse<{ appointments: BookedAppointment[]; pagination: any }>> {
+  async getAppointments(page: number = 1, limit: number = 10, accessToken?: string): Promise<ApiResponse<{ appointments: BookedAppointment[]; pagination: any }>> {
     if (this.useMock) {
       return mockApi.getAppointments();
     }
-    return this.request<{ appointments: BookedAppointment[]; pagination: any }>(`${API_CONFIG.ENDPOINTS.APPOINTMENTS}?page=${page}&limit=${limit}`);
+    
+    const headers: Record<string, string> = {};
+    if (accessToken) {
+      headers['Authorization'] = `Bearer ${accessToken}`;
+    }
+    
+    return this.request<{ appointments: BookedAppointment[]; pagination: any }>(`${API_CONFIG.ENDPOINTS.APPOINTMENTS}?page=${page}&limit=${limit}`, {
+      headers,
+    });
   }
 
   async getAppointmentDetail(appointmentId: number, accessToken: string): Promise<ApiResponse<{ appointment: BookedAppointment }>> {
@@ -217,6 +256,17 @@ export class ApiClient {
       method: 'POST',
     });
   }
+
+  // Admin appointment action method
+  async adminAppointmentAction(appointmentId: number, action: 'confirm' | 'cancel', accessToken: string): Promise<ApiResponse> {
+    return this.request(`${API_CONFIG.ENDPOINTS.ADMIN_APPOINTMENT_ACTION}${appointmentId}/${action}/`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+      },
+    });
+  }
+
 
   // Authentication APIs
   async login(username: string, password: string): Promise<ApiResponse<{ tokens: { access: string; refresh: string }; user: any }>> {
@@ -271,6 +321,7 @@ export class ApiClient {
       },
     });
   }
+
 
   // Contact APIs (using mock for now)
   async submitContactForm(formData: {
@@ -340,68 +391,133 @@ export class ApiClient {
     });
   }
 
-  // Email Template Management (Admin Only)
-  async getEmailTemplates(accessToken: string): Promise<ApiResponse<{ templates: any }>> {
-    return this.request<{ templates: any }>(API_CONFIG.ENDPOINTS.EMAIL_TEMPLATES, {
+  // Additional methods needed for new admin pages
+  async getBlockedSlots(accessToken: string): Promise<ApiResponse<{ blocked_slots: any[] }>> {
+    return this.request<{ blocked_slots: any[] }>(API_CONFIG.ENDPOINTS.BLOCKED_SLOTS, {
       headers: {
         'Authorization': `Bearer ${accessToken}`,
       },
     });
   }
 
-  async updateEmailTemplate(templateData: {
-    template_type: string;
-    subject: string;
-    body: string;
-  }, accessToken: string): Promise<ApiResponse<{ template: any }>> {
-    return this.request<{ template: any }>(API_CONFIG.ENDPOINTS.EMAIL_TEMPLATES, {
+  async updateBlockedSlot(blockedId: number, data: any, accessToken: string): Promise<ApiResponse<{ blocked_slot: any }>> {
+    return this.request<{ blocked_slot: any }>(`${API_CONFIG.ENDPOINTS.BLOCKED_SLOTS}${blockedId}/`, {
       method: 'PUT',
       headers: {
         'Authorization': `Bearer ${accessToken}`,
       },
-      body: JSON.stringify(templateData),
+      body: JSON.stringify(data),
     });
   }
 
-  async testEmailTemplate(templateType: string, accessToken: string): Promise<ApiResponse<{ success: boolean; message: string }>> {
-    return this.request<{ success: boolean; message: string }>(API_CONFIG.ENDPOINTS.EMAIL_TEMPLATES_TEST, {
+  async deleteBlockedSlot(blockedId: number, accessToken: string): Promise<ApiResponse> {
+    return this.request(`${API_CONFIG.ENDPOINTS.BLOCKED_SLOTS}${blockedId}/`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+      },
+    });
+  }
+
+  async getDoctorAvailability(accessToken: string): Promise<ApiResponse<{ availability: any[] }>> {
+    return this.request<{ availability: any[] }>(API_CONFIG.ENDPOINTS.AVAILABILITY, {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+      },
+    });
+  }
+
+  async createDoctorAvailability(data: any, accessToken: string): Promise<ApiResponse<{ availability: any }>> {
+    return this.request<{ availability: any }>(API_CONFIG.ENDPOINTS.AVAILABILITY, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${accessToken}`,
       },
-      body: JSON.stringify({ template_type: templateType }),
+      body: JSON.stringify(data),
     });
   }
 
-  async validateEmailTemplate(templateData: {
-    template_type: string;
-    subject: string;
-    body: string;
-  }, accessToken: string): Promise<ApiResponse<{ valid: boolean; errors: string[] }>> {
-    return this.request<{ valid: boolean; errors: string[] }>(API_CONFIG.ENDPOINTS.EMAIL_TEMPLATES_VALIDATE, {
-      method: 'POST',
+  async updateDoctorAvailability(availabilityId: number, data: any, accessToken: string): Promise<ApiResponse<{ availability: any }>> {
+    return this.request<{ availability: any }>(`${API_CONFIG.ENDPOINTS.AVAILABILITY}${availabilityId}/`, {
+      method: 'PUT',
       headers: {
         'Authorization': `Bearer ${accessToken}`,
       },
-      body: JSON.stringify(templateData),
+      body: JSON.stringify(data),
     });
   }
 
-  async getEmailTemplatePreview(templateType: string, accessToken: string): Promise<ApiResponse<{ preview: string }>> {
-    return this.request<{ preview: string }>(`${API_CONFIG.ENDPOINTS.EMAIL_TEMPLATES_PREVIEW}?template_type=${templateType}`, {
+  async deleteDoctorAvailability(availabilityId: number, accessToken: string): Promise<ApiResponse> {
+    return this.request(`${API_CONFIG.ENDPOINTS.AVAILABILITY}${availabilityId}/`, {
+      method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${accessToken}`,
       },
     });
   }
 
-  async getEmailStatistics(accessToken: string): Promise<ApiResponse<{ statistics: any }>> {
-    return this.request<{ statistics: any }>(API_CONFIG.ENDPOINTS.EMAIL_TEMPLATES_STATS, {
-      headers: {
-        'Authorization': `Bearer ${accessToken}`,
-      },
-    });
-  }
+  // Email Template Management (Admin Only)
+  // async getEmailTemplates(accessToken: string): Promise<ApiResponse<{ templates: any }>> {
+  //   return this.request<{ templates: any }>(API_CONFIG.ENDPOINTS.EMAIL_TEMPLATES, {
+  //     headers: {
+  //       'Authorization': `Bearer ${accessToken}`,
+  //     },
+  //   });
+  // }
+
+  // async updateEmailTemplate(templateData: {
+  //   template_type: string;
+  //   subject: string;
+  //   body: string;
+  // }, accessToken: string): Promise<ApiResponse<{ template: any }>> {
+  //   return this.request<{ template: any }>(API_CONFIG.ENDPOINTS.EMAIL_TEMPLATES, {
+  //     method: 'PUT',
+  //     headers: {
+  //       'Authorization': `Bearer ${accessToken}`,
+  //     },
+  //     body: JSON.stringify(templateData),
+  //   });
+  // }
+
+  // async testEmailTemplate(templateType: string, accessToken: string): Promise<ApiResponse<{ success: boolean; message: string }>> {
+  //   return this.request<{ success: boolean; message: string }>(API_CONFIG.ENDPOINTS.EMAIL_TEMPLATES_TEST, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Authorization': `Bearer ${accessToken}`,
+  //     },
+  //     body: JSON.stringify({ template_type: templateType }),
+  //   });
+  // }
+
+  // async validateEmailTemplate(templateData: {
+  //   template_type: string;
+  //   subject: string;
+  //   body: string;
+  // }, accessToken: string): Promise<ApiResponse<{ valid: boolean; errors: string[] }>> {
+  //   return this.request<{ valid: boolean; errors: string[] }>(API_CONFIG.ENDPOINTS.EMAIL_TEMPLATES_VALIDATE, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Authorization': `Bearer ${accessToken}`,
+  //     },
+  //     body: JSON.stringify(templateData),
+  //   });
+  // }
+
+  // async getEmailTemplatePreview(templateType: string, accessToken: string): Promise<ApiResponse<{ preview: string }>> {
+  //   return this.request<{ preview: string }>(`${API_CONFIG.ENDPOINTS.EMAIL_TEMPLATES_PREVIEW}?template_type=${templateType}`, {
+  //     headers: {
+  //       'Authorization': `Bearer ${accessToken}`,
+  //     },
+  //   });
+  // }
+
+  // async getEmailStatistics(accessToken: string): Promise<ApiResponse<{ statistics: any }>> {
+  //   return this.request<{ statistics: any }>(API_CONFIG.ENDPOINTS.EMAIL_TEMPLATES_STATS, {
+  //     headers: {
+  //       'Authorization': `Bearer ${accessToken}`,
+  //     },
+  //   });
+  // }
 }
 
 // Create default API client instance
@@ -500,7 +616,14 @@ export const handleApiResponseError = (error: any): string => {
 // Token refresh utility
 export const refreshAccessToken = async (): Promise<string | null> => {
   try {
-    const refreshToken = localStorage.getItem('refreshToken');
+    const storedTokens = localStorage.getItem('admin_tokens');
+    if (!storedTokens) {
+      return null;
+    }
+
+    const parsedTokens = JSON.parse(storedTokens);
+    const refreshToken = parsedTokens.refresh;
+    
     if (!refreshToken) {
       return null;
     }
@@ -509,21 +632,21 @@ export const refreshAccessToken = async (): Promise<string | null> => {
     const response = await apiClient.refreshToken(refreshToken);
     
     if (response.success && response.data) {
-      localStorage.setItem('accessToken', response.data.access);
+      const newTokens = {
+        access: response.data.access,
+        refresh: parsedTokens.refresh
+      };
+      localStorage.setItem('admin_tokens', JSON.stringify(newTokens));
       return response.data.access;
     } else {
       // Clear invalid tokens
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
-      localStorage.removeItem('user');
+      localStorage.removeItem('admin_tokens');
       return null;
     }
   } catch (error) {
     console.error('Token refresh failed:', error);
     // Clear invalid tokens
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    localStorage.removeItem('user');
+    localStorage.removeItem('admin_tokens');
     return null;
   }
 };

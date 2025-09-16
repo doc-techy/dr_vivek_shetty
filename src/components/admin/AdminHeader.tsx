@@ -1,28 +1,17 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { LogOut, User, Bell, Menu } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function AdminHeader() {
-  const [user, setUser] = useState<any>(null);
+  const { user, logout } = useAuth();
   const [showUserMenu, setShowUserMenu] = useState(false);
   const router = useRouter();
 
-  useEffect(() => {
-    const userData = localStorage.getItem('user');
-    if (userData) {
-      setUser(JSON.parse(userData));
-    }
-  }, []);
-
   const handleLogout = async () => {
-    // Clear all stored data
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    localStorage.removeItem('user');
-    
-    // Redirect to login
+    logout();
     router.push('/admin-login');
   };
 

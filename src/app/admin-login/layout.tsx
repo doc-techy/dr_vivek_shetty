@@ -1,4 +1,5 @@
 import React from 'react';
+import ClientProviders from '@/components/providers/ClientProviders';
 
 export default function AdminLoginLayout({
   children,
@@ -14,7 +15,9 @@ export default function AdminLoginLayout({
         <meta name="description" content="Admin login for Dr. Vivek Shetty appointment management system" />
       </head>
       <body className="font-sans antialiased min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-        {children}
+        <ClientProviders>
+          {children}
+        </ClientProviders>
       </body>
     </html>
   );

@@ -159,8 +159,8 @@ export function VideoSection() {
 
   const filteredVideos = sampleVideos.filter(video => {
     const matchesCategory = selectedCategory === 'All' || video.category === selectedCategory;
-    const matchesSearch = video.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         video.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = (video.title?.toLowerCase() || '').includes(searchTerm.toLowerCase()) ||
+                         (video.description?.toLowerCase() || '').includes(searchTerm.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 

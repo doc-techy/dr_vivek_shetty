@@ -1,79 +1,51 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { ApiClient } from '@/lib/api';
+import { useRouter, usePathname } from 'next/navigation';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface AdminWrapperProps {
   children: React.ReactNode;
 }
 
 export default function AdminWrapper({ children }: AdminWrapperProps) {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const { user, tokens, loading, isAdmin } = useAuth();
   const router = useRouter();
-  const apiClient = new ApiClient();
+  const pathname = usePathname();
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
   useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const accessToken = localStorage.getItem('accessToken');
-        const user = localStorage.getItem('user');
-        
-        if (!accessToken || !user) {
-          router.push('/admin-login');
-          return;
-        }
+    console.log('🔐 AdminWrapper: Auth state check', { 
+      loading, 
+      hasTokens: !!tokens?.access, 
+      hasUser: !!user, 
+      isAdmin, 
+      isRedirecting,
+      pathname
+    });
 
-        // Verify token is still valid
-        const verifyResponse = await apiClient.verifyToken(accessToken);
-        
-        if (verifyResponse.success && verifyResponse.data?.valid) {
-          // Check if user is admin
-          const adminCheck = await apiClient.checkAdmin(accessToken);
-          
-          if (adminCheck.success && adminCheck.data?.is_admin) {
-            setIsAuthenticated(true);
-          } else {
-            // Not admin, redirect to login
-            localStorage.removeItem('accessToken');
-            localStorage.removeItem('refreshToken');
-            localStorage.removeItem('user');
-            router.push('/admin-login');
-          }
-        } else {
-          // Token invalid, try to refresh
-          const refreshToken = localStorage.getItem('refreshToken');
-          if (refreshToken) {
-            const refreshResponse = await apiClient.refreshToken(refreshToken);
-            if (refreshResponse.success && refreshResponse.data) {
-              localStorage.setItem('accessToken', refreshResponse.data.access);
-              // Retry admin check with new token
-              const adminCheck = await apiClient.checkAdmin(refreshResponse.data.access);
-              if (adminCheck.success && adminCheck.data?.is_admin) {
-                setIsAuthenticated(true);
-              } else {
-                router.push('/admin-login');
-              }
-            } else {
-              router.push('/admin-login');
-            }
-          } else {
-            router.push('/admin-login');
-          }
-        }
-      } catch (error) {
-        console.error('Auth check failed:', error);
-        router.push('/admin-login');
-      } finally {
-        setIsLoading(false);
+    // Only redirect if we're not already redirecting and not on login page
+    // Add a small delay to prevent rapid redirects
+    if (!loading && !isRedirecting && pathname !== '/admin-login') {
+      if (!tokens?.access || !user || !isAdmin) {
+        console.log('🔐 AdminWrapper: Redirecting to login - no valid admin session');
+        setIsRedirecting(true);
+        // Use setTimeout to prevent immediate redirect loops
+        setTimeout(() => {
+          router.replace('/admin-login');
+        }, 100);
       }
-    };
+    }
+  }, [loading, tokens, user, isAdmin, router, isRedirecting, pathname]);
 
-    checkAuth();
-  }, [router]);
+  // Reset redirecting state when auth state changes
+  useEffect(() => {
+    if (tokens?.access && user && isAdmin) {
+      setIsRedirecting(false);
+    }
+  }, [tokens, user, isAdmin]);
 
-  if (isLoading) {
+  if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
@@ -81,8 +53,26 @@ export default function AdminWrapper({ children }: AdminWrapperProps) {
     );
   }
 
-  if (!isAuthenticated) {
-    return null;
+  if (isRedirecting) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Redirecting to login...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!tokens?.access || !user || !isAdmin) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Redirecting to login...</p>
+        </div>
+      </div>
+    );
   }
 
   return <>{children}</>;

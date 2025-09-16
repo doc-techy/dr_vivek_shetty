@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Eye, EyeOff, Lock, User, AlertCircle } from 'lucide-react';
-import { ApiClient } from '@/lib/api';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function AdminLoginPage() {
   const [username, setUsername] = useState('');
@@ -11,9 +11,23 @@ export default function AdminLoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [hasRedirected, setHasRedirected] = useState(false);
   
   const router = useRouter();
-  const apiClient = new ApiClient();
+  const { login, user, isAdmin, loading } = useAuth();
+
+  // Redirect if already logged in as admin
+  useEffect(() => {
+    console.log('🔐 Login page: Auth state check', { loading, user: !!user, isAdmin, hasRedirected });
+    if (!loading && user && isAdmin && !hasRedirected) {
+      console.log('🔐 Login page: User already authenticated, redirecting to dashboard');
+      setHasRedirected(true);
+      // Add a small delay to prevent rapid redirects
+      setTimeout(() => {
+        router.replace('/admin/dashboard');
+      }, 100);
+    }
+  }, [user, isAdmin, loading, router, hasRedirected]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,33 +35,17 @@ export default function AdminLoginPage() {
     setIsLoading(true);
 
     try {
-      // Use real API authentication
-      const response = await apiClient.login(username, password);
+      console.log('🔐 Login attempt for user:', username);
+      const success = await login(username, password);
       
-      if (response.success && response.data) {
-        // Store tokens in localStorage
-        localStorage.setItem('accessToken', response.data.tokens.access);
-        localStorage.setItem('refreshToken', response.data.tokens.refresh);
-        localStorage.setItem('user', JSON.stringify(response.data.user));
-        
-        // Check if user is admin
-        const adminCheck = await apiClient.checkAdmin(response.data.tokens.access);
-        
-        if (adminCheck.success && adminCheck.data?.is_admin) {
-          // Redirect to admin dashboard
-          router.push('/admin/dashboard');
-        } else {
-          setError('Access denied. Admin privileges required.');
-          // Clear stored tokens
-          localStorage.removeItem('accessToken');
-          localStorage.removeItem('refreshToken');
-          localStorage.removeItem('user');
-        }
+      if (success) {
+        console.log('✅ Login successful, redirecting to dashboard');
+        router.replace('/admin/dashboard');
       } else {
-        setError(response.error || 'Invalid username or password');
+        setError('Invalid username or password');
       }
     } catch (err) {
-      console.error('Login error:', err);
+      console.error('💥 Login error:', err);
       setError('Login failed. Please check your connection and try again.');
     } finally {
       setIsLoading(false);

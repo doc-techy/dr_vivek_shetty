@@ -13,7 +13,8 @@ import {
   Clock,
   Edit,
   Trash2,
-  Eye
+  Eye,
+  Shield
 } from 'lucide-react';
 
 interface Appointment {
@@ -59,7 +60,7 @@ export default function AdminAppointmentsPage() {
 
     try {
       setLoading(true);
-      const response = await apiClient.getAppointments(currentPage, 10);
+      const response = await apiClient.getAppointments(currentPage, 10, tokens.access);
       
       if (response.success && response.data) {
         setAppointments(response.data.appointments);
@@ -91,6 +92,21 @@ export default function AdminAppointmentsPage() {
       }
     } catch (err) {
       console.error('Status update error:', err);
+    }
+  };
+
+  const handleAdminAction = async (appointmentId: number, action: 'confirm' | 'cancel') => {
+    if (!tokens?.access) return;
+
+    try {
+      const response = await apiClient.adminAppointmentAction(appointmentId, action, tokens.access);
+      
+      if (response.success) {
+        // Refresh appointments
+        fetchAppointments();
+      }
+    } catch (err) {
+      console.error('Admin action error:', err);
     }
   };
 
@@ -131,8 +147,8 @@ export default function AdminAppointmentsPage() {
   };
 
   const filteredAppointments = appointments.filter(appointment => {
-    const matchesSearch = appointment.patient_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         appointment.patient_email.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = (appointment.patient_name?.toLowerCase() || '').includes(searchTerm.toLowerCase()) ||
+                         (appointment.patient_email?.toLowerCase() || '').includes(searchTerm.toLowerCase());
     const matchesStatus = statusFilter === 'all' || appointment.status === statusFilter;
     return matchesSearch && matchesStatus;
   });
@@ -147,16 +163,6 @@ export default function AdminAppointmentsPage() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Appointments</h1>
-          <p className="text-gray-600">Manage patient appointments</p>
-        </div>
-        <div className="text-sm text-gray-500">
-          {pagination && `${pagination.total} total appointments`}
-        </div>
-      </div>
 
       {/* Filters */}
       <div className="bg-white rounded-lg shadow p-6">
@@ -223,7 +229,7 @@ export default function AdminAppointmentsPage() {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div>
                         <div className="text-sm font-medium text-gray-900">
-                          {appointment.patient_name}
+                          {appointment.patient_name || 'N/A'}
                         </div>
                         <div className="text-sm text-gray-500">
                           ID: #{appointment.appointment_id}
@@ -231,8 +237,8 @@ export default function AdminAppointmentsPage() {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{appointment.patient_email}</div>
-                      <div className="text-sm text-gray-500">{appointment.patient_phone}</div>
+                      <div className="text-sm text-gray-900">{appointment.patient_email || 'N/A'}</div>
+                      <div className="text-sm text-gray-500">{appointment.patient_phone || 'N/A'}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm text-gray-900">{appointment.appointment_date}</div>
@@ -257,21 +263,31 @@ export default function AdminAppointmentsPage() {
                         </button>
                         
                         {appointment.status === 'pending' && (
-                          <button
-                            onClick={() => handleStatusChange(parseInt(appointment.appointment_id), 'confirmed')}
-                            className="text-green-600 hover:text-green-900"
-                          >
-                            <CheckCircle className="h-4 w-4" />
-                          </button>
-                        )}
-                        
-                        {appointment.status === 'pending' && (
-                          <button
-                            onClick={() => handleStatusChange(parseInt(appointment.appointment_id), 'cancelled')}
-                            className="text-red-600 hover:text-red-900"
-                          >
-                            <XCircle className="h-4 w-4" />
-                          </button>
+                          <>
+                            <button
+                              onClick={() => handleStatusChange(parseInt(appointment.appointment_id), 'confirmed')}
+                              className="text-green-600 hover:text-green-900"
+                              title="Confirm Appointment"
+                            >
+                              <CheckCircle className="h-4 w-4" />
+                            </button>
+                            
+                            <button
+                              onClick={() => handleStatusChange(parseInt(appointment.appointment_id), 'cancelled')}
+                              className="text-red-600 hover:text-red-900"
+                              title="Cancel Appointment"
+                            >
+                              <XCircle className="h-4 w-4" />
+                            </button>
+
+                            <button
+                              onClick={() => handleAdminAction(parseInt(appointment.appointment_id), 'confirm')}
+                              className="text-blue-600 hover:text-blue-900"
+                              title="Admin Confirm (Email Action)"
+                            >
+                              <Shield className="h-4 w-4" />
+                            </button>
+                          </>
                         )}
                         
                         <button
