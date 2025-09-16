@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Play, Clock, Calendar, Filter, ChevronDown, Eye, ArrowRight, ArrowUp } from 'lucide-react';
+import { Play, Clock, Calendar, Filter, ChevronDown, Eye, ArrowRight, ArrowUp, FileText, BookOpen } from 'lucide-react';
 import Image from 'next/image';
 
 interface Video {
@@ -14,6 +14,18 @@ interface Video {
   category: string;
   views: number;
   videoUrl: string;
+}
+
+interface Blog {
+  id: string;
+  title: string;
+  description: string;
+  thumbnail: string;
+  readTime: string;
+  date: string;
+  category: string;
+  views: number;
+  blogUrl: string;
 }
 
 const sampleVideos: Video[] = [
@@ -151,8 +163,99 @@ const sampleVideos: Video[] = [
   }
 ];
 
+const sampleBlogs: Blog[] = [
+  {
+    id: '1',
+    title: 'Early Signs of Head & Neck Cancer: What You Need to Know',
+    description: 'Learn about the warning signs and symptoms of head and neck cancer that should prompt immediate medical consultation.',
+    thumbnail: 'https://picsum.photos/400/225?random=13',
+    readTime: '5 min read',
+    date: '2024-01-20',
+    category: 'Education',
+    views: 1850,
+    blogUrl: '#'
+  },
+  {
+    id: '2',
+    title: 'Preparing for Head & Neck Surgery: A Complete Guide',
+    description: 'Essential steps and preparations patients should take before undergoing head and neck surgical procedures.',
+    thumbnail: 'https://picsum.photos/400/225?random=14',
+    readTime: '8 min read',
+    date: '2024-01-18',
+    category: 'Surgery',
+    views: 1200,
+    blogUrl: '#'
+  },
+  {
+    id: '3',
+    title: 'Recovery Timeline: What to Expect After Surgery',
+    description: 'A detailed timeline of the recovery process and milestones patients can expect after head and neck surgery.',
+    thumbnail: 'https://picsum.photos/400/225?random=15',
+    readTime: '6 min read',
+    date: '2024-01-15',
+    category: 'Patient Care',
+    views: 2200,
+    blogUrl: '#'
+  },
+  {
+    id: '4',
+    title: 'Advanced Reconstruction Techniques in Modern Surgery',
+    description: 'Exploring the latest innovations in reconstructive surgery and their impact on patient outcomes.',
+    thumbnail: 'https://picsum.photos/400/225?random=16',
+    readTime: '10 min read',
+    date: '2024-01-12',
+    category: 'Reconstruction',
+    views: 980,
+    blogUrl: '#'
+  },
+  {
+    id: '5',
+    title: 'Nutrition Guidelines for Cancer Patients',
+    description: 'Comprehensive dietary recommendations and nutritional support strategies for head and neck cancer patients.',
+    thumbnail: 'https://picsum.photos/400/225?random=17',
+    readTime: '7 min read',
+    date: '2024-01-08',
+    category: 'Lifestyle',
+    views: 1650,
+    blogUrl: '#'
+  },
+  {
+    id: '6',
+    title: 'Breakthrough Research in Head & Neck Oncology',
+    description: 'Latest research findings and clinical trials that are shaping the future of head and neck cancer treatment.',
+    thumbnail: 'https://picsum.photos/400/225?random=18',
+    readTime: '12 min read',
+    date: '2024-01-05',
+    category: 'Research',
+    views: 1400,
+    blogUrl: '#'
+  },
+  {
+    id: '7',
+    title: 'Robotic Surgery: The Future of Precision Medicine',
+    description: 'How robotic-assisted surgery is revolutionizing head and neck cancer treatment with improved precision.',
+    thumbnail: 'https://picsum.photos/400/225?random=19',
+    readTime: '9 min read',
+    date: '2024-01-02',
+    category: 'Surgery',
+    views: 1750,
+    blogUrl: '#'
+  },
+  {
+    id: '8',
+    title: 'Managing Side Effects of Cancer Treatment',
+    description: 'Practical strategies for managing common side effects and maintaining quality of life during treatment.',
+    thumbnail: 'https://picsum.photos/400/225?random=20',
+    readTime: '6 min read',
+    date: '2023-12-30',
+    category: 'Patient Care',
+    views: 1300,
+    blogUrl: '#'
+  }
+];
+
 const categories = [
-  { id: 'all', label: 'All Videos', icon: '🎥' },
+  { id: 'all', label: 'All', icon: '🎯' },
   { id: 'Education', label: 'Education', icon: '📚' },
   { id: 'Surgery', label: 'Surgery', icon: '⚕️' },
   { id: 'Patient Care', label: 'Patient Care', icon: '❤️' },
@@ -161,22 +264,24 @@ const categories = [
 
 export function VideoSection() {
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [videosToShow, setVideosToShow] = useState(4); // Start with 4 videos (1 row)
+  const [videosToShow, setVideosToShow] = useState(8); // Start with 8 videos (2 rows)
   const [showFilters, setShowFilters] = useState(false);
+  const [contentType, setContentType] = useState<'videos' | 'blogs'>('videos');
 
-  const filteredVideos = sampleVideos.filter(video => {
-    return selectedCategory === 'all' || video.category === selectedCategory;
+  const currentData = contentType === 'videos' ? sampleVideos : sampleBlogs;
+  const filteredData = currentData.filter(item => {
+    return selectedCategory === 'all' || item.category === selectedCategory;
   });
 
-  const displayedVideos = filteredVideos.slice(0, videosToShow);
-  const hasMoreVideos = videosToShow < filteredVideos.length;
+  const displayedItems = filteredData.slice(0, videosToShow);
+  const hasMoreItems = videosToShow < filteredData.length;
 
   const loadMore = () => {
-    setVideosToShow(prev => Math.min(prev + 4, filteredVideos.length));
+    setVideosToShow(prev => Math.min(prev + 4, filteredData.length));
   };
 
   const showLess = () => {
-    setVideosToShow(prev => Math.max(prev - 4, 4));
+    setVideosToShow(prev => Math.max(prev - 4, 8));
   };
 
   const formatDate = (dateString: string) => {
@@ -194,13 +299,56 @@ export function VideoSection() {
     return `${views}`;
   };
 
+  const generateSlug = (title: string) => {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '') // Remove special characters
+      .replace(/\s+/g, '-') // Replace spaces with hyphens
+      .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
+      .trim();
+  };
+
+  const handleBlogClick = (blog: Blog) => {
+    const slug = generateSlug(blog.title);
+    const blogUrl = `/blogs/${slug}`;
+    window.open(blogUrl, '_blank');
+  };
+
   return (
     <div className="container-custom pb-16">
       {/* Header */}
       <div className="text-center mb-8">
         <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-          Educational <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Videos</span>
+          Educational <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Videos and Blogs</span>
         </h2>
+        
+        {/* Content Type Toggle Switch */}
+        <div className="flex justify-center mb-6">
+          <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-1 flex border border-gray-200/50">
+            <button
+              onClick={() => setContentType('videos')}
+              className={`flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-500 ease-in-out transform ${
+                contentType === 'videos'
+                  ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg scale-105 animate-pulse'
+                  : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50/50 hover:scale-102 active:scale-95'
+              }`}
+            >
+              <Play className={`w-4 h-4 transition-all duration-500 ${contentType === 'videos' ? 'rotate-12' : 'rotate-0'}`} />
+              Videos
+            </button>
+            <button
+              onClick={() => setContentType('blogs')}
+              className={`flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-500 ease-in-out transform ${
+                contentType === 'blogs'
+                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg scale-105 animate-pulse'
+                  : 'text-gray-700 hover:text-purple-600 hover:bg-purple-50/50 hover:scale-102 active:scale-95'
+              }`}
+            >
+              <BookOpen className={`w-4 h-4 transition-all duration-500 ${contentType === 'blogs' ? 'rotate-12' : 'rotate-0'}`} />
+              Blogs
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Modern Filter Section */}
@@ -209,7 +357,7 @@ export function VideoSection() {
           {/* Filter Toggle */}
           <div className="flex items-center gap-3">
             <div className="text-sm text-gray-500">
-              {filteredVideos.length} video{filteredVideos.length !== 1 ? 's' : ''} found
+              {filteredData.length} {contentType === 'videos' ? 'video' : 'blog'}{filteredData.length !== 1 ? 's' : ''} found
             </div>
           </div>
         </div>
@@ -235,16 +383,21 @@ export function VideoSection() {
         </div>
       </div>
 
-      {/* Single Row Video Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {displayedVideos.map((video) => (
-          <div key={video.id} className="group">
-            <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 group-hover:border-transparent">
-              {/* Video Thumbnail */}
+      {/* Content Layout */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
+        {displayedItems.map((item) => (
+          <div key={item.id} className="group h-full">
+            <div 
+              className={`bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-all duration-300 hover:-translate-y-1 border border-gray-100 group-hover:border-transparent h-full flex flex-col ${
+                contentType === 'blogs' ? 'cursor-pointer' : ''
+              }`}
+              onClick={contentType === 'blogs' ? () => handleBlogClick(item as Blog) : undefined}
+            >
+              {/* Thumbnail */}
               <div className="relative aspect-video bg-gradient-to-br from-blue-100 to-purple-100">
                 <Image 
-                  src={video.thumbnail} 
-                  alt={video.title} 
+                  src={item.thumbnail} 
+                  alt={item.title} 
                   fill 
                   className="object-cover group-hover:scale-105 transition-transform duration-300" 
                   onError={(e) => {
@@ -253,45 +406,51 @@ export function VideoSection() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 
-                {/* Play Button */}
+                {/* Play Button for Videos / Read Icon for Blogs */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-16 h-16 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center shadow-xl hover:scale-110 transition-all duration-300 group-hover:bg-white">
-                    <Play className="w-8 h-8 text-blue-600 ml-1" />
+                  <div className="w-10 h-10 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300 group-hover:bg-white">
+                    {contentType === 'videos' ? (
+                      <Play className="w-5 h-5 text-blue-600 ml-0.5" />
+                    ) : (
+                      <FileText className="w-5 h-5 text-purple-600" />
+                    )}
                   </div>
                 </div>
                 
-                {/* Duration Badge */}
-                <div className="absolute bottom-3 right-3 bg-black/80 backdrop-blur-sm text-white px-2 py-1 rounded-lg text-sm font-medium">
-                  {video.duration}
+                {/* Duration/Read Time Badge */}
+                <div className="absolute bottom-2 right-2 bg-black/80 backdrop-blur-sm text-white px-2 py-1 rounded-md text-xs font-medium">
+                  {contentType === 'videos' ? (item as Video).duration : (item as Blog).readTime}
                 </div>
 
                 {/* Category Badge */}
-                <div className="absolute top-3 left-3">
-                  <span className="bg-white/90 backdrop-blur-sm text-gray-800 px-3 py-1 rounded-full text-xs font-semibold shadow-sm">
-                    {video.category}
+                <div className="absolute top-2 left-2">
+                  <span className="bg-white/90 backdrop-blur-sm text-gray-800 px-2 py-1 rounded-full text-xs font-semibold shadow-sm">
+                    {item.category}
                   </span>
                 </div>
               </div>
 
-              {/* Video Content */}
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors duration-200">
-                  {video.title}
+              {/* Content */}
+              <div className="p-3 flex-1 flex flex-col">
+                <h3 className={`text-sm font-bold text-gray-900 mb-2 line-clamp-2 transition-colors duration-200 min-h-[2.25rem] ${
+                  contentType === 'videos' ? 'group-hover:text-blue-600' : 'group-hover:text-purple-600'
+                }`}>
+                  {item.title}
                 </h3>
                 
-                <p className="text-sm text-gray-600 mb-4 line-clamp-2">
-                  {video.description}
+                <p className="text-xs text-gray-600 mb-2 line-clamp-2 flex-1 min-h-[1.75rem]">
+                  {item.description}
                 </p>
                 
-                {/* Video Metadata */}
-                <div className="flex items-center justify-between text-xs text-gray-500">
+                {/* Metadata */}
+                <div className="flex items-center justify-between text-xs text-gray-500 mt-auto">
                   <div className="flex items-center gap-1">
                     <Calendar className="w-3 h-3" />
-                    <span>{formatDate(video.date)}</span>
+                    <span>{formatDate(item.date)}</span>
                   </div>
                   <div className="flex items-center gap-1">
                     <Eye className="w-3 h-3" />
-                    <span>{formatViews(video.views)}</span>
+                    <span>{formatViews(item.views)}</span>
                   </div>
                 </div>
               </div>
@@ -302,17 +461,17 @@ export function VideoSection() {
 
       {/* Action Buttons at Bottom */}
       <div className="flex justify-center gap-4">
-        {hasMoreVideos && (
+        {hasMoreItems && (
           <button 
             onClick={loadMore}
             className="flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
           >
-            <span>Load More Videos</span>
+            <span>Load More {contentType === 'videos' ? 'Videos' : 'Blogs'}</span>
             <ArrowRight className="w-5 h-5" />
           </button>
         )}
         
-        {videosToShow > 4 && (
+        {videosToShow > 8 && (
           <button 
             onClick={showLess}
             className="flex items-center gap-2 px-8 py-4 bg-gray-600 text-white rounded-xl font-semibold hover:bg-gray-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
@@ -323,13 +482,13 @@ export function VideoSection() {
         )}
       </div>
 
-      {/* No Videos Message */}
-      {filteredVideos.length === 0 && (
+      {/* No Content Message */}
+      {filteredData.length === 0 && (
         <div className="text-center py-12">
           <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <Filter className="w-8 h-8 text-gray-400" />
           </div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">No videos found</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">No {contentType} found</h3>
           <p className="text-gray-600">Try adjusting your filters to see more content.</p>
         </div>
       )}

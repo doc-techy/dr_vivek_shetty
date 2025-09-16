@@ -20,11 +20,11 @@ export default function Home() {
       <section id="videos">
         <VideoSection />
       </section>
-      <section id="testimonials">
-        <TestimonialsSection />
-      </section>
       <section id="contact">
         <CtaSection />
+      </section>
+      <section id="testimonials">
+        <TestimonialsSection />
       </section>
     </div>
   );
