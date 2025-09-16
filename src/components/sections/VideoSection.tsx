@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Play, Clock, Calendar, Filter } from 'lucide-react';
+import { Play, Clock, Calendar, Filter, ChevronDown, Eye, ArrowRight, ArrowUp } from 'lucide-react';
 import Image from 'next/image';
 
 interface Video {
@@ -151,126 +151,146 @@ const sampleVideos: Video[] = [
   }
 ];
 
-const categories = ['All', 'Education', 'Surgery', 'Patient Care', 'Reconstruction', 'Lifestyle', 'Research'];
+const categories = [
+  { id: 'all', label: 'All Videos', icon: '🎥' },
+  { id: 'Education', label: 'Education', icon: '📚' },
+  { id: 'Surgery', label: 'Surgery', icon: '⚕️' },
+  { id: 'Patient Care', label: 'Patient Care', icon: '❤️' },
+  { id: 'Reconstruction', label: 'Reconstruction', icon: '🔧' }
+];
 
 export function VideoSection() {
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [videosToShow, setVideosToShow] = useState(4); // Start with 4 videos (1 row)
+  const [showFilters, setShowFilters] = useState(false);
 
   const filteredVideos = sampleVideos.filter(video => {
-    const matchesCategory = selectedCategory === 'All' || video.category === selectedCategory;
-    const matchesSearch = (video.title?.toLowerCase() || '').includes(searchTerm.toLowerCase()) ||
-                         (video.description?.toLowerCase() || '').includes(searchTerm.toLowerCase());
-    return matchesCategory && matchesSearch;
+    return selectedCategory === 'all' || video.category === selectedCategory;
   });
+
+  const displayedVideos = filteredVideos.slice(0, videosToShow);
+  const hasMoreVideos = videosToShow < filteredVideos.length;
+
+  const loadMore = () => {
+    setVideosToShow(prev => Math.min(prev + 4, filteredVideos.length));
+  };
+
+  const showLess = () => {
+    setVideosToShow(prev => Math.max(prev - 4, 4));
+  };
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
     });
   };
 
   const formatViews = (views: number) => {
     if (views >= 1000) {
-      return `${(views / 1000).toFixed(1)}K views`;
+      return `${(views / 1000).toFixed(1)}K`;
     }
-    return `${views} views`;
-  };
-
-  // Load More functionality (2 rows = 8 videos initially)
-  const initialVideosToShow = 8;
-  const [videosToShow, setVideosToShow] = useState(initialVideosToShow);
-  const displayedVideos = filteredVideos.slice(0, videosToShow);
-  const hasMoreVideos = videosToShow < filteredVideos.length;
-
-  const loadMore = () => {
-    setVideosToShow(prev => Math.min(prev + 8, filteredVideos.length));
+    return `${views}`;
   };
 
   return (
     <div className="container-custom pb-16">
-      {/* Page Title */}
-      <div className="mb-10 text-center">
-        <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-3">Educational Videos</h2>
-        <p className="text-lg lg:text-xl text-gray-600 max-w-xl mx-auto">Browse curated videos by category to learn more about Head & Neck Oncology.</p>
+      {/* Header */}
+      <div className="text-center mb-8">
+        <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+          Educational <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Videos</span>
+        </h2>
       </div>
 
-      {/* Categories Only */}
-      <div className="mb-10 flex items-center justify-center gap-4">
-        <Filter className="text-gray-600 w-5 h-5" />
-        <div className="flex flex-wrap gap-2 justify-center">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
-                selectedCategory === category
-                  ? 'bg-primary-600 text-white'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              }`}
-            >
-              {category}
-            </button>
-          ))}
+      {/* Modern Filter Section */}
+      <div className="mb-8">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
+          {/* Filter Toggle */}
+          <div className="flex items-center gap-3">
+            <div className="text-sm text-gray-500">
+              {filteredVideos.length} video{filteredVideos.length !== 1 ? 's' : ''} found
+            </div>
+          </div>
+        </div>
+
+        {/* Filter Options - Always Visible */}
+        <div className="mt-4 flex justify-center">
+          <div className="flex flex-wrap gap-2 justify-center">
+            {categories.map((category) => (
+              <button
+                key={category.id}
+                onClick={() => setSelectedCategory(category.id)}
+                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
+                  selectedCategory === category.id
+                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg scale-105'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:scale-105'
+                }`}
+              >
+                <span>{category.icon}</span>
+                <span>{category.label}</span>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Video Grid - 2 x 4 */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {/* Single Row Video Layout */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         {displayedVideos.map((video) => (
-          <div key={video.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-            {/* Video Thumbnail */}
-            <div className="relative aspect-video bg-gradient-to-br from-primary-100 to-primary-200">
-              <Image 
-                src={video.thumbnail} 
-                alt={video.title} 
-                fill 
-                className="object-cover" 
-                onError={(e) => {
-                  // Fallback to gradient background if image fails
-                  e.currentTarget.style.display = 'none';
-                }}
-              />
-              <div className="absolute inset-0 bg-black/20 hover:bg-black/10 transition-colors duration-300" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-14 h-14 bg-white/95 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300">
-                  <Play className="w-7 h-7 text-primary-600 ml-0.5" />
+          <div key={video.id} className="group">
+            <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 group-hover:border-transparent">
+              {/* Video Thumbnail */}
+              <div className="relative aspect-video bg-gradient-to-br from-blue-100 to-purple-100">
+                <Image 
+                  src={video.thumbnail} 
+                  alt={video.title} 
+                  fill 
+                  className="object-cover group-hover:scale-105 transition-transform duration-300" 
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                
+                {/* Play Button */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-16 h-16 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center shadow-xl hover:scale-110 transition-all duration-300 group-hover:bg-white">
+                    <Play className="w-8 h-8 text-blue-600 ml-1" />
+                  </div>
+                </div>
+                
+                {/* Duration Badge */}
+                <div className="absolute bottom-3 right-3 bg-black/80 backdrop-blur-sm text-white px-2 py-1 rounded-lg text-sm font-medium">
+                  {video.duration}
+                </div>
+
+                {/* Category Badge */}
+                <div className="absolute top-3 left-3">
+                  <span className="bg-white/90 backdrop-blur-sm text-gray-800 px-3 py-1 rounded-full text-xs font-semibold shadow-sm">
+                    {video.category}
+                  </span>
                 </div>
               </div>
-              
-              {/* Duration Badge */}
-              <div className="absolute bottom-3 right-3 bg-black bg-opacity-75 text-white px-2 py-1 rounded text-sm font-medium">
-                {video.duration}
-              </div>
-            </div>
 
-            {/* Video Content */}
-            <div className="p-6">
-              <div className="mb-3">
-                <span className="inline-block bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm font-medium">
-                  {video.category}
-                </span>
-              </div>
-              
-              <h3 className="text-lg lg:text-xl font-bold text-gray-900 mb-3 line-clamp-2">
-                {video.title}
-              </h3>
-              
-              <p className="text-sm lg:text-base text-gray-600 mb-4 line-clamp-3">
-                {video.description}
-              </p>
-              
-              {/* Video Metadata */}
-              <div className="flex items-center justify-between text-sm text-gray-500">
-                <div className="flex items-center gap-4">
+              {/* Video Content */}
+              <div className="p-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors duration-200">
+                  {video.title}
+                </h3>
+                
+                <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+                  {video.description}
+                </p>
+                
+                {/* Video Metadata */}
+                <div className="flex items-center justify-between text-xs text-gray-500">
                   <div className="flex items-center gap-1">
-                    <Calendar className="w-4 h-4" />
+                    <Calendar className="w-3 h-3" />
                     <span>{formatDate(video.date)}</span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <Clock className="w-4 h-4" />
+                    <Eye className="w-3 h-3" />
                     <span>{formatViews(video.views)}</span>
                   </div>
                 </div>
@@ -280,15 +300,37 @@ export function VideoSection() {
         ))}
       </div>
 
-      {/* Load More Button */}
-      {hasMoreVideos && (
-        <div className="flex justify-center mt-12">
+      {/* Action Buttons at Bottom */}
+      <div className="flex justify-center gap-4">
+        {hasMoreVideos && (
           <button 
             onClick={loadMore}
-            className="px-8 py-3 bg-primary-600 text-white rounded-lg font-semibold hover:bg-primary-700 transition-all duration-200 transform hover:scale-105 shadow-lg"
+            className="flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
           >
-            Load More Videos
+            <span>Load More Videos</span>
+            <ArrowRight className="w-5 h-5" />
           </button>
+        )}
+        
+        {videosToShow > 4 && (
+          <button 
+            onClick={showLess}
+            className="flex items-center gap-2 px-8 py-4 bg-gray-600 text-white rounded-xl font-semibold hover:bg-gray-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+          >
+            <span>Show Less</span>
+            <ArrowUp className="w-5 h-5" />
+          </button>
+        )}
+      </div>
+
+      {/* No Videos Message */}
+      {filteredVideos.length === 0 && (
+        <div className="text-center py-12">
+          <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Filter className="w-8 h-8 text-gray-400" />
+          </div>
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">No videos found</h3>
+          <p className="text-gray-600">Try adjusting your filters to see more content.</p>
         </div>
       )}
     </div>

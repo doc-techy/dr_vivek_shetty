@@ -144,15 +144,12 @@ export function TestimonialsSection() {
   }, []);
 
   return (
-    <section className="pb-20">
+    <section className="pt-16 pb-20">
       <div className="container-custom">
         <div className="text-center mb-16">
-          <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
-            Patient Testimonials
+          <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+            Patient <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Testimonials</span>
           </h2>
-          <p className="text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto">
-            Hear from our patients about their experience with Dr. Shetty and our team.
-          </p>
         </div>
 
         {/* Infinite Scrolling Testimonials */}

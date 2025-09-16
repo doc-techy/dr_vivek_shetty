@@ -125,10 +125,10 @@ export function ServicesSection() {
   };
 
   return (
-    <section id="services" className="pb-20">
+    <section id="services" className="pb-12">
       <div className="container-custom">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           {/* <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full border border-blue-200/50 mb-6">
             <Sparkles className="w-4 h-4 mr-2 text-blue-600" />
             <span className="text-sm font-semibold text-blue-700">Head & Neck Surgical Excellence</span>
@@ -141,9 +141,6 @@ export function ServicesSection() {
             </span>
           </h2>
           
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Comprehensive head & neck cancer care with advanced surgical techniques and reconstructive expertise
-          </p>
         </div>
 
         {/* Category Filter
@@ -173,7 +170,7 @@ export function ServicesSection() {
         </div> */}
 
         {/* Services Carousel */}
-        <div className="relative mb-8">
+        <div className="relative mb-8 bg-transparent shadow-none">
           {/* Navigation Arrows */}
           <button
             onClick={goToPrev}
@@ -200,7 +197,7 @@ export function ServicesSection() {
                 
                 return (
                   <div key={pageIndex} className="w-full flex-shrink-0">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-16">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 px-12">
                       {pageServices.map((service, index) => {
                         const Icon = service.icon;
                         const isHovered = hoveredIndex === index;
@@ -228,22 +225,22 @@ export function ServicesSection() {
                   <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-5 group-hover:opacity-10 transition-opacity duration-500`} />
                   
                   {/* Content */}
-                  <div className="relative p-8">
+                  <div className="relative p-7">
                     {/* Icon */}
-                    <div className="mb-6">
+                    <div className="mb-5">
                       <div className={`
-                        w-16 h-16 rounded-2xl bg-gradient-to-br ${service.gradient}
+                        w-14 h-14 rounded-xl bg-gradient-to-br ${service.gradient}
                         flex items-center justify-center shadow-lg
                         transform transition-all duration-500
                         ${isHovered ? 'scale-110 rotate-3' : ''}
                       `}>
-                        <Icon className="w-8 h-8 text-white" />
+                        <Icon className="w-7 h-7 text-white" />
                       </div>
                     </div>
 
                     {/* Title & Subtitle */}
-                    <div className="mb-4">
-                      <h3 className="text-2xl font-bold text-gray-900 mb-1">
+                    <div className="mb-3">
+                      <h3 className="text-lg lg:text-xl font-bold text-gray-900 mb-1">
                         {service.title}
                       </h3>
                       <p className={`text-sm font-medium bg-gradient-to-r ${service.gradient} bg-clip-text text-transparent`}>
@@ -252,21 +249,21 @@ export function ServicesSection() {
                     </div>
 
                     {/* Description */}
-                    <p className="text-gray-600 mb-6 leading-relaxed">
+                    <p className="text-sm lg:text-base text-gray-600 mb-5 leading-relaxed">
                       {service.description}
                     </p>
 
                     {/* Features */}
-                    <div className="space-y-2">
+                    <div className="space-y-1.5">
                       {service.features.map((feature, idx) => (
                         <div key={idx} className="flex items-center text-sm text-gray-700">
                           <div className={`
-                            w-5 h-5 rounded-full bg-gradient-to-r ${service.gradient}
-                            flex items-center justify-center mr-3 flex-shrink-0
+                            w-4 h-4 rounded-full bg-gradient-to-r ${service.gradient}
+                            flex items-center justify-center mr-2 flex-shrink-0
                             transform transition-all duration-300
                             ${isHovered ? 'scale-110' : ''}
                           `}>
-                            <Plus className="w-3 h-3 text-white" />
+                            <Plus className="w-2.5 h-2.5 text-white" />
                           </div>
                           <span>{feature}</span>
                         </div>
@@ -303,8 +300,8 @@ export function ServicesSection() {
         </div>
 
         {/* Why Choose Dr. Vivek Shetty - Professional Design */}
-        <div className="mt-6">
-          <div className="bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 rounded-3xl p-6 text-white shadow-xl relative overflow-hidden">
+        <div className="mt-4">
+          <div className="bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 rounded-2xl p-4 text-white shadow-xl relative overflow-hidden">
             {/* Animated Background */}
             <div className="absolute inset-0 opacity-5">
               <div className="absolute inset-0 animate-pulse" style={{
@@ -314,32 +311,24 @@ export function ServicesSection() {
 
             <div className="relative z-10">
               {/* Header */}
-              <div className="text-center mb-4">
-                <div className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-3">
-                  <span className="text-lg font-semibold text-blue-200"> Why Choose Dr. Vivek Shetty  ?</span>
+              <div className="text-center mb-3">
+                <div className="inline-flex items-center px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-2">
+                  <span className="text-sm lg:text-base font-semibold text-blue-200"> Why Choose Dr. Vivek Shetty  ?</span>
                 </div>
-                {/* <h3 className="text-2xl lg:text-3xl font-bold mb-4">
-                  <span className="bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-transparent">
-                    Excellence in Head & Neck Oncology
-                  </span>
-                </h3> */}
-                <p className="text-sm text-blue-100 max-w-xl mx-auto">
+                <p className="text-xs lg:text-sm text-blue-100 max-w-lg mx-auto">
                   Leading expertise with exceptional patient outcomes and compassionate care
                 </p>
               </div>
 
               {/* Key Points Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
                 <div className="text-center group hover:scale-105 transition-all duration-500">
-                  <div className="relative mb-2">
-                    <div className="w-12 h-12 bg-gradient-to-r from-blue-400 to-blue-600 rounded-xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-xl transition-all duration-500">
-                      <Award className="w-6 h-6 text-white" />
+                  <div className="relative mb-1">
+                    <div className="w-10 h-10 bg-gradient-to-r from-blue-400 to-blue-600 rounded-lg flex items-center justify-center mx-auto shadow-lg group-hover:shadow-xl transition-all duration-500">
+                      <Award className="w-5 h-5 text-white" />
                     </div>
-                    {/* <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-sm shadow-lg group-hover:scale-110 transition-transform duration-300">
-                      🏅
-                    </div> */}
                   </div>
-                  <h4 className="text-sm font-bold text-white mb-1 group-hover:text-yellow-300 transition-colors duration-300">
+                  <h4 className="text-xs lg:text-sm font-bold text-white mb-0.5 group-hover:text-yellow-300 transition-colors duration-300">
                     9+ Years Experience
                   </h4>
                   <p className="text-blue-100 group-hover:text-white transition-colors duration-300 text-xs leading-tight">
@@ -348,12 +337,12 @@ export function ServicesSection() {
                 </div>
                 
                 <div className="text-center group hover:scale-105 transition-all duration-500">
-                  <div className="relative mb-2">
-                    <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-green-600 rounded-xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-xl transition-all duration-500">
-                      <Microscope className="w-6 h-6 text-white" />
+                  <div className="relative mb-1">
+                    <div className="w-10 h-10 bg-gradient-to-r from-green-400 to-green-600 rounded-lg flex items-center justify-center mx-auto shadow-lg group-hover:shadow-xl transition-all duration-500">
+                      <Microscope className="w-5 h-5 text-white" />
                     </div>
                   </div>
-                  <h4 className="text-sm font-bold text-white mb-1 group-hover:text-yellow-300 transition-colors duration-300">
+                  <h4 className="text-xs lg:text-sm font-bold text-white mb-0.5 group-hover:text-yellow-300 transition-colors duration-300">
                     Advanced Fellowship
                   </h4>
                   <p className="text-blue-100 group-hover:text-white transition-colors duration-300 text-xs leading-tight">
@@ -362,12 +351,12 @@ export function ServicesSection() {
                 </div>
                 
                 <div className="text-center group hover:scale-105 transition-all duration-500">
-                  <div className="relative mb-2">
-                    <div className="w-12 h-12 bg-gradient-to-r from-purple-400 to-purple-600 rounded-xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-xl transition-all duration-500">
-                      <Heart className="w-6 h-6 text-white" />
+                  <div className="relative mb-1">
+                    <div className="w-10 h-10 bg-gradient-to-r from-purple-400 to-purple-600 rounded-lg flex items-center justify-center mx-auto shadow-lg group-hover:shadow-xl transition-all duration-500">
+                      <Heart className="w-5 h-5 text-white" />
                     </div>
                   </div>
-                  <h4 className="text-sm font-bold text-white mb-1 group-hover:text-yellow-300 transition-colors duration-300">
+                  <h4 className="text-xs lg:text-sm font-bold text-white mb-0.5 group-hover:text-yellow-300 transition-colors duration-300">
                     Patient-Centered Care
                   </h4>
                   <p className="text-blue-100 group-hover:text-white transition-colors duration-300 text-xs leading-tight">
@@ -376,12 +365,12 @@ export function ServicesSection() {
                 </div>
                 
                 <div className="text-center group hover:scale-105 transition-all duration-500">
-                  <div className="relative mb-2">
-                    <div className="w-12 h-12 bg-gradient-to-r from-orange-400 to-orange-600 rounded-xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-xl transition-all duration-500">
-                      <Users className="w-6 h-6 text-white" />
+                  <div className="relative mb-1">
+                    <div className="w-10 h-10 bg-gradient-to-r from-orange-400 to-orange-600 rounded-lg flex items-center justify-center mx-auto shadow-lg group-hover:shadow-xl transition-all duration-500">
+                      <Users className="w-5 h-5 text-white" />
                     </div>
                   </div>
-                  <h4 className="text-sm font-bold text-white mb-1 group-hover:text-yellow-300 transition-colors duration-300">
+                  <h4 className="text-xs lg:text-sm font-bold text-white mb-0.5 group-hover:text-yellow-300 transition-colors duration-300">
                     Multilingual Support
                   </h4>
                   <p className="text-blue-100 group-hover:text-white transition-colors duration-300 text-xs leading-tight">

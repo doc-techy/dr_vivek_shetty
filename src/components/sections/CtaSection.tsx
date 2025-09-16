@@ -28,13 +28,9 @@ export function CtaSection() {
     <section className="pb-20">
       <div className="container-custom">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-            Ready to Schedule Your Consultation?
+          <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-12">
+            Ready to Schedule Your <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Consultation?</span>
           </h2>
-          <p className="text-lg lg:text-xl text-gray-600 mb-12 max-w-xl mx-auto">
-            Take the first step towards expert Head & Neck Oncology care. 
-            Book your appointment with Dr. Shetty today.
-          </p>
 
           <div className="grid md:grid-cols-3 gap-6 mb-12">
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20">

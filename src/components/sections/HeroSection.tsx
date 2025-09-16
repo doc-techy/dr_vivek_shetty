@@ -79,7 +79,7 @@ export function HeroSection() {
                 <div className="w-full h-full max-h-96 lg:max-h-[500px] xl:max-h-[600px] rounded-2xl overflow-hidden shadow-xl">
                   <Image
                     src="/images/dr_vivek_profile_pic.jpg"
-                    alt="Dr. Vivek Shetty - Senior Consultant Head & Neck Oncology"
+                    alt="Dr. Vivek Shetty"
                     width={600}
                     height={600}
                     className="w-full h-full object-cover"
@@ -88,11 +88,6 @@ export function HeroSection() {
                 </div>
               </div>
               
-              {/* Professional Badge */}
-              <div className="inline-flex items-center px-4 py-3 bg-blue-50 border border-blue-200 text-blue-800 rounded-lg font-medium text-sm lg:text-base max-w-full">
-                <Award className="w-4 h-4 mr-2 flex-shrink-0" />
-                <span className="truncate">Senior Consultant - Head & Neck Oncology</span>
-              </div>
             </div>
           </div>
         </div>
