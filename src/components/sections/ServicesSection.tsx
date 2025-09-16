@@ -19,12 +19,13 @@ import {
   Sparkles,
   Wrench
 } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export function ServicesSection() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const itemsPerPage = 6;
+  const itemsPerPageMobile = 4; // 2x2 grid for mobile
+  const itemsPerPageDesktop = 6; // 2x3 grid for desktop
 
 
   const services = [
@@ -173,6 +174,19 @@ export function ServicesSection() {
     },
   ];
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check screen size on mount and resize
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
+  const itemsPerPage = isMobile ? itemsPerPageMobile : itemsPerPageDesktop;
   const totalPages = Math.ceil(services.length / itemsPerPage);
 
   const goToNext = () => {
@@ -195,10 +209,10 @@ export function ServicesSection() {
   };
 
   return (
-    <section id="services" className="pb-12">
+    <section id="services" className="pb-6 md:pb-12">
       <div className="container-custom">
         {/* Modern Header */}
-        <div className="text-center mb-16 relative">
+        <div className="text-center mb-4 pb-0 md:mb-16 md:pb-0">
           {/* Background Decoration */}
           <div className="absolute inset-0 flex items-center justify-center opacity-5">
             <div className="w-96 h-96 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full blur-3xl"></div>
@@ -219,7 +233,7 @@ export function ServicesSection() {
             </h2>
             
             {/* Description */}
-            <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
+            <p className="hidden md:block text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
               Comprehensive head and neck oncology services with cutting-edge surgical techniques and compassionate care
             </p>
             
@@ -250,26 +264,9 @@ export function ServicesSection() {
 
         {/* Services Carousel */}
         <div className="relative mb-8 bg-transparent shadow-none">
-          {/* Navigation Arrows - Close to content */}
-          <button
-            onClick={goToPrev}
-            className="absolute -left-8 top-1/2 -translate-y-1/2 z-10 w-14 h-14 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full shadow-xl hover:shadow-2xl flex items-center justify-center text-white hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-110"
-            aria-label="Previous services"
-          >
-            <ChevronLeft className="w-7 h-7 transition-transform duration-300" />
-          </button>
-
-          <button
-            onClick={goToNext}
-            className="absolute -right-8 top-1/2 -translate-y-1/2 z-10 w-14 h-14 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-xl hover:shadow-2xl flex items-center justify-center text-white hover:from-purple-600 hover:to-pink-600 transition-all duration-300 hover:scale-110"
-            aria-label="Next services"
-          >
-            <ChevronRight className="w-7 h-7 transition-transform duration-300" />
-          </button>
-
           {/* Services Container */}
           <div className="relative">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 px-12">
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-7 px-4 md:px-12">
               {services.slice(currentIndex * itemsPerPage, (currentIndex + 1) * itemsPerPage).map((service, index) => {
                 const Icon = service.icon;
                 const isHovered = hoveredIndex === index;
@@ -282,6 +279,7 @@ export function ServicesSection() {
                     onMouseLeave={() => setHoveredIndex(null)}
                     style={{ 
                       animation: `flipIn 0.6s ease-in-out both`,
+                      animationDelay: `${index * 0.1}s`
                     }}
                   >
                     {/* Card Container */}
@@ -299,22 +297,22 @@ export function ServicesSection() {
                       <div className="absolute inset-0 bg-white/60 backdrop-blur-sm group-hover:bg-white/50 transition-all duration-500"></div>
                       
                       {/* Content */}
-                      <div className="relative p-5">
+                      <div className="relative p-3 md:p-5">
                         {/* Icon */}
-                        <div className="mb-4">
+                        <div className="mb-2 md:mb-3">
                           <div className={`
-                            w-12 h-12 rounded-lg bg-gradient-to-br ${service.gradient}
+                            w-8 h-8 md:w-12 md:h-12 rounded-lg bg-gradient-to-br ${service.gradient}
                             flex items-center justify-center shadow-md
                             transform transition-all duration-500
                             ${isHovered ? 'scale-110 rotate-3' : ''}
                           `}>
-                            <Icon className="w-6 h-6 text-white" />
+                            <Icon className="w-4 h-4 md:w-6 md:h-6 text-white" />
                           </div>
                         </div>
 
                         {/* Title & Subtitle */}
-                        <div className="mb-3">
-                          <h3 className="text-base lg:text-lg font-bold text-gray-900 mb-1">
+                        <div className="mb-1 md:mb-2">
+                          <h3 className="text-sm md:text-base lg:text-lg font-bold text-gray-900 mb-0.5">
                             {service.title}
                           </h3>
                           <p className={`text-xs font-medium bg-gradient-to-r ${service.gradient} bg-clip-text text-transparent`}>
@@ -323,23 +321,23 @@ export function ServicesSection() {
                         </div>
 
                         {/* Description */}
-                        <p className="text-xs lg:text-sm text-gray-600 mb-4 leading-relaxed">
+                        <p className="text-xs md:text-sm text-gray-600 mb-1 md:mb-2 leading-tight">
                           {service.description}
                         </p>
 
                         {/* Features */}
-                        <div className="space-y-1">
+                        <div className="space-y-0.5">
                           {service.features.map((feature, idx) => (
                             <div key={idx} className="flex items-center text-xs text-gray-700">
                               <div className={`
-                                w-3 h-3 rounded-full bg-gradient-to-r ${service.gradient}
+                                w-2 h-2 md:w-3 md:h-3 rounded-full bg-gradient-to-r ${service.gradient}
                                 flex items-center justify-center mr-2 flex-shrink-0
                                 transform transition-all duration-300
                                 ${isHovered ? 'scale-110' : ''}
                               `}>
-                                <Plus className="w-2 h-2 text-white" />
+                                <Plus className="w-1.5 h-1.5 md:w-2 md:h-2 text-white" />
                               </div>
-                              <span>{feature}</span>
+                              <span className="text-xs">{feature}</span>
                             </div>
                           ))}
                         </div>
@@ -351,20 +349,39 @@ export function ServicesSection() {
             </div>
           </div>
 
-          {/* Page Indicators */}
-          <div className="flex justify-center mt-4 space-x-2">
-            {Array.from({ length: totalPages }, (_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === currentIndex 
-                    ? 'bg-blue-600 scale-125' 
-                    : 'bg-gray-300 hover:bg-gray-400'
-                }`}
-                aria-label={`Go to page ${index + 1}`}
-              />
-            ))}
+          {/* Navigation Arrows and Dots - Same line */}
+          <div className="flex justify-center items-center mt-6 space-x-4">
+            <button
+              onClick={goToPrev}
+              className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full shadow-xl hover:shadow-2xl flex items-center justify-center text-white hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-110"
+              aria-label="Previous services"
+            >
+              <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 transition-transform duration-300" />
+            </button>
+
+            {/* Page Indicators */}
+            <div className="flex space-x-2">
+              {Array.from({ length: totalPages }, (_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentIndex(index)}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    index === currentIndex 
+                      ? 'bg-blue-600 scale-125' 
+                      : 'bg-gray-300 hover:bg-gray-400'
+                  }`}
+                  aria-label={`Go to page ${index + 1}`}
+                />
+              ))}
+            </div>
+
+            <button
+              onClick={goToNext}
+              className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-xl hover:shadow-2xl flex items-center justify-center text-white hover:from-purple-600 hover:to-pink-600 transition-all duration-300 hover:scale-110"
+              aria-label="Next services"
+            >
+              <ChevronRight className="w-5 h-5 md:w-6 md:h-6 transition-transform duration-300" />
+            </button>
           </div>
         </div>
 
@@ -374,28 +391,63 @@ export function ServicesSection() {
       <style jsx>{`
         @keyframes flipIn {
           0% {
-            transform: perspective(600px) rotateY(-90deg) scale(0.8);
+            transform: perspective(800px) rotateY(-120deg) scale(0.7);
             opacity: 0;
+            filter: blur(6px);
+          }
+          20% {
+            transform: perspective(800px) rotateY(-80deg) scale(0.8);
+            opacity: 0.2;
             filter: blur(4px);
           }
-          25% {
-            transform: perspective(600px) rotateY(-45deg) scale(0.9);
-            opacity: 0.3;
+          40% {
+            transform: perspective(800px) rotateY(-40deg) scale(0.9);
+            opacity: 0.5;
             filter: blur(2px);
           }
-          50% {
-            transform: perspective(600px) rotateY(0deg) scale(1.05);
+          60% {
+            transform: perspective(800px) rotateY(0deg) scale(1.1);
             opacity: 0.8;
             filter: blur(0px);
           }
-          75% {
-            transform: perspective(600px) rotateY(5deg) scale(1.02);
+          80% {
+            transform: perspective(800px) rotateY(10deg) scale(1.05);
             opacity: 0.95;
           }
           100% {
-            transform: perspective(600px) rotateY(0deg) scale(1);
+            transform: perspective(800px) rotateY(0deg) scale(1);
             opacity: 1;
             filter: blur(0px);
+          }
+        }
+        
+        @media (max-width: 768px) {
+          @keyframes flipIn {
+            0% {
+              transform: perspective(1000px) rotateY(-180deg) scale(0.6);
+              opacity: 0;
+              filter: blur(8px);
+            }
+            25% {
+              transform: perspective(1000px) rotateY(-90deg) scale(0.7);
+              opacity: 0.3;
+              filter: blur(4px);
+            }
+            50% {
+              transform: perspective(1000px) rotateY(-45deg) scale(0.9);
+              opacity: 0.6;
+              filter: blur(2px);
+            }
+            75% {
+              transform: perspective(1000px) rotateY(0deg) scale(1.1);
+              opacity: 0.9;
+              filter: blur(0px);
+            }
+            100% {
+              transform: perspective(1000px) rotateY(0deg) scale(1);
+              opacity: 1;
+              filter: blur(0px);
+            }
           }
         }
       `}</style>

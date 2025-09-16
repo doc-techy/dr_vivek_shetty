@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Play, Clock, Calendar, Filter, ChevronDown, Eye, ArrowRight, ArrowUp, FileText, BookOpen } from 'lucide-react';
 import Image from 'next/image';
 
@@ -264,24 +264,47 @@ const categories = [
 
 export function VideoSection() {
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [videosToShow, setVideosToShow] = useState(8); // Start with 8 videos (2 rows)
+  const [videosToShow, setVideosToShow] = useState(4); // Start with 4 videos (2x2 grid)
   const [showFilters, setShowFilters] = useState(false);
   const [contentType, setContentType] = useState<'videos' | 'blogs'>('videos');
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check screen size on mount and resize
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
 
   const currentData = contentType === 'videos' ? sampleVideos : sampleBlogs;
   const filteredData = currentData.filter(item => {
     return selectedCategory === 'all' || item.category === selectedCategory;
   });
 
+  // Set initial videos based on screen size
+  useEffect(() => {
+    if (!isMobile && videosToShow === 4) {
+      setVideosToShow(8); // Desktop: 8 videos (2x4 grid)
+    } else if (isMobile && videosToShow === 8) {
+      setVideosToShow(4); // Mobile: 4 videos (2x2 grid)
+    }
+  }, [isMobile, videosToShow]);
+
   const displayedItems = filteredData.slice(0, videosToShow);
   const hasMoreItems = videosToShow < filteredData.length;
 
   const loadMore = () => {
-    setVideosToShow(prev => Math.min(prev + 4, filteredData.length));
+    const increment = isMobile ? 4 : 8; // Load 4 more on mobile, 8 more on desktop
+    setVideosToShow(prev => Math.min(prev + increment, filteredData.length));
   };
 
   const showLess = () => {
-    setVideosToShow(prev => Math.max(prev - 4, 8));
+    const minVideos = isMobile ? 4 : 8; // Minimum 4 on mobile, 8 on desktop
+    const decrement = isMobile ? 4 : 8; // Decrease by 4 on mobile, 8 on desktop
+    setVideosToShow(prev => Math.max(prev - decrement, minVideos));
   };
 
   const formatDate = (dateString: string) => {
@@ -315,19 +338,20 @@ export function VideoSection() {
   };
 
   return (
-    <div className="container-custom pt-8 pb-16">
+    <div className="container-custom pt-4 md:pt-8 pb-8 md:pb-16">
       {/* Header */}
-      <div className="text-center mb-4">
-        <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+      <div className="text-center mb-4 relative">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-4 md:mb-6">
           Educational <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Videos and Blogs</span>
         </h2>
         
-        {/* Content Type Toggle Switch */}
-        <div className="flex justify-center mb-2">
-          <div className="bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 rounded-xl p-1 flex border border-gray-200/50 shadow-md backdrop-blur-sm min-w-[320px]">
+        {/* Content Type Toggle Switch and Filter - Mobile Same Line */}
+        <div className="flex md:flex-col justify-center md:items-center items-center gap-3 mb-2 px-4">
+          {/* Toggle Switch */}
+          <div className="bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 rounded-xl p-1 flex border border-gray-200/50 shadow-md backdrop-blur-sm w-full max-w-[320px] md:min-w-[320px]">
             <button
               onClick={() => setContentType('videos')}
-              className={`flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-700 ease-in-out transform relative overflow-hidden ${
+              className={`flex items-center gap-1 md:gap-2 px-2 md:px-6 py-1.5 md:py-3 rounded-lg text-xs md:text-sm font-semibold transition-all duration-700 ease-in-out transform relative overflow-hidden ${
                 contentType === 'videos'
                   ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg scale-105'
                   : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50/70 hover:scale-102 active:scale-98'
@@ -340,14 +364,14 @@ export function VideoSection() {
               <div className={`absolute inset-0 bg-gradient-to-r from-white/20 to-transparent transition-all duration-700 ${
                 contentType === 'videos' ? 'opacity-100' : 'opacity-0'
               }`}></div>
-              <Play className={`w-4 h-4 transition-all duration-700 ease-in-out relative z-10 ${
+              <Play className={`w-3 h-3 md:w-4 md:h-4 transition-all duration-700 ease-in-out relative z-10 ${
                 contentType === 'videos' ? 'rotate-12 scale-110' : 'rotate-0 scale-100'
               }`} />
               <span className="relative z-10">Videos</span>
             </button>
             <button
               onClick={() => setContentType('blogs')}
-              className={`flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold transition-all duration-700 ease-in-out transform relative overflow-hidden ${
+              className={`flex items-center gap-1 md:gap-2 px-2 md:px-6 py-1.5 md:py-3 rounded-lg text-xs md:text-sm font-semibold transition-all duration-700 ease-in-out transform relative overflow-hidden ${
                 contentType === 'blogs'
                   ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg scale-105'
                   : 'text-gray-700 hover:text-purple-600 hover:bg-purple-50/70 hover:scale-102 active:scale-98'
@@ -360,17 +384,59 @@ export function VideoSection() {
               <div className={`absolute inset-0 bg-gradient-to-r from-white/20 to-transparent transition-all duration-700 ${
                 contentType === 'blogs' ? 'opacity-100' : 'opacity-0'
               }`}></div>
-              <BookOpen className={`w-4 h-4 transition-all duration-700 ease-in-out relative z-10 ${
+              <BookOpen className={`w-3 h-3 md:w-4 md:h-4 transition-all duration-700 ease-in-out relative z-10 ${
                 contentType === 'blogs' ? 'rotate-12 scale-110' : 'rotate-0 scale-100'
               }`} />
               <span className="relative z-10">Blogs</span>
             </button>
           </div>
+
+          {/* Filter Icon - Mobile only - Same Line */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setShowFilters(!showFilters)}
+              className="flex items-center justify-center w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+            >
+              <Filter className="w-5 h-5" />
+              {selectedCategory !== 'all' && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                  !
+                </span>
+              )}
+            </button>
+          </div>
         </div>
+
+        {/* Mobile Filter Dropdown */}
+        {showFilters && (
+          <div className="md:hidden mb-4">
+            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4 mx-4">
+              <div className="grid grid-cols-2 gap-2">
+                {categories.map((category) => (
+                  <button
+                    key={category.id}
+                    onClick={() => {
+                      setSelectedCategory(category.id);
+                      setShowFilters(false);
+                    }}
+                    className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                      selectedCategory === category.id
+                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg scale-105'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:scale-105'
+                    }`}
+                  >
+                    <span className="text-base">{category.icon}</span>
+                    <span>{category.label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
-      {/* Modern Filter Section */}
-      <div className="mb-6">
+      {/* Modern Filter Section - Desktop only */}
+      <div className="hidden md:block mb-6">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
           {/* Filter Toggle */}
           <div className="flex items-center gap-3">
@@ -380,7 +446,7 @@ export function VideoSection() {
           </div>
         </div>
 
-        {/* Filter Options - Always Visible */}
+        {/* Filter Options - Desktop only */}
         <div className="mt-4 flex justify-center">
           <div className="flex flex-wrap gap-2 justify-center">
             {categories.map((category) => (
@@ -393,7 +459,7 @@ export function VideoSection() {
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:scale-105'
                 }`}
               >
-                <span>{category.icon}</span>
+                <span className="text-base">{category.icon}</span>
                 <span>{category.label}</span>
               </button>
             ))}
@@ -401,8 +467,9 @@ export function VideoSection() {
         </div>
       </div>
 
+
       {/* Content Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4 mb-5">
         {displayedItems.map((item) => (
           <div key={item.id} className="group h-full">
             <div 
@@ -426,11 +493,11 @@ export function VideoSection() {
                 
                 {/* Play Button for Videos / Read Icon for Blogs */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-10 h-10 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300 group-hover:bg-white">
+                  <div className="w-8 h-8 md:w-10 md:h-10 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300 group-hover:bg-white">
                     {contentType === 'videos' ? (
-                      <Play className="w-5 h-5 text-blue-600 ml-0.5" />
+                      <Play className="w-4 h-4 md:w-5 md:h-5 text-blue-600 ml-0.5" />
                     ) : (
-                      <FileText className="w-5 h-5 text-purple-600" />
+                      <FileText className="w-4 h-4 md:w-5 md:h-5 text-purple-600" />
                     )}
                   </div>
                 </div>
@@ -442,21 +509,21 @@ export function VideoSection() {
 
                 {/* Category Badge */}
                 <div className="absolute top-2 left-2">
-                  <span className="bg-white/90 backdrop-blur-sm text-gray-800 px-2 py-1 rounded-full text-xs font-semibold shadow-sm">
+                  <span className="bg-white/90 backdrop-blur-sm text-gray-800 px-1.5 md:px-2 py-0.5 md:py-1 rounded-full text-xs font-semibold shadow-sm">
                     {item.category}
                   </span>
                 </div>
               </div>
 
               {/* Content */}
-              <div className="p-3 flex-1 flex flex-col">
-                <h3 className={`text-sm font-bold text-gray-900 mb-2 line-clamp-2 transition-colors duration-200 min-h-[2.25rem] ${
+              <div className="p-2 md:p-3 flex-1 flex flex-col">
+                <h3 className={`text-xs md:text-sm font-bold text-gray-900 mb-1 md:mb-2 line-clamp-2 transition-colors duration-200 min-h-[1.75rem] md:min-h-[2.25rem] ${
                   contentType === 'videos' ? 'group-hover:text-blue-600' : 'group-hover:text-purple-600'
                 }`}>
                   {item.title}
                 </h3>
                 
-                <p className="text-xs text-gray-600 mb-2 line-clamp-2 flex-1 min-h-[1.75rem]">
+                <p className="text-xs text-gray-600 mb-1 md:mb-2 line-clamp-2 flex-1 min-h-[1.5rem] md:min-h-[1.75rem]">
                   {item.description}
                 </p>
                 
@@ -464,11 +531,11 @@ export function VideoSection() {
                 <div className="flex items-center justify-between text-xs text-gray-500 mt-auto">
                   <div className="flex items-center gap-1">
                     <Calendar className="w-3 h-3" />
-                    <span>{formatDate(item.date)}</span>
+                    <span className="text-xs">{formatDate(item.date)}</span>
                   </div>
                   <div className="flex items-center gap-1">
                     <Eye className="w-3 h-3" />
-                    <span>{formatViews(item.views)}</span>
+                    <span className="text-xs">{formatViews(item.views)}</span>
                   </div>
                 </div>
               </div>
@@ -478,24 +545,24 @@ export function VideoSection() {
       </div>
 
       {/* Action Buttons at Bottom */}
-      <div className="flex justify-center gap-4">
+      <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4">
         {hasMoreItems && (
           <button 
             onClick={loadMore}
-            className="flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+            className="flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl text-sm md:text-base"
           >
             <span>Load More {contentType === 'videos' ? 'Videos' : 'Blogs'}</span>
-            <ArrowRight className="w-5 h-5" />
+            <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
           </button>
         )}
         
-        {videosToShow > 8 && (
+        {videosToShow > (isMobile ? 4 : 8) && (
           <button 
             onClick={showLess}
-            className="flex items-center gap-2 px-8 py-4 bg-gray-600 text-white rounded-xl font-semibold hover:bg-gray-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+            className="flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-gray-600 text-white rounded-xl font-semibold hover:bg-gray-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl text-sm md:text-base"
           >
             <span>Show Less</span>
-            <ArrowUp className="w-5 h-5" />
+            <ArrowUp className="w-4 h-4 md:w-5 md:h-5" />
           </button>
         )}
       </div>
