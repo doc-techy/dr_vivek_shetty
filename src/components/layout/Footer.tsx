@@ -146,60 +146,55 @@ export function Footer() {
             </div>
           </div>
           
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4 text-white">Quick Links</h4>
-            <ul className="space-y-2.5">
-              <li>
-                <a href="/about" className="text-gray-300 hover:text-primary-300 transition-colors duration-200 text-sm">
+          {/* Mobile Side-by-Side Layout for Quick Links and Services */}
+          <div className="grid grid-cols-2 gap-4 md:contents">
+            {/* Quick Links */}
+            <div className="md:col-span-1">
+              <h4 className="text-lg font-semibold mb-4 text-white">Quick Links</h4>
+              <ul className="space-y-2.5">
+                <li>
+                  <a href="#home" className="text-gray-300 hover:text-primary-300 transition-colors duration-200 text-sm">
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a href="#about" className="text-gray-300 hover:text-primary-300 transition-colors duration-200 text-sm">
                   About Dr. Vivek Shetty
-                </a>
-              </li>
-              <li>
-                <a href="/services" className="text-gray-300 hover:text-primary-300 transition-colors duration-200 text-sm">
-                  Services & Specializations
-                </a>
-              </li>
-              <li>
-                <a href="/about#experience" className="text-gray-300 hover:text-primary-300 transition-colors duration-200 text-sm">
-                  Experience
-                </a>
-              </li>
-              <li>
-                <a href="/about#education" className="text-gray-300 hover:text-primary-300 transition-colors duration-200 text-sm">
-                  Education
-                </a>
-              </li>
-              <li>
-                <a href="/videos" className="text-gray-300 hover:text-primary-300 transition-colors duration-200 text-sm">
-                  Educational Videos
-                </a>
-              </li>
-              <li>
-                <a href="/appointment" className="text-gray-300 hover:text-primary-300 transition-colors duration-200 text-sm">
-                  Book Appointment
-                </a>
-              </li>
-              <li>
-                <a href="/contact" className="text-gray-300 hover:text-primary-300 transition-colors duration-200 text-sm">
-                  Contact
-                </a>
-              </li>
-            </ul>
-          </div>
-          
-          {/* Services & Credentials */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4 text-white">Services</h4>
-            <ul className="space-y-2 mb-6">
-              <li className="text-gray-300 text-sm">Head & Neck Surgery</li>
-              <li className="text-gray-300 text-sm">Surgical Oncology</li>
-              <li className="text-gray-300 text-sm">Cancer Treatment</li>
-              <li className="text-gray-300 text-sm">Reconstructive Surgery</li>
-              <li className="text-gray-300 text-sm">Thyroid Surgery</li>
-              <li className="text-gray-300 text-sm">Oral Cancer Surgery</li>
-            </ul>
+                  </a>
+                </li>
+                <li>
+                  <a href="#Services" className="text-gray-300 hover:text-primary-300 transition-colors duration-200 text-sm">
+                    Services
+                  </a>
+                </li>
 
+                <li>
+                  <a href="#videos" className="text-gray-300 hover:text-primary-300 transition-colors duration-200 text-sm">
+                    Educational Videos
+                  </a>
+                </li>
+                <li>
+                  <a href="/appointment" className="text-gray-300 hover:text-primary-300 transition-colors duration-200 text-sm">
+                    Book Appointment
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+            
+            {/* Services & Credentials */}
+            <div className="md:col-span-1">
+              <h4 className="text-lg font-semibold mb-4 text-white">Services</h4>
+              <ul className="space-y-2 mb-6">
+                <li className="text-gray-300 text-sm">Head & Neck Surgery</li>
+                <li className="text-gray-300 text-sm">Surgical Oncology</li>
+                <li className="text-gray-300 text-sm">Cancer Treatment</li>
+                <li className="text-gray-300 text-sm">Reconstructive Surgery</li>
+                <li className="text-gray-300 text-sm">Thyroid Surgery</li>
+                <li className="text-gray-300 text-sm">Oral Cancer Surgery</li>
+              </ul>
+
+            </div>
           </div>
         </div>
         

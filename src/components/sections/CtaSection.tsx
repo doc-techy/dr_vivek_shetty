@@ -29,8 +29,10 @@ export function CtaSection() {
       <div className="w-full px-4">
         <div className="max-w-4xl mx-auto text-center">
           <div className="flex justify-center items-center mb-12">
-            <h2 className="text-4xl lg:text-5xl xl:text-7xl font-bold text-gray-900 whitespace-nowrap">
-              Ready to Schedule Your <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Consultation?</span>
+            <h2 className="text-4xl md:text-4xl lg:text-5xl xl:text-7xl font-bold text-gray-900 whitespace-nowrap">
+              Ready to Schedule Your
+              <br />
+               <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Consultation?</span>
             </h2>
           </div>
         </div>
@@ -38,7 +40,7 @@ export function CtaSection() {
         
       {/* Why Choose Dr. Vivek Shetty Section - True Full Width */}
       <div className="mb-16 w-full px-1 lg:px-2 xl:px-4">
-            <div className="bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 rounded-2xl p-8 lg:p-12 text-white shadow-2xl relative overflow-hidden">
+            <div className="bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 rounded-2xl p-3 md:p-8 lg:p-12 text-white shadow-2xl relative overflow-hidden">
               {/* Animated Background */}
               <div className="absolute inset-0 opacity-5">
                 <div className="absolute inset-0 animate-pulse" style={{
@@ -48,24 +50,24 @@ export function CtaSection() {
 
               <div className="relative z-10">
                 {/* Header */}
-                <div className="text-center mb-6">
-                  <div className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-3">
-                    <span className="text-base lg:text-lg font-semibold text-blue-200">Why Choose Dr. Vivek Shetty?</span>
+                <div className="text-center mb-2 md:mb-6">
+                  <div className="inline-flex items-center px-2 md:px-4 py-1 md:py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-1 md:mb-3">
+                    <span className="text-xs md:text-base lg:text-lg font-semibold text-blue-200">Why Choose Dr. Vivek Shetty?</span>
                   </div>
-                  <p className="text-sm text-blue-100 max-w-3xl mx-auto">
+                  <p className="text-xs md:text-sm text-blue-100 max-w-3xl mx-auto hidden md:block">
                     Leading expertise with exceptional patient outcomes and compassionate care
                   </p>
                 </div>
 
                 {/* Key Points Grid */}
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-20">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-16 lg:gap-20">
                   <div className="text-center group hover:scale-105 transition-all duration-500">
-                    <div className="relative mb-3">
-                      <div className="w-12 h-12 bg-gradient-to-r from-blue-400 to-blue-600 rounded-xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-xl transition-all duration-500">
-                        <Award className="w-6 h-6 text-white" />
+                    <div className="relative mb-1 md:mb-3">
+                      <div className="w-6 h-6 md:w-12 md:h-12 bg-gradient-to-r from-blue-400 to-blue-600 rounded-lg md:rounded-xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-xl transition-all duration-500">
+                        <Award className="w-3 h-3 md:w-6 md:h-6 text-white" />
                       </div>
                     </div>
-                    <h4 className="text-sm lg:text-base font-bold text-white mb-1 group-hover:text-yellow-300 transition-colors duration-300">
+                    <h4 className="text-xs md:text-sm lg:text-base font-bold text-white mb-0.5 md:mb-1 group-hover:text-yellow-300 transition-colors duration-300">
                       9+ Years Experience
                     </h4>
                     <p className="text-blue-100 group-hover:text-white transition-colors duration-300 text-xs lg:text-sm leading-tight">
@@ -74,12 +76,12 @@ export function CtaSection() {
                   </div>
                   
                   <div className="text-center group hover:scale-105 transition-all duration-500">
-                    <div className="relative mb-3">
-                      <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-green-600 rounded-xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-xl transition-all duration-500">
-                        <Microscope className="w-6 h-6 text-white" />
+                    <div className="relative mb-1 md:mb-3">
+                      <div className="w-6 h-6 md:w-12 md:h-12 bg-gradient-to-r from-green-400 to-green-600 rounded-lg md:rounded-xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-xl transition-all duration-500">
+                        <Microscope className="w-3 h-3 md:w-6 md:h-6 text-white" />
                       </div>
                     </div>
-                    <h4 className="text-sm lg:text-base font-bold text-white mb-1 group-hover:text-yellow-300 transition-colors duration-300">
+                    <h4 className="text-xs md:text-sm lg:text-base font-bold text-white mb-0.5 md:mb-1 group-hover:text-yellow-300 transition-colors duration-300">
                       Advanced Fellowship
                     </h4>
                     <p className="text-blue-100 group-hover:text-white transition-colors duration-300 text-xs lg:text-sm leading-tight">
@@ -88,12 +90,12 @@ export function CtaSection() {
                   </div>
                   
                   <div className="text-center group hover:scale-105 transition-all duration-500">
-                    <div className="relative mb-3">
-                      <div className="w-12 h-12 bg-gradient-to-r from-purple-400 to-purple-600 rounded-xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-xl transition-all duration-500">
-                        <Heart className="w-6 h-6 text-white" />
+                    <div className="relative mb-1 md:mb-3">
+                      <div className="w-6 h-6 md:w-12 md:h-12 bg-gradient-to-r from-purple-400 to-purple-600 rounded-lg md:rounded-xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-xl transition-all duration-500">
+                        <Heart className="w-3 h-3 md:w-6 md:h-6 text-white" />
                       </div>
                     </div>
-                    <h4 className="text-sm lg:text-base font-bold text-white mb-1 group-hover:text-yellow-300 transition-colors duration-300">
+                    <h4 className="text-xs md:text-sm lg:text-base font-bold text-white mb-0.5 md:mb-1 group-hover:text-yellow-300 transition-colors duration-300">
                       Patient-Centered Care
                     </h4>
                     <p className="text-blue-100 group-hover:text-white transition-colors duration-300 text-xs lg:text-sm leading-tight">
@@ -102,12 +104,12 @@ export function CtaSection() {
                   </div>
                   
                   <div className="text-center group hover:scale-105 transition-all duration-500">
-                    <div className="relative mb-3">
-                      <div className="w-12 h-12 bg-gradient-to-r from-orange-400 to-orange-600 rounded-xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-xl transition-all duration-500">
-                        <Users className="w-6 h-6 text-white" />
+                    <div className="relative mb-1 md:mb-3">
+                      <div className="w-6 h-6 md:w-12 md:h-12 bg-gradient-to-r from-orange-400 to-orange-600 rounded-lg md:rounded-xl flex items-center justify-center mx-auto shadow-lg group-hover:shadow-xl transition-all duration-500">
+                        <Users className="w-3 h-3 md:w-6 md:h-6 text-white" />
                       </div>
                     </div>
-                    <h4 className="text-sm lg:text-base font-bold text-white mb-1 group-hover:text-yellow-300 transition-colors duration-300">
+                    <h4 className="text-xs md:text-sm lg:text-base font-bold text-white mb-0.5 md:mb-1 group-hover:text-yellow-300 transition-colors duration-300">
                       Multilingual Support
                     </h4>
                     <p className="text-blue-100 group-hover:text-white transition-colors duration-300 text-xs lg:text-sm leading-tight">
@@ -121,8 +123,8 @@ export function CtaSection() {
         
       <div className="w-full px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-12">
+            <div className="hidden md:block bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20">
               <Calendar className="w-12 h-12 text-blue-600 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">Book Online</h3>
               <p className="text-gray-600 text-sm mb-4">
@@ -136,31 +138,31 @@ export function CtaSection() {
               </Link>
             </div>
 
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20">
-              <Phone className="w-12 h-12 text-blue-600 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Call Us</h3>
-              <p className="text-gray-600 text-sm mb-4">
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-3 md:p-6 shadow-lg border border-white/20">
+              <Phone className="w-6 h-6 md:w-12 md:h-12 text-blue-600 mx-auto mb-2 md:mb-4" />
+              <h3 className="text-sm md:text-xl font-semibold text-gray-900 mb-1 md:mb-2">Call Us</h3>
+              <p className="text-gray-600 text-xs md:text-sm mb-2 md:mb-4">
                 Speak directly with our team
               </p>
               <a
                 href="tel:+918022222222"
-                className="inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors"
+                className="inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors text-xs md:text-base"
               >
                 +91 80 2222 2222
               </a>
             </div>
 
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20">
-              <MessageCircle className="w-12 h-12 text-blue-600 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Get Consultation</h3>
-              <p className="text-gray-600 text-sm mb-4">
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-3 md:p-6 shadow-lg border border-white/20">
+              <MessageCircle className="w-6 h-6 md:w-12 md:h-12 text-blue-600 mx-auto mb-2 md:mb-4" />
+              <h3 className="text-sm md:text-xl font-semibold text-gray-900 mb-1 md:mb-2">Get Consultation</h3>
+              <p className="text-gray-600 text-xs md:text-sm mb-2 md:mb-4">
                 Ask questions about your condition
               </p>
               <Link
                 href="/contact"
-                className="inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors"
+                className="inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors text-xs md:text-base"
               >
-                Contact Us <ArrowRight className="w-4 h-4 ml-1" />
+                Contact Us <ArrowRight className="w-3 h-3 md:w-4 md:h-4 ml-1" />
               </Link>
             </div>
           </div>
