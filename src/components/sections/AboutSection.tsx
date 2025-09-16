@@ -59,7 +59,7 @@ export function AboutSection() {
         {/* Header */}
         <div className="text-center mb-6 md:mb-8">
           <h2 className="text-3xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-3 md:mb-4">
-            Academic Excellence & <span className="text-green-600">Professional Mastery</span>
+            Academic Excellence & <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Professional Mastery</span>
           </h2>
           
           <p className="hidden md:block text-sm md:text-2xl lg:text-3xl text-gray-600 max-w-5xl mx-auto leading-relaxed px-4">
@@ -106,8 +106,8 @@ export function AboutSection() {
               <div className="text-center">
                 <div className={`inline-flex items-center px-3 py-2 md:px-6 md:py-4 text-white rounded-lg md:rounded-xl text-sm md:text-xl lg:text-2xl font-bold mb-3 md:mb-4 transition-all duration-500 ease-in-out transform ${
                   activeTab === 'education' 
-                    ? 'bg-gradient-to-r from-blue-600 to-indigo-600 scale-105' 
-                    : 'md:bg-gradient-to-r md:from-blue-600 md:to-indigo-600 bg-gradient-to-r from-green-600 to-emerald-600 scale-105'
+                    ? 'bg-black scale-105' 
+                    : 'bg-black scale-105'
                 }`}>
                   <div className="transition-all duration-500 ease-in-out">
                     {activeTab === 'education' ? (
@@ -144,20 +144,20 @@ export function AboutSection() {
                   {education.map((edu, index) => (
                     <div 
                       key={`edu-${index}`} 
-                      className="bg-white/70 backdrop-blur-sm rounded-xl p-3 md:p-4 border border-blue-200/50 transition-all duration-500 ease-in-out transform hover:scale-[1.02] hover:shadow-lg mb-3 md:mb-4"
+                      className="bg-white/70 md:bg-gray-900 backdrop-blur-sm rounded-xl p-3 md:p-4 border border-blue-200/50 md:border-gray-700 transition-all duration-500 ease-in-out transform hover:scale-[1.02] hover:shadow-lg mb-3 md:mb-4"
                       style={{ animationDelay: `${index * 100}ms` }}
                     >
                       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-                        <h4 className="text-base md:text-lg lg:text-xl font-bold text-gray-900 transition-all duration-300">{edu.degree}</h4>
-                        <div className="bg-blue-100 text-blue-800 px-2 py-1 md:px-3 md:py-1.5 rounded-full text-xs md:text-sm font-semibold mt-1 sm:mt-0 w-fit transition-all duration-300 hover:bg-blue-200">
+                        <h4 className="text-base md:text-lg lg:text-xl font-bold text-gray-900 md:text-white transition-all duration-300">{edu.degree}</h4>
+                        <div className="bg-blue-100 md:bg-gray-800 text-blue-800 md:text-gray-200 px-2 py-1 md:px-3 md:py-1.5 rounded-full text-xs md:text-sm font-semibold mt-1 sm:mt-0 w-fit transition-all duration-300 hover:bg-blue-200 md:hover:bg-gray-700">
                           {edu.year}
                         </div>
                       </div>
-                      <h5 className="text-sm md:text-base lg:text-lg font-semibold text-blue-700 mb-1 transition-all duration-300">
+                      <h5 className="text-sm md:text-base lg:text-lg font-semibold text-blue-700 md:text-blue-300 mb-1 transition-all duration-300">
                         {edu.institution}
                       </h5>
-                      <p className="text-xs md:text-sm lg:text-base text-gray-600 flex items-center">
-                        <MapPin className="w-3 h-3 md:w-4 md:h-4 mr-1 text-blue-500 flex-shrink-0 transition-all duration-300" />
+                      <p className="text-xs md:text-sm lg:text-base text-gray-600 md:text-gray-300 flex items-center">
+                        <MapPin className="w-3 h-3 md:w-4 md:h-4 mr-1 text-blue-500 md:text-blue-400 flex-shrink-0 transition-all duration-300" />
                         {edu.location}
                       </p>
                     </div>
@@ -193,7 +193,7 @@ export function AboutSection() {
             {/* Desktop Only: Experience Section */}
             <div className="hidden md:block space-y-4 md:space-y-6">
               <div className="text-center">
-                <div className="inline-flex items-center px-6 py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-xl text-xl lg:text-2xl font-bold mb-3 md:mb-4">
+                <div className="inline-flex items-center px-6 py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white rounded-xl text-xl lg:text-2xl font-bold mb-3 md:mb-4">
                   <Calendar className="w-6 h-6 mr-3" />
                   Professional Journey
                 </div>
@@ -203,18 +203,18 @@ export function AboutSection() {
               {/* Experience Timeline for Desktop */}
               <div className="space-y-4">
                 {experience.map((exp, index) => (
-                  <div key={index} className="bg-white/70 backdrop-blur-sm rounded-xl p-4 border border-green-200/50">
+                  <div key={index} className="bg-white/70 backdrop-blur-sm rounded-xl p-4 border border-purple-200/50">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
                       <h4 className="text-lg lg:text-xl font-bold text-gray-900">{exp.position}</h4>
-                      <div className="bg-green-100 text-green-800 px-3 py-1.5 rounded-full text-sm font-semibold mt-1 sm:mt-0 w-fit">
+                      <div className="bg-purple-100 text-purple-800 px-3 py-1.5 rounded-full text-sm font-semibold mt-1 sm:mt-0 w-fit">
                         {exp.duration}
                       </div>
                     </div>
-                    <h5 className="text-base lg:text-lg font-semibold text-green-700 mb-1">
+                    <h5 className="text-base lg:text-lg font-semibold text-purple-700 mb-1">
                       {exp.hospital}
                     </h5>
                     <p className="text-sm lg:text-base text-gray-600 flex items-center">
-                      <MapPin className="w-4 h-4 mr-1 text-green-500 flex-shrink-0" />
+                      <MapPin className="w-4 h-4 mr-1 text-purple-500 flex-shrink-0" />
                       {exp.location}
                     </p>
                   </div>

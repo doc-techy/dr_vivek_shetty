@@ -35,7 +35,7 @@ export function Header() {
     <>
       {/* Main Navigation */}
       <header
-        className="fixed top-0 left-0 right-0 z-50 w-full bg-gradient-to-r from-blue-600 to-blue-700 backdrop-blur-xl shadow-xl"
+        className="fixed top-0 left-0 right-0 z-50 w-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 backdrop-blur-xl shadow-xl"
       >
         <div className="container-custom">
           <div className="flex h-20 items-center justify-between">
@@ -127,7 +127,7 @@ export function Header() {
           'lg:hidden transition-all duration-700 ease-in-out overflow-hidden',
           isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         )}>
-          <div className="bg-gradient-to-b from-blue-700/98 to-blue-800/95 backdrop-blur-2xl border-t border-blue-500/30">
+          <div className="bg-gradient-to-b from-blue-600/98 via-purple-600/95 to-pink-600/90 backdrop-blur-2xl border-t border-purple-500/30">
             <div className="container-custom py-8">
               <nav className="space-y-3">
                 {navigation.map((item) => {

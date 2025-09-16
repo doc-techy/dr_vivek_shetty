@@ -40,7 +40,7 @@ export function CtaSection() {
         
       {/* Why Choose Dr. Vivek Shetty Section - True Full Width */}
       <div className="mb-16 w-full px-1 lg:px-2 xl:px-4">
-            <div className="bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 rounded-2xl p-3 md:p-8 lg:p-12 text-white shadow-2xl relative overflow-hidden">
+            <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-2xl p-3 md:p-8 lg:p-12 text-white shadow-2xl relative overflow-hidden">
               {/* Animated Background */}
               <div className="absolute inset-0 opacity-5">
                 <div className="absolute inset-0 animate-pulse" style={{

@@ -64,7 +64,7 @@ export function HeroSection() {
             <div className="space-y-4 lg:space-y-6 text-center lg:text-left">
               <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold text-gray-900 leading-tight">
                 Expert Surgical <span className="lg:block"></span>
-                <span className="bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">Oncology Care</span>
+                <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Oncology Care</span>
               </h1>
               
               <p className="text-responsive-md text-gray-600 leading-relaxed text-justify max-w-2xl">
@@ -76,7 +76,7 @@ export function HeroSection() {
             <div className="grid grid-cols-2 gap-3 max-w-lg mx-auto lg:max-w-none lg:mx-0">
               {features.map((feature, index) => (
                 <div key={index} className="flex items-center space-x-2 justify-center lg:justify-start">
-                  <div className="w-5 h-5 lg:w-6 lg:h-6 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="w-5 h-5 lg:w-6 lg:h-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-full flex items-center justify-center flex-shrink-0">
                     <CheckCircle className="w-3 h-3 lg:w-4 lg:h-4 text-white" />
                   </div>
                   <span className="text-sm lg:text-base text-gray-700 font-medium">{feature}</span>
@@ -87,11 +87,11 @@ export function HeroSection() {
             {/* Professional Stats */}
             <div className="grid grid-cols-2 gap-3 lg:gap-4 max-w-md mx-auto lg:max-w-none lg:mx-0">
               <div className="text-center py-4 lg:py-5 bg-white/80 backdrop-blur-sm rounded-xl border border-white/50 shadow-lg">
-                <div className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent mb-1">11+</div>
+                <div className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-1">11+</div>
                 <div className="text-xs lg:text-sm text-gray-600 font-medium">Years Experience</div>
               </div>
               <div className="text-center py-4 lg:py-5 bg-white/80 backdrop-blur-sm rounded-xl border border-white/50 shadow-lg">
-                <div className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent mb-1">1000+</div>
+                <div className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-1">1000+</div>
                 <div className="text-xs lg:text-sm text-gray-600 font-medium">Surgeries</div>
               </div>
             </div>
@@ -100,7 +100,7 @@ export function HeroSection() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start max-w-lg mx-auto lg:max-w-none lg:mx-0 lg:w-full">
               <Link
                 href="#appointment"
-                className="group inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-2xl font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 hover:scale-105 lg:flex-1"
+                className="group inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white rounded-2xl font-semibold hover:from-blue-700 hover:via-purple-700 hover:to-pink-700 transition-all duration-300 hover:scale-105 lg:flex-1"
               >
                 <Calendar className="w-5 h-5 mr-2" />
                 Book Consultation
