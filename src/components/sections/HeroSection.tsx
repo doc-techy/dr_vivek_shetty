@@ -21,13 +21,7 @@ export function HeroSection() {
   ];
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center pt-24 overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-200/30 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-300/20 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-blue-100/40 to-blue-200/30 rounded-full blur-3xl"></div>
-      </div>
+    <section id="home" className="relative min-h-screen flex items-center pt-24 lg:pt-8 overflow-hidden">
 
       <div className="container-custom relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center min-h-[calc(100vh-6rem)]">
@@ -35,13 +29,13 @@ export function HeroSection() {
           <div className={`relative transition-all duration-1000 delay-300 lg:order-2 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <div className="relative">
               {/* Main Image Container */}
-              <div className="relative w-full max-w-lg mx-auto">
+              <div className="relative w-full max-w-lg lg:max-w-2xl mx-auto">
                 {/* Background Glow */}
-                <div className="absolute -inset-4 bg-gradient-to-r from-blue-400/30 to-blue-500/20 rounded-3xl blur-2xl"></div>
+                <div className="absolute -inset-4 lg:-inset-6 bg-gradient-to-r from-blue-400/30 to-blue-500/20 rounded-3xl blur-2xl"></div>
                 
                 {/* Image Container */}
-                <div className="relative bg-white/90 backdrop-blur-sm rounded-3xl p-4 shadow-2xl border border-white/50">
-                  <div className="relative w-full h-[280px] lg:h-[600px] rounded-2xl overflow-hidden">
+                <div className="relative bg-white/90 backdrop-blur-sm rounded-3xl p-4 lg:p-6 shadow-2xl border border-white/50">
+                  <div className="relative w-full h-[280px] lg:h-[700px] rounded-2xl overflow-hidden">
                     <Image
                       src="/images/dr_vivek_profile_pic.jpg"
                       alt="Dr. Vivek Shetty - Senior Consultant"
@@ -73,8 +67,8 @@ export function HeroSection() {
                 <span className="bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">Oncology Care</span>
               </h1>
               
-              <p className="text-base md:text-xl lg:text-2xl text-gray-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                Dr. Vivek Shetty delivers exceptional head and neck surgical oncology care with over 9 years of expertise, advanced techniques, and personalized treatment approaches.
+              <p className="text-responsive-md text-gray-600 leading-relaxed text-justify max-w-2xl">
+                Dr. Vivek Shetty delivers exceptional head and neck surgical oncology care with over 9 years of specialized expertise, utilizing cutting-edge advanced techniques, state-of-the-art medical technology, and comprehensive personalized treatment approaches. His dedicated practice focuses on providing compassionate patient-centered care, innovative surgical solutions, and multidisciplinary collaboration at the renowned SPARSH Hospital, Bangalore, ensuring optimal outcomes for complex oncological cases.
               </p>
             </div>
 
@@ -91,22 +85,22 @@ export function HeroSection() {
             </div>
 
             {/* Professional Stats */}
-            <div className="grid grid-cols-2 gap-4 lg:gap-6 max-w-lg mx-auto lg:max-w-none lg:mx-0">
-              <div className="text-center py-6 lg:py-8 bg-white/80 backdrop-blur-sm rounded-2xl border border-white/50 shadow-xl">
-                <div className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent mb-2">11+</div>
-                <div className="text-sm lg:text-base text-gray-600 font-medium">Years Experience</div>
+            <div className="grid grid-cols-2 gap-3 lg:gap-4 max-w-md mx-auto lg:max-w-none lg:mx-0">
+              <div className="text-center py-4 lg:py-5 bg-white/80 backdrop-blur-sm rounded-xl border border-white/50 shadow-lg">
+                <div className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent mb-1">11+</div>
+                <div className="text-xs lg:text-sm text-gray-600 font-medium">Years Experience</div>
               </div>
-              <div className="text-center py-6 lg:py-8 bg-white/80 backdrop-blur-sm rounded-2xl border border-white/50 shadow-xl">
-                <div className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent mb-2">1000+</div>
-                <div className="text-sm lg:text-base text-gray-600 font-medium">Surgeries</div>
+              <div className="text-center py-4 lg:py-5 bg-white/80 backdrop-blur-sm rounded-xl border border-white/50 shadow-lg">
+                <div className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent mb-1">1000+</div>
+                <div className="text-xs lg:text-sm text-gray-600 font-medium">Surgeries</div>
               </div>
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start max-w-lg mx-auto lg:max-w-none lg:mx-0">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start max-w-lg mx-auto lg:max-w-none lg:mx-0 lg:w-full">
               <Link
                 href="#appointment"
-                className="group inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-2xl font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105"
+                className="group inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-2xl font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 hover:scale-105 lg:flex-1"
               >
                 <Calendar className="w-5 h-5 mr-2" />
                 Book Consultation
@@ -115,7 +109,7 @@ export function HeroSection() {
               
               <button
                 onClick={() => setIsVideoOpen(true)}
-                className="group inline-flex items-center justify-center px-8 py-4 bg-white/90 backdrop-blur-sm border-2 border-gray-200 text-gray-700 rounded-2xl font-semibold hover:bg-white hover:border-blue-300 hover:text-blue-600 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+                className="group inline-flex items-center justify-center px-8 py-4 bg-white/90 backdrop-blur-sm border-2 border-gray-200 text-gray-700 rounded-2xl font-semibold hover:bg-white hover:border-blue-300 hover:text-blue-600 transition-all duration-300 hover:scale-105 lg:flex-1"
               >
                 <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-300" />
                 Watch Introduction
