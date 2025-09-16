@@ -147,8 +147,8 @@ export function TestimonialsSection() {
     <section className="pt-16 pb-20">
       {/* Header with container */}
       <div className="container-custom">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+        <div className="text-center mb-8 md:mb-16">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 md:mb-6">
             Patient <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Testimonials and Reviews</span>
           </h2>
         </div>
@@ -158,7 +158,7 @@ export function TestimonialsSection() {
       <div className="relative overflow-hidden w-full">
         <div 
           ref={scrollContainerRef}
-          className="flex gap-7 scroll-animation pl-7"
+          className="flex gap-3 md:gap-7 scroll-animation pl-3 md:pl-7"
           style={{
             width: 'max-content',
             scrollBehavior: 'auto',
@@ -171,25 +171,25 @@ export function TestimonialsSection() {
           {duplicatedTestimonials.map((testimonial, index) => (
             <div
               key={`${testimonial.name}-${index}`}
-              className="bg-white/80 backdrop-blur-sm rounded-xl p-5 hover:shadow-xl transition-all duration-300 border border-white/20 flex-shrink-0 w-80"
+              className="bg-white/80 backdrop-blur-sm rounded-xl p-2 md:p-5 hover:shadow-xl transition-all duration-300 border border-white/20 flex-shrink-0 w-56 md:w-80"
             >
-              <div className="flex items-center mb-4">
-                <Quote className="w-7 h-7 text-primary-600 mr-2" />
+              <div className="flex items-center mb-1 md:mb-4">
+                <Quote className="w-4 h-4 md:w-7 md:h-7 text-primary-600 mr-1 md:mr-2" />
                 <div className="flex">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                    <Star key={i} className="w-2.5 h-2.5 md:w-4 md:h-4 text-yellow-400 fill-current" />
                   ))}
                 </div>
               </div>
               
-              <p className="text-gray-600 mb-5 italic text-sm leading-relaxed">
+              <p className="text-gray-600 mb-2 md:mb-5 italic text-xs md:text-sm leading-tight md:leading-relaxed">
                 "{testimonial.content}"
               </p>
               
-              <div className="border-t border-gray-200 pt-4">
-                <h4 className="font-semibold text-gray-900 text-sm">{testimonial.name}</h4>
+              <div className="border-t border-gray-200 pt-1.5 md:pt-4">
+                <h4 className="font-semibold text-gray-900 text-xs md:text-sm">{testimonial.name}</h4>
                 <p className="text-xs text-gray-600">{testimonial.role}</p>
-                <p className="text-xs text-primary-600 font-medium mt-1">
+                <p className="text-xs text-primary-600 font-medium mt-0.5 md:mt-1">
                   {testimonial.treatment}
                 </p>
               </div>
