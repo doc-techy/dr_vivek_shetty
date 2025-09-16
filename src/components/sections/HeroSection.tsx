@@ -31,57 +31,79 @@ export function HeroSection() {
 
       <div className="container-custom relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center min-h-[calc(100vh-6rem)]">
-          {/* Left Content */}
-          <div className={`space-y-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          {/* Right Content - Modern Image Container (Mobile First) */}
+          <div className={`relative transition-all duration-1000 delay-300 lg:order-2 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className="relative">
+              {/* Main Image Container */}
+              <div className="relative w-full max-w-lg mx-auto">
+                {/* Background Glow */}
+                <div className="absolute -inset-4 bg-gradient-to-r from-blue-400/30 to-blue-500/20 rounded-3xl blur-2xl"></div>
+                
+                {/* Image Container */}
+                <div className="relative bg-white/90 backdrop-blur-sm rounded-3xl p-4 shadow-2xl border border-white/50">
+                  <div className="relative w-full h-[280px] lg:h-[600px] rounded-2xl overflow-hidden">
+                    <Image
+                      src="/images/dr_vivek_profile_pic.jpg"
+                      alt="Dr. Vivek Shetty - Senior Consultant"
+                      fill
+                      className="object-cover object-top"
+                      priority
+                    />
+                    
+                    {/* Image Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Left Content (Mobile Second) */}
+          <div className={`space-y-6 lg:space-y-8 lg:order-1 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             {/* Badge */}
-            <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-50 to-blue-100 border border-blue-200 rounded-full">
+            {/* <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-50 to-blue-100 border border-blue-200 rounded-full">
               <Award className="w-4 h-4 text-blue-600 mr-2" />
               <span className="text-sm font-semibold text-blue-700">Senior Consultant • SPARSH Hospital</span>
-            </div>
+            </div> */}
 
             {/* Main Heading */}
-            <div className="space-y-6">
-              <h1 className="text-5xl lg:text-7xl font-bold text-gray-900 leading-tight">
-                Expert Surgical
-                <br />
+            <div className="space-y-4 lg:space-y-6 text-center lg:text-left">
+              <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold text-gray-900 leading-tight">
+                Expert Surgical <span className="lg:block"></span>
                 <span className="bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">Oncology Care</span>
               </h1>
               
-              <p className="text-xl lg:text-2xl text-gray-600 leading-relaxed max-w-2xl">
+              <p className="text-base md:text-xl lg:text-2xl text-gray-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
                 Dr. Vivek Shetty delivers exceptional head and neck surgical oncology care with over 9 years of expertise, advanced techniques, and personalized treatment approaches.
               </p>
             </div>
 
             {/* Features List */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-3 max-w-lg mx-auto lg:max-w-none lg:mx-0">
               {features.map((feature, index) => (
-                <div key={index} className="flex items-center space-x-3">
-                  <div className="w-6 h-6 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
-                    <CheckCircle className="w-4 h-4 text-white" />
+                <div key={index} className="flex items-center space-x-2 justify-center lg:justify-start">
+                  <div className="w-5 h-5 lg:w-6 lg:h-6 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <CheckCircle className="w-3 h-3 lg:w-4 lg:h-4 text-white" />
                   </div>
-                  <span className="text-gray-700 font-medium">{feature}</span>
+                  <span className="text-sm lg:text-base text-gray-700 font-medium">{feature}</span>
                 </div>
               ))}
             </div>
 
             {/* Professional Stats */}
-            <div className="grid grid-cols-3 gap-6 py-8 bg-white/80 backdrop-blur-sm rounded-2xl border border-white/50 shadow-xl">
-              <div className="text-center">
+            <div className="grid grid-cols-2 gap-4 lg:gap-6 max-w-lg mx-auto lg:max-w-none lg:mx-0">
+              <div className="text-center py-6 lg:py-8 bg-white/80 backdrop-blur-sm rounded-2xl border border-white/50 shadow-xl">
                 <div className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent mb-2">11+</div>
                 <div className="text-sm lg:text-base text-gray-600 font-medium">Years Experience</div>
               </div>
-              <div className="text-center">
+              <div className="text-center py-6 lg:py-8 bg-white/80 backdrop-blur-sm rounded-2xl border border-white/50 shadow-xl">
                 <div className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent mb-2">1000+</div>
                 <div className="text-sm lg:text-base text-gray-600 font-medium">Surgeries</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent mb-2">98%</div>
-                <div className="text-sm lg:text-base text-gray-600 font-medium">Success Rate</div>
               </div>
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start max-w-lg mx-auto lg:max-w-none lg:mx-0">
               <Link
                 href="#appointment"
                 className="group inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-2xl font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105"
@@ -101,33 +123,6 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Right Content - Modern Image Container */}
-          <div className={`relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <div className="relative">
-              {/* Main Image Container */}
-              <div className="relative w-full max-w-lg mx-auto">
-                {/* Background Glow */}
-                <div className="absolute -inset-4 bg-gradient-to-r from-blue-400/30 to-blue-500/20 rounded-3xl blur-2xl"></div>
-                
-                {/* Image Container */}
-                <div className="relative bg-white/90 backdrop-blur-sm rounded-3xl p-4 shadow-2xl border border-white/50">
-                  <div className="relative w-full h-[500px] lg:h-[600px] rounded-2xl overflow-hidden">
-                    <Image
-                      src="/images/dr_vivek_profile_pic.jpg"
-                      alt="Dr. Vivek Shetty - Senior Consultant"
-                      fill
-                      className="object-cover"
-                      priority
-                    />
-                    
-                    {/* Image Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
         </div>
       </div>
 

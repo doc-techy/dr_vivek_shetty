@@ -327,6 +327,12 @@ a {
 
 /* Container max widths */
 .container-custom {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.container-header {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
