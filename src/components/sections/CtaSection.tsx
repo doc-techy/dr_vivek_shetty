@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight, Phone, Calendar, MessageCircle, Mail, CheckCircle, Award, Microscope, Heart, Users } from 'lucide-react';
+import { ArrowRight, Phone, Calendar, MessageCircle, Mail, CheckCircle, Award, Microscope, Heart, Users, MapPin } from 'lucide-react';
 import { useState } from 'react';
 
 export function CtaSection() {
@@ -38,8 +38,9 @@ export function CtaSection() {
         </div>
       </div>
         
-      {/* Why Choose Dr. Vivek Shetty Section - True Full Width */}
-      <div className="mb-16 w-full px-1 lg:px-2 xl:px-4">
+      {/* Why Choose Dr. Vivek Shetty Section - Same Width as Below Components */}
+      <div className="mb-16 w-full px-4">
+        <div className="max-w-7xl mx-auto">
             <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-2xl p-3 md:p-8 lg:p-12 text-white shadow-2xl relative overflow-hidden">
               {/* Animated Background */}
               <div className="absolute inset-0 opacity-5">
@@ -119,10 +120,11 @@ export function CtaSection() {
                 </div>
               </div>
             </div>
+        </div>
       </div>
         
       <div className="w-full px-4">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-7xl mx-auto text-center">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-12">
             <div className="hidden md:block bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20">
               <Calendar className="w-12 h-12 text-blue-600 mx-auto mb-4" />
@@ -138,39 +140,41 @@ export function CtaSection() {
               </Link>
             </div>
 
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-3 md:p-6 shadow-lg border border-white/20">
-              <Phone className="w-6 h-6 md:w-12 md:h-12 text-blue-600 mx-auto mb-2 md:mb-4" />
-              <h3 className="text-sm md:text-xl font-semibold text-gray-900 mb-1 md:mb-2">Call Us</h3>
-              <p className="text-gray-600 text-xs md:text-sm mb-2 md:mb-4">
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 md:p-6 shadow-lg border border-white/20">
+              <Phone className="w-8 h-8 md:w-12 md:h-12 text-blue-600 mx-auto mb-3 md:mb-4" />
+              <h3 className="text-base md:text-xl font-semibold text-gray-900 mb-2 md:mb-2">Call Us</h3>
+              <p className="text-gray-600 text-sm md:text-sm mb-3 md:mb-4">
                 Speak directly with our team
               </p>
               <a
                 href="tel:+918022222222"
-                className="inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors text-xs md:text-base"
+                className="inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors text-sm md:text-base"
               >
                 +91 80 2222 2222
               </a>
             </div>
 
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-3 md:p-6 shadow-lg border border-white/20">
-              <MessageCircle className="w-6 h-6 md:w-12 md:h-12 text-blue-600 mx-auto mb-2 md:mb-4" />
-              <h3 className="text-sm md:text-xl font-semibold text-gray-900 mb-1 md:mb-2">Get Consultation</h3>
-              <p className="text-gray-600 text-xs md:text-sm mb-2 md:mb-4">
-                Ask questions about your condition
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 md:p-6 shadow-lg border border-white/20">
+              <MapPin className="w-8 h-8 md:w-12 md:h-12 text-blue-600 mx-auto mb-3 md:mb-4" />
+              <h3 className="text-base md:text-xl font-semibold text-gray-900 mb-2 md:mb-2">Location</h3>
+              <p className="text-gray-600 text-sm md:text-sm mb-3 md:mb-4">
+                Visit our clinic location
               </p>
-              <Link
-                href="/contact"
-                className="inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors text-xs md:text-base"
+              <a
+                href="https://maps.app.goo.gl/BkZc18x4NMYkymwe7"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors text-sm md:text-base"
               >
-                Contact Us <ArrowRight className="w-3 h-3 md:w-4 md:h-4 ml-1" />
-              </Link>
+                View on Maps <ArrowRight className="w-4 h-4 md:w-4 md:h-4 ml-1" />
+              </a>
             </div>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/appointment"
-              className="inline-flex items-center justify-center px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all duration-200 transform hover:scale-105 shadow-lg"
+              className="inline-flex items-center justify-center px-12 md:px-16 py-4 md:py-5 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-700 hover:via-purple-700 hover:to-pink-700 text-white rounded-xl font-semibold transition-all duration-200 transform hover:scale-105 shadow-xl hover:shadow-2xl"
             >
               Book Appointment
               <ArrowRight className="w-5 h-5 ml-2" />
@@ -190,7 +194,7 @@ export function CtaSection() {
 
         {/* Newsletter Subscription Section */}
         <div className="mt-16">
-          <div className="relative bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 rounded-3xl p-8 text-white shadow-2xl overflow-hidden">
+          <div className="relative bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 rounded-3xl p-6 md:p-8 text-white shadow-2xl overflow-hidden">
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-10">
               <div className="absolute inset-0" style={{
@@ -203,14 +207,14 @@ export function CtaSection() {
                 {/* Left Content */}
                 <div className="flex-1 text-center lg:text-left">
                   <div className="flex items-center justify-center lg:justify-start gap-3 mb-3">
-                    <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
-                      <Mail className="w-6 h-6 text-white" />
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
+                      <Mail className="w-5 h-5 md:w-6 md:h-6 text-white" />
                     </div>
-                    <h3 className="text-xl lg:text-2xl font-bold text-white">
+                    <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-white">
                       Stay Updated with Health Insights
                     </h3>
                   </div>
-                  <p className="text-blue-100 text-sm max-w-md mx-auto lg:mx-0">
+                  <p className="text-blue-100 text-xs md:text-sm max-w-md mx-auto lg:mx-0">
                     Subscribe to Dr. Shetty&apos;s newsletter for the latest updates on Head & Neck Oncology, 
                     health tips, and educational content.
                   </p>
@@ -235,13 +239,13 @@ export function CtaSection() {
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="Enter your email address"
                             required
-                            className="w-full px-5 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 text-sm placeholder-blue-200 text-white"
+                            className="w-full px-4 md:px-5 py-3 md:py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 text-xs md:text-sm placeholder-blue-200 text-white"
                           />
                         </div>
                         <button
                           type="submit"
                           disabled={isLoading}
-                          className="px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl font-semibold hover:from-blue-600 hover:to-blue-700 transition-all duration-200 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center min-w-[140px]"
+                          className="px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl font-semibold hover:from-blue-600 hover:to-blue-700 transition-all duration-200 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center min-w-[120px] md:min-w-[140px]"
                         >
                           {isLoading ? (
                             <>
@@ -250,8 +254,8 @@ export function CtaSection() {
                             </>
                           ) : (
                             <>
-                              <span className="text-sm">Subscribe</span>
-                              <ArrowRight className="w-4 h-4 ml-2" />
+                              <span className="text-xs md:text-sm">Subscribe</span>
+                              <ArrowRight className="w-3 h-3 md:w-4 md:h-4 ml-2" />
                             </>
                           )}
                         </button>

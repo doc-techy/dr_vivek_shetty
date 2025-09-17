@@ -127,7 +127,7 @@ export function Header() {
           'lg:hidden transition-all duration-700 ease-in-out overflow-hidden',
           isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         )}>
-          <div className="bg-gradient-to-b from-blue-600/98 via-purple-600/95 to-pink-600/90 backdrop-blur-2xl border-t border-purple-500/30">
+          <div className="bg-gradient-to-r from-blue-600/98 via-purple-600/95 to-pink-600/90 backdrop-blur-2xl border-t border-purple-500/30">
             <div className="container-custom py-8">
               <nav className="space-y-3">
                 {navigation.map((item) => {
@@ -161,7 +161,7 @@ export function Header() {
                     );
                   }
                 })}
-                <div className="pt-6 border-t border-blue-400/30">
+                <div className="pt-6 pb-6 border-t border-blue-400/30">
                   {pathname === '/' ? (
                     <button
                       onClick={() => scrollToSection('#contact')}

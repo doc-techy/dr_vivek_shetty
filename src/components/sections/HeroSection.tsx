@@ -36,11 +36,21 @@ export function HeroSection() {
                 {/* Image Container */}
                 <div className="relative bg-white/90 backdrop-blur-sm rounded-3xl p-4 lg:p-6 shadow-2xl border border-white/50">
                   <div className="relative w-full h-[280px] lg:h-[700px] rounded-2xl overflow-hidden">
+                    {/* Mobile Image */}
+                    <Image
+                      src="/images/mobile_pic.jpeg"
+                      alt="Dr. Vivek Shetty - Senior Consultant"
+                      fill
+                      className="object-cover object-top lg:hidden"
+                      priority
+                    />
+                    
+                    {/* Desktop Image */}
                     <Image
                       src="/images/dr_vivek_profile_pic.jpg"
                       alt="Dr. Vivek Shetty - Senior Consultant"
                       fill
-                      className="object-cover object-top"
+                      className="object-cover object-top hidden lg:block"
                       priority
                     />
                     
@@ -67,7 +77,7 @@ export function HeroSection() {
                 <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Oncology Care</span>
               </h1>
               
-              <p className="text-responsive-md text-gray-600 leading-relaxed text-justify max-w-2xl">
+              <p className="text-sm md:text-base lg:text-xl text-gray-600 leading-relaxed text-justify max-w-2xl">
                 Dr. Vivek Shetty delivers exceptional head and neck surgical oncology care with over 9 years of specialized expertise, utilizing cutting-edge advanced techniques, state-of-the-art medical technology, and comprehensive personalized treatment approaches. His dedicated practice focuses on providing compassionate patient-centered care, innovative surgical solutions, and multidisciplinary collaboration at the renowned SPARSH Hospital, Bangalore, ensuring optimal outcomes for complex oncological cases.
               </p>
             </div>

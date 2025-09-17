@@ -72,24 +72,24 @@ export function AboutSection() {
           <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-xl p-1 flex border border-gray-200/50">
             <button
               onClick={() => setActiveTab('experience')}
-              className={`flex-1 py-3 px-4 rounded-lg text-sm font-semibold transition-all duration-500 ease-in-out flex items-center justify-center transform ${
+              className={`flex-1 py-3 px-4 rounded-lg text-sm font-semibold transition-all duration-300 ease-in-out flex items-center justify-center ${
                 activeTab === 'experience'
-                  ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-lg scale-105 animate-pulse'
-                  : 'text-gray-700 hover:text-green-600 hover:bg-green-50/50 hover:scale-102 active:scale-95'
+                  ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-lg'
+                  : 'text-gray-700 hover:text-green-600 hover:bg-green-50/50'
               }`}
             >
-              <Calendar className={`w-4 h-4 mr-2 transition-all duration-500 ${activeTab === 'experience' ? 'rotate-12' : 'rotate-0'}`} />
+              <Calendar className={`w-4 h-4 mr-2 transition-all duration-300 ${activeTab === 'experience' ? 'rotate-12' : 'rotate-0'}`} />
               Professional
             </button>
             <button
               onClick={() => setActiveTab('education')}
-              className={`flex-1 py-3 px-4 rounded-lg text-sm font-semibold transition-all duration-500 ease-in-out flex items-center justify-center transform ${
+              className={`flex-1 py-3 px-4 rounded-lg text-sm font-semibold transition-all duration-300 ease-in-out flex items-center justify-center ${
                 activeTab === 'education'
-                  ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-lg scale-105 animate-pulse'
-                  : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50/50 hover:scale-102 active:scale-95'
+                  ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-lg'
+                  : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50/50'
               }`}
             >
-              <GraduationCap className={`w-4 h-4 mr-2 transition-all duration-500 ${activeTab === 'education' ? 'rotate-12' : 'rotate-0'}`} />
+              <GraduationCap className={`w-4 h-4 mr-2 transition-all duration-300 ${activeTab === 'education' ? 'rotate-12' : 'rotate-0'}`} />
               Education
             </button>
           </div>
@@ -140,53 +140,59 @@ export function AboutSection() {
 
               {/* Dynamic Content Timeline */}
               <div className="space-y-3 md:space-y-4">
-                <div className={`transition-all duration-500 ease-in-out ${activeTab === 'education' ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 absolute invisible'}`}>
-                  {education.map((edu, index) => (
-                    <div 
-                      key={`edu-${index}`} 
-                      className="bg-white/70 md:bg-gray-900 backdrop-blur-sm rounded-xl p-3 md:p-4 border border-blue-200/50 md:border-gray-700 transition-all duration-500 ease-in-out transform hover:scale-[1.02] hover:shadow-lg mb-3 md:mb-4"
-                      style={{ animationDelay: `${index * 100}ms` }}
-                    >
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-                        <h4 className="text-base md:text-lg lg:text-xl font-bold text-gray-900 md:text-white transition-all duration-300">{edu.degree}</h4>
-                        <div className="bg-blue-100 md:bg-gray-800 text-blue-800 md:text-gray-200 px-2 py-1 md:px-3 md:py-1.5 rounded-full text-xs md:text-sm font-semibold mt-1 sm:mt-0 w-fit transition-all duration-300 hover:bg-blue-200 md:hover:bg-gray-700">
-                          {edu.year}
+                {/* Education Content - Mobile: Conditional, Desktop: Always show */}
+                {activeTab === 'education' && (
+                  <div className="transition-all duration-500 ease-in-out opacity-100 translate-y-0 block md:block">
+                    {education.map((edu, index) => (
+                      <div 
+                        key={`edu-${index}`} 
+                        className="bg-white backdrop-blur-sm rounded-xl p-3 md:p-4 border border-blue-200/50 transition-all duration-500 ease-in-out transform hover:scale-[1.02] hover:shadow-lg mb-3 md:mb-4"
+                        style={{ animationDelay: `${index * 100}ms` }}
+                      >
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
+                          <h4 className="text-base md:text-lg lg:text-xl font-bold text-gray-900 transition-all duration-300">{edu.degree}</h4>
+                          <div className="bg-blue-100 text-blue-800 px-2 py-1 md:px-3 md:py-1.5 rounded-full text-xs md:text-sm font-semibold mt-1 sm:mt-0 w-fit transition-all duration-300 hover:bg-blue-200">
+                            {edu.year}
+                          </div>
                         </div>
+                        <h5 className="text-sm md:text-base lg:text-lg font-semibold text-blue-700 mb-1 transition-all duration-300">
+                          {edu.institution}
+                        </h5>
+                        <p className="text-xs md:text-sm lg:text-base text-gray-600 flex items-center">
+                          <MapPin className="w-3 h-3 md:w-4 md:h-4 mr-1 text-blue-500 flex-shrink-0 transition-all duration-300" />
+                          {edu.location}
+                        </p>
                       </div>
-                      <h5 className="text-sm md:text-base lg:text-lg font-semibold text-blue-700 md:text-blue-300 mb-1 transition-all duration-300">
-                        {edu.institution}
-                      </h5>
-                      <p className="text-xs md:text-sm lg:text-base text-gray-600 md:text-gray-300 flex items-center">
-                        <MapPin className="w-3 h-3 md:w-4 md:h-4 mr-1 text-blue-500 md:text-blue-400 flex-shrink-0 transition-all duration-300" />
-                        {edu.location}
-                      </p>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                )}
                 
-                <div className={`transition-all duration-500 ease-in-out ${activeTab === 'experience' ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 absolute invisible'}`}>
-                  {experience.slice().reverse().map((exp, index) => (
-                    <div 
-                      key={`exp-${index}`} 
-                      className="bg-white/70 backdrop-blur-sm rounded-xl p-3 md:p-4 border md:border-blue-200/50 border-green-200/50 transition-all duration-500 ease-in-out transform hover:scale-[1.02] hover:shadow-lg mb-3 md:mb-4"
-                      style={{ animationDelay: `${index * 100}ms` }}
-                    >
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-                        <h4 className="text-base md:text-lg lg:text-xl font-bold text-gray-900 transition-all duration-300">{exp.position}</h4>
-                        <div className="md:bg-blue-100 md:text-blue-800 bg-green-100 text-green-800 px-2 py-1 md:px-3 md:py-1.5 rounded-full text-xs md:text-sm font-semibold mt-1 sm:mt-0 w-fit transition-all duration-300 hover:bg-green-200 md:hover:bg-blue-200">
-                          {exp.duration}
+                {/* Experience Content - Mobile: Conditional, Desktop: Hidden */}
+                {activeTab === 'experience' && (
+                  <div className="transition-all duration-500 ease-in-out opacity-100 translate-y-0 block md:hidden">
+                    {experience.slice().reverse().map((exp, index) => (
+                      <div 
+                        key={`exp-${index}`} 
+                        className="bg-white backdrop-blur-sm rounded-xl p-3 md:p-4 border border-green-200/50 transition-all duration-500 ease-in-out transform hover:scale-[1.02] hover:shadow-lg mb-3 md:mb-4"
+                        style={{ animationDelay: `${index * 100}ms` }}
+                      >
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
+                          <h4 className="text-base md:text-lg lg:text-xl font-bold text-gray-900 transition-all duration-300">{exp.position}</h4>
+                          <div className="bg-green-100 text-green-800 px-2 py-1 md:px-3 md:py-1.5 rounded-full text-xs md:text-sm font-semibold mt-1 sm:mt-0 w-fit transition-all duration-300 hover:bg-green-200">
+                            {exp.duration}
+                          </div>
                         </div>
+                        <h5 className="text-sm md:text-base lg:text-lg font-semibold text-green-700 mb-1 transition-all duration-300">
+                          {exp.hospital}
+                        </h5>
+                        <p className="text-xs md:text-sm lg:text-base text-gray-600 flex items-center">
+                          <MapPin className="w-3 h-3 md:w-4 md:h-4 mr-1 text-green-500 flex-shrink-0 transition-all duration-300" />
+                          {exp.location}
+                        </p>
                       </div>
-                      <h5 className="text-sm md:text-base lg:text-lg font-semibold md:text-blue-700 text-green-700 mb-1 transition-all duration-300">
-                        {exp.hospital}
-                      </h5>
-                      <p className="text-xs md:text-sm lg:text-base text-gray-600 flex items-center">
-                        <MapPin className="w-3 h-3 md:w-4 md:h-4 mr-1 md:text-blue-500 text-green-500 flex-shrink-0 transition-all duration-300" />
-                        {exp.location}
-                      </p>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
 
@@ -203,18 +209,18 @@ export function AboutSection() {
               {/* Experience Timeline for Desktop */}
               <div className="space-y-4">
                 {experience.map((exp, index) => (
-                  <div key={index} className="bg-white/70 backdrop-blur-sm rounded-xl p-4 border border-purple-200/50">
+                  <div key={index} className="bg-white/70 backdrop-blur-sm rounded-xl p-4 border border-purple-200/50 transition-all duration-500 ease-in-out transform hover:scale-[1.02] hover:shadow-lg">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-                      <h4 className="text-lg lg:text-xl font-bold text-gray-900">{exp.position}</h4>
-                      <div className="bg-purple-100 text-purple-800 px-3 py-1.5 rounded-full text-sm font-semibold mt-1 sm:mt-0 w-fit">
+                      <h4 className="text-lg lg:text-xl font-bold text-gray-900 transition-all duration-300">{exp.position}</h4>
+                      <div className="bg-purple-100 text-purple-800 px-3 py-1.5 rounded-full text-sm font-semibold mt-1 sm:mt-0 w-fit transition-all duration-300 hover:bg-purple-200">
                         {exp.duration}
                       </div>
                     </div>
-                    <h5 className="text-base lg:text-lg font-semibold text-purple-700 mb-1">
+                    <h5 className="text-base lg:text-lg font-semibold text-purple-700 mb-1 transition-all duration-300">
                       {exp.hospital}
                     </h5>
                     <p className="text-sm lg:text-base text-gray-600 flex items-center">
-                      <MapPin className="w-4 h-4 mr-1 text-purple-500 flex-shrink-0" />
+                      <MapPin className="w-4 h-4 mr-1 text-purple-500 flex-shrink-0 transition-all duration-300" />
                       {exp.location}
                     </p>
                   </div>
