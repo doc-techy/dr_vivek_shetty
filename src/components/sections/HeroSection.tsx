@@ -35,10 +35,10 @@ export function HeroSection() {
                 
                 {/* Image Container */}
                 <div className="relative bg-white/90 backdrop-blur-sm rounded-3xl p-4 lg:p-6 shadow-2xl border border-white/50">
-                  <div className="relative w-full h-[280px] lg:h-[700px] rounded-2xl overflow-hidden">
+                  <div className="relative w-full h-[360px] lg:h-[700px] rounded-2xl overflow-hidden">
                     {/* Mobile Image */}
                     <Image
-                      src="/images/mobile_pic.jpeg"
+                      src="/images/dr_vivek_profile_pic.jpg"
                       alt="Dr. Vivek Shetty - Senior Consultant"
                       fill
                       className="object-cover object-top lg:hidden"

@@ -69,25 +69,27 @@ export function AboutSection() {
 
         {/* Mobile Toggle Switch - Only visible on mobile */}
         <div className="md:hidden mb-6">
-          <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-xl p-1 flex border border-gray-200/50">
+          <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-xl p-1 flex border border-gray-200/50 relative z-10">
             <button
               onClick={() => setActiveTab('experience')}
-              className={`flex-1 py-3 px-4 rounded-lg text-sm font-semibold transition-all duration-300 ease-in-out flex items-center justify-center ${
+              className={`flex-1 py-3 px-4 rounded-lg text-sm font-semibold transition-all duration-300 ease-in-out flex items-center justify-center relative z-10 cursor-pointer touch-manipulation ${
                 activeTab === 'experience'
                   ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-lg'
                   : 'text-gray-700 hover:text-green-600 hover:bg-green-50/50'
               }`}
+              style={{ WebkitTapHighlightColor: 'transparent' }}
             >
               <Calendar className={`w-4 h-4 mr-2 transition-all duration-300 ${activeTab === 'experience' ? 'rotate-12' : 'rotate-0'}`} />
               Professional
             </button>
             <button
               onClick={() => setActiveTab('education')}
-              className={`flex-1 py-3 px-4 rounded-lg text-sm font-semibold transition-all duration-300 ease-in-out flex items-center justify-center ${
+              className={`flex-1 py-3 px-4 rounded-lg text-sm font-semibold transition-all duration-300 ease-in-out flex items-center justify-center relative z-10 cursor-pointer touch-manipulation ${
                 activeTab === 'education'
                   ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-lg'
                   : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50/50'
               }`}
+              style={{ WebkitTapHighlightColor: 'transparent' }}
             >
               <GraduationCap className={`w-4 h-4 mr-2 transition-all duration-300 ${activeTab === 'education' ? 'rotate-12' : 'rotate-0'}`} />
               Education
@@ -141,8 +143,7 @@ export function AboutSection() {
               {/* Dynamic Content Timeline */}
               <div className="space-y-3 md:space-y-4">
                 {/* Education Content - Mobile: Conditional, Desktop: Always show */}
-                {activeTab === 'education' && (
-                  <div className="transition-all duration-500 ease-in-out opacity-100 translate-y-0 block md:block">
+                <div className={`transition-all duration-500 ease-in-out opacity-100 translate-y-0 md:block ${activeTab === 'education' ? 'block' : 'hidden md:block'}`}>
                     {education.map((edu, index) => (
                       <div 
                         key={`edu-${index}`} 
@@ -165,11 +166,10 @@ export function AboutSection() {
                       </div>
                     ))}
                   </div>
-                )}
                 
                 {/* Experience Content - Mobile: Conditional, Desktop: Hidden */}
                 {activeTab === 'experience' && (
-                  <div className="transition-all duration-500 ease-in-out opacity-100 translate-y-0 block md:hidden">
+                  <div className="transition-all duration-500 ease-in-out opacity-100 translate-y-0 md:hidden">
                     {experience.slice().reverse().map((exp, index) => (
                       <div 
                         key={`exp-${index}`} 
