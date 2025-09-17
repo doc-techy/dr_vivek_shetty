@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { apiClient } from '@/lib/api';
 
 interface User {
+  
   id: number;
   username: string;
   email: string;

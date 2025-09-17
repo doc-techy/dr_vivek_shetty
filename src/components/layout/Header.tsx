@@ -102,7 +102,7 @@ export function Header() {
                   href="/appointment"
                   className="px-3 py-2 bg-white text-blue-600 rounded-lg font-semibold text-sm hover:bg-blue-50 transition-all duration-300 whitespace-nowrap"
                 >
-                  Book Appointment
+                  BookAppointment
                 </Link>
               )}
             </div>
