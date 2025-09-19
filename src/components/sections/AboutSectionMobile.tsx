@@ -70,13 +70,13 @@ export function AboutSectionMobile() {
 
         {/* Mobile Toggle Switch */}
         <div className="mb-6">
-          <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-xl p-1 flex border border-gray-200/50">
+          <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-1 flex border border-gray-200/50">
             <button
               onClick={() => setActiveTab('experience')}
               className={`flex-1 py-3 px-4 rounded-lg text-sm font-semibold transition-all duration-300 ease-in-out flex items-center justify-center ${
                 activeTab === 'experience'
-                  ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-lg'
-                  : 'text-gray-700 hover:text-green-600 hover:bg-green-50/50'
+                  ? 'bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white shadow-lg'
+                  : 'text-gray-700 hover:text-purple-600 hover:bg-purple-50/50'
               }`}
             >
               <Calendar className={`w-4 h-4 mr-2 transition-all duration-300 ${activeTab === 'experience' ? 'rotate-12' : 'rotate-0'}`} />
@@ -86,7 +86,7 @@ export function AboutSectionMobile() {
               onClick={() => setActiveTab('education')}
               className={`flex-1 py-3 px-4 rounded-lg text-sm font-semibold transition-all duration-300 ease-in-out flex items-center justify-center ${
                 activeTab === 'education'
-                  ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-lg'
+                  ? 'bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white shadow-lg'
                   : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50/50'
               }`}
             >
@@ -155,20 +155,20 @@ export function AboutSectionMobile() {
                 {experience.slice().reverse().map((exp, index) => (
                   <div 
                     key={`exp-${index}`} 
-                    className="bg-white backdrop-blur-sm rounded-xl p-3 border border-green-200/50 transition-all duration-500 ease-in-out transform hover:scale-[1.02] hover:shadow-lg mb-3"
+                    className="bg-white backdrop-blur-sm rounded-xl p-3 border border-gray-200/50 transition-all duration-500 ease-in-out transform hover:scale-[1.02] hover:shadow-lg mb-3"
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
                       <h4 className="text-base font-bold text-gray-900 transition-all duration-300">{exp.position}</h4>
-                      <div className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-semibold mt-1 sm:mt-0 w-fit transition-all duration-300 hover:bg-green-200">
+                      <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white px-2 py-1 rounded-full text-xs font-semibold mt-1 sm:mt-0 w-fit transition-all duration-300 hover:from-blue-700 hover:via-purple-700 hover:to-pink-700">
                         {exp.duration}
                       </div>
                     </div>
-                    <h5 className="text-sm font-semibold text-green-700 mb-1 transition-all duration-300">
+                    <h5 className="text-sm font-semibold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-1 transition-all duration-300">
                       {exp.hospital}
                     </h5>
                     <p className="text-xs text-gray-600 flex items-center">
-                      <MapPin className="w-3 h-3 mr-1 text-green-500 flex-shrink-0 transition-all duration-300" />
+                      <MapPin className="w-3 h-3 mr-1 text-purple-500 flex-shrink-0 transition-all duration-300" />
                       {exp.location}
                     </p>
                   </div>
