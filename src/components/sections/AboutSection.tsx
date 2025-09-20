@@ -31,6 +31,13 @@ export function AboutSection() {
 
   const experience = [
     {
+      position: 'Consultant',
+      hospital: 'Doc Cube Koramangala',
+      location: 'Koramangala, Bangalore',
+      duration: 'September 2025 - Present',
+      description: 'Providing specialized head and neck oncology consultations and surgical care'
+    },
+    {
       position: 'Senior Consultant',
       hospital: 'SPARSH Hospital',
       location: 'Hennur Road, Bangalore',
@@ -44,13 +51,7 @@ export function AboutSection() {
       duration: '2018 - 2020',
       description: 'Specialized in surgical oncology with focus on reconstructive procedures and microvascular surgery'
     },
-    {
-      position: 'Resident Doctor',
-      hospital: 'Victoria Hospital',
-      location: 'Bangalore Medical College, Bangalore',
-      duration: '2015 - 2018',
-      description: 'Comprehensive training in general surgery, emergency medicine, and patient care management'
-    }
+
   ];
 
   return (
