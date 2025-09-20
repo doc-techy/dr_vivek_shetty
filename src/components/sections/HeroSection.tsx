@@ -2,12 +2,13 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, Play, Star, Award, Users, X, CheckCircle, Phone, Calendar } from 'lucide-react';
+import { ArrowRight, Play, Star, Award, Users, X, CheckCircle, Phone, Calendar, MapPin } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 export function HeroSection() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [dimensionOption, setDimensionOption] = useState(1);
 
   useEffect(() => {
     setIsVisible(true);
@@ -18,6 +19,11 @@ export function HeroSection() {
     'Minimally Invasive Procedures',
     'Comprehensive Care Plans',
     'Patient-Centered Approach'
+  ];
+
+  const availability = [
+    { name: 'Doc Cube Koramangala', timing: 'Mon-Sat: 10:00 AM - 6:00 PM' },
+    { name: 'SPARSH Hospital', timing: 'Mon-Fri: 9:00 AM - 5:00 PM' }
   ];
 
   return (
@@ -35,7 +41,7 @@ export function HeroSection() {
                 
                 {/* Image Container */}
                 <div className="relative bg-white/90 backdrop-blur-sm rounded-3xl p-4 lg:p-6 shadow-2xl border border-white/50">
-                  <div className="relative w-full h-[360px] lg:h-[700px] rounded-2xl overflow-hidden">
+                    <div className="relative w-full h-[450px] lg:h-[650px] rounded-2xl overflow-hidden">
                     {/* Mobile Image */}
                     <Image
                       src="/images/dr_vivek_profile_pic.jpg"
@@ -56,6 +62,15 @@ export function HeroSection() {
                     
                     {/* Image Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+                  </div>
+                </div>
+                
+                {/* Title Box - Below Image */}
+                <div className="mt-2 lg:mt-3">
+                  <div className="bg-white rounded-lg px-6 py-4 shadow-md border border-gray-200">
+                    <h3 className="text-xl lg:text-2xl font-bold text-gray-800 text-center">
+                      Head and Neck Oncology
+                    </h3>
                   </div>
                 </div>
               </div>
@@ -83,7 +98,7 @@ export function HeroSection() {
             </div>
 
             {/* Features List */}
-            <div className="grid grid-cols-2 gap-3 max-w-lg mx-auto lg:max-w-none lg:mx-0">
+            {/* <div className="grid grid-cols-2 gap-3 max-w-lg mx-auto lg:max-w-none lg:mx-0">
               {features.map((feature, index) => (
                 <div key={index} className="flex items-center space-x-2 justify-center lg:justify-start">
                   <div className="w-5 h-5 lg:w-6 lg:h-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-full flex items-center justify-center flex-shrink-0">
@@ -92,6 +107,24 @@ export function HeroSection() {
                   <span className="text-sm lg:text-base text-gray-700 font-medium">{feature}</span>
                 </div>
               ))}
+            </div> */}
+
+            {/* Doctor Availability */}
+            <div className="space-y-3 max-w-lg mx-auto lg:max-w-none lg:mx-0">
+              <h4 className="text-lg lg:text-xl font-bold text-gray-800 text-center lg:text-left">Available At:</h4>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                {availability.map((location, index) => (
+                  <div key={index} className="flex items-start space-x-3 justify-center lg:justify-start">
+                    <div className="w-5 h-5 lg:w-6 lg:h-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                      <MapPin className="w-3 h-3 lg:w-4 lg:h-4 text-white" />
+                    </div>
+                    <div className="text-center lg:text-left">
+                      <div className="text-sm lg:text-base text-gray-700 font-medium">{location.name}</div>
+                      <div className="text-xs lg:text-sm text-gray-500 mt-1">{location.timing}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Professional Stats */}

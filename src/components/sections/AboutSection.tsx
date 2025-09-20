@@ -21,7 +21,7 @@ export function AboutSection() {
       description: 'Master of Surgery with specialization in general and oncological surgery'
     },
     {
-      degree: 'Fellowship',
+      degree: 'Fellowship in head and surgical oncology',
       institution: 'Rajiv Gandhi University of Health Sciences',
       location: 'Bangalore, Karnataka',
       year: '2014-2016',
