@@ -22,8 +22,8 @@ export function HeroSection() {
   ];
 
   const availability = [
-    { name: 'Doc Cube Koramangala', timing: 'Mon-Sat: 10:00 AM - 6:00 PM' },
-    { name: 'SPARSH Hospital', timing: 'Mon-Fri: 9:00 AM - 5:00 PM' }
+    { name: 'Doc Cube Koramangala', timing: 'Mon-Sat: 6:00 PM - 8:00 PM' },
+    { name: 'SPARSH Hospital', timing: 'Mon, Wed, Fri: 9:30 AM - 4:00 PM' }
   ];
 
   return (
@@ -93,7 +93,7 @@ export function HeroSection() {
               </h1>
               
               <p className="text-sm md:text-base lg:text-xl text-gray-600 leading-relaxed text-justify max-w-2xl">
-                Dr. Vivek Shetty delivers exceptional head and neck surgical oncology care with over 9 years of specialized expertise, utilizing cutting-edge advanced techniques, state-of-the-art medical technology, and comprehensive personalized treatment approaches. His dedicated practice focuses on providing compassionate patient-centered care, innovative surgical solutions, and multidisciplinary collaboration at the renowned SPARSH Hospital, Bangalore, ensuring optimal outcomes for complex oncological cases.
+                Dr. Vivek Shetty delivers exceptional head and neck surgical oncology care with over 11 years of specialized expertise, utilizing cutting-edge advanced techniques, state-of-the-art medical technology, and comprehensive personalized treatment approaches. His dedicated practice focuses on providing compassionate patient-centered care, innovative surgical solutions, and multidisciplinary collaboration at the renowned SPARSH Hospital, Bangalore, ensuring optimal outcomes for complex oncological cases.
               </p>
             </div>
 
@@ -142,7 +142,7 @@ export function HeroSection() {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start max-w-lg mx-auto lg:max-w-none lg:mx-0 lg:w-full">
               <Link
-                href="#appointment"
+                href="/appointment"
                 className="group inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white rounded-2xl font-semibold hover:from-blue-700 hover:via-purple-700 hover:to-pink-700 transition-all duration-300 hover:scale-105 lg:flex-1"
               >
                 <Calendar className="w-5 h-5 mr-2" />

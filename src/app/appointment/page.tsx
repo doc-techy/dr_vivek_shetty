@@ -8,23 +8,14 @@ export default function AppointmentPage() {
     <div className="min-h-screen bg-gray-50 py-20">
       <div className="container-custom">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-              Book Your Appointment
-            </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Schedule a consultation with Dr. Vivek Shetty for expert care in Head & Neck Oncology
-            </p>
-          </div>
-
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Appointment Form */}
             <div className="lg:col-span-2">
-              <AppointmentBooking />
+              <AppointmentBooking className="mt-8 mb-8" />
             </div>
 
             {/* Sidebar */}
-            <div className="space-y-6">
+            <div className="space-y-6 mt-8 mb-8">
               {/* Doctor Info */}
               <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
                 <div className="text-center mb-6">
@@ -42,7 +33,7 @@ export default function AppointmentPage() {
                 <div className="space-y-3 text-sm text-gray-600">
                   <div className="flex items-center">
                     <Award className="w-4 h-4 mr-3 text-blue-500" />
-                    <span><strong>Experience:</strong> 9+ Years</span>
+                    <span><strong>Experience:</strong> 11+ Years</span>
                   </div>
                   <div className="flex items-center">
                     <MapPin className="w-4 h-4 mr-3 text-blue-500" />

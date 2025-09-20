@@ -69,7 +69,7 @@ export function CtaSection() {
                       </div>
                     </div>
                     <h4 className="text-xs md:text-sm lg:text-base font-bold text-white mb-0.5 md:mb-1 group-hover:text-yellow-300 transition-colors duration-300">
-                      9+ Years Experience
+                      11+ Years Experience
                     </h4>
                     <p className="text-blue-100 group-hover:text-white transition-colors duration-300 text-xs lg:text-sm leading-tight">
                       Extensive expertise in head & neck surgical oncology

@@ -22,7 +22,7 @@ A modern, professional website for Dr. Vivek Shetty, Senior Consultant in Head &
 ### Location
 - **Hospital**: SPARSH Hospital, Hennur Road, Bangalore
 - **Languages**: English, Hindi, Kannada
-- **Experience**: 9+ Years
+- **Experience**: 11+ Years
 
 ## 🚀 Features
 
