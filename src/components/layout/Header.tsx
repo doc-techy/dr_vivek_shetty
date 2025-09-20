@@ -90,21 +90,12 @@ export function Header() {
               </nav>
 
               {/* CTA Button */}
-              {pathname === '/' ? (
-                <button
-                  onClick={() => scrollToSection('#contact')}
-                  className="px-3 py-2 bg-white text-blue-600 rounded-lg font-semibold text-sm hover:bg-blue-50 transition-all duration-300 whitespace-nowrap"
-                >
-                  Book Appointment
-                </button>
-              ) : (
-                <Link
-                  href="/appointment"
-                  className="px-3 py-2 bg-white text-blue-600 rounded-lg font-semibold text-sm hover:bg-blue-50 transition-all duration-300 whitespace-nowrap"
-                >
-                  BookAppointment
-                </Link>
-              )}
+              <Link
+                href="/appointment"
+                className="px-3 py-2 bg-white text-blue-600 rounded-lg font-semibold text-sm hover:bg-blue-50 transition-all duration-300 whitespace-nowrap"
+              >
+                Book Appointment
+              </Link>
             </div>
 
             {/* Mobile menu button */}
@@ -162,22 +153,13 @@ export function Header() {
                   }
                 })}
                 <div className="pt-6 pb-6 border-t border-blue-400/30">
-                  {pathname === '/' ? (
-                    <button
-                      onClick={() => scrollToSection('#contact')}
-                      className="flex items-center justify-center w-full px-6 py-3 bg-white text-blue-600 rounded-lg font-semibold text-base hover:bg-blue-50 transition-all duration-300"
-                    >
-                      Book Appointment
-                    </button>
-                  ) : (
-                    <Link
-                      href="/appointment"
-                      className="flex items-center justify-center w-full px-6 py-3 bg-white text-blue-600 rounded-lg font-semibold text-base hover:bg-blue-50 transition-all duration-300"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      Book Appointment
-                    </Link>
-                  )}
+                  <Link
+                    href="/appointment"
+                    className="flex items-center justify-center w-full px-6 py-3 bg-white text-blue-600 rounded-lg font-semibold text-base hover:bg-blue-50 transition-all duration-300"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Book Appointment
+                  </Link>
                 </div>
               </nav>
             </div>
