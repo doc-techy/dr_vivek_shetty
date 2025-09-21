@@ -35,7 +35,7 @@ class Command(BaseCommand):
                 'qualifications': 'MBBS, MS General Surgery, Fellowship in Head and Neck Surgical Oncology and Reconstructive Surgery (RGUHS)',
                 'bio': 'Dr. Vivek Shetty is a Senior Consultant in Head & Neck Oncology with over 9 years of experience. He specializes in surgical oncology and reconstructive surgery.',
                 'email': 'dr.vivekshetty@sparshhospital.com',
-                'phone': '+91 80 2222 2222',
+                'phone': '+91 9886432371',
                 'address': 'SPARSH Hospital, Hennur Road, Bangalore',
                 'languages': ['English', 'Hindi', 'Kannada'],
                 'consultation_fee': 1500.00,

@@ -34,10 +34,10 @@ export function AppointmentBooking({ className = '' }: AppointmentBookingProps) 
     <div className={`bg-white rounded-3xl shadow-2xl border border-gray-100 p-8 ${className}`}>
       {/* Header */}
       <div className="text-center mb-12">
-        <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl text-lg font-bold mb-6 shadow-lg">
+        {/* <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl text-lg font-bold mb-6 shadow-lg">
           <Calendar className="w-6 h-6 mr-3" />
           Book Your Appointment
-        </div>
+        </div> */}
         <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
           Choose Your Preferred Location
         </h2>

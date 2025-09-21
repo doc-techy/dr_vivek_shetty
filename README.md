@@ -205,8 +205,8 @@ npm run build
 ## 📞 Support
 
 For technical support or questions about the website:
-- **Email**: info@drvivekshetty.com
-- **Phone**: +91 80 2222 2222
+- **Email**: vivekshetty.headneck@gmail.com
+- **Phone**: +91 9886432371
 
 ## 📄 License
 

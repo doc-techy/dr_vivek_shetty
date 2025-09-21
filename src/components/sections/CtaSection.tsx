@@ -150,7 +150,7 @@ export function CtaSection() {
                 href="tel:+918022222222"
                 className="inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors text-sm md:text-base"
               >
-                +91 80 2222 2222
+                +91 9886432371
               </a>
             </div>
 

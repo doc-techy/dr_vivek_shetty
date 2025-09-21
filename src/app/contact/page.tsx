@@ -213,7 +213,7 @@ export default function ContactPage() {
                   <Phone className="w-6 h-6 text-primary-600" />
                   <div>
                     <h4 className="font-semibold text-gray-900">Phone</h4>
-                    <p className="text-gray-600">+91 80 2222 2222</p>
+                    <p className="text-gray-600">+91 9886432371</p>
                     <p className="text-sm text-gray-500">Available 24/7 for emergencies</p>
                   </div>
                 </div>
@@ -222,7 +222,7 @@ export default function ContactPage() {
                   <Mail className="w-6 h-6 text-primary-600" />
                   <div>
                     <h4 className="font-semibold text-gray-900">Email</h4>
-                    <p className="text-gray-600">info@drvivekshetty.com</p>
+                    <p className="text-gray-600">vivekshetty.headneck@gmail.com</p>
                     <p className="text-sm text-gray-500">We respond within 24 hours</p>
                   </div>
                 </div>
@@ -248,7 +248,7 @@ export default function ContactPage() {
                 For urgent Head & Neck conditions that require immediate attention:
               </p>
               <div className="space-y-2">
-                <p className="font-semibold">Emergency Hotline: +91 80 2222 2222</p>
+                <p className="font-semibold">Emergency Hotline: +91 9886432371</p>
                 <p className="text-sm text-primary-100">
                   Available 24/7 for critical cases
                 </p>

@@ -47,7 +47,7 @@ export default function AppointmentPage() {
               </div>
 
               {/* Office Hours */}
-              <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+              {/* <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
                 <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
                   <Clock className="w-5 h-5 mr-2 text-blue-500" />
                   Office Hours
@@ -66,7 +66,7 @@ export default function AppointmentPage() {
                     <span className="text-red-600 font-semibold">Emergency Only</span>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               {/* Contact Info */}
               <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-100">
@@ -80,7 +80,7 @@ export default function AppointmentPage() {
                     </div>
                     <div>
                       <p className="font-semibold text-gray-900">Emergency Line</p>
-                      <p className="text-sm text-gray-600">+91 80 2222 2222</p>
+                      <p className="text-sm text-gray-600">+91 9886432371</p>
                     </div>
                   </div>
                   <div className="flex items-center">
@@ -89,7 +89,7 @@ export default function AppointmentPage() {
                     </div>
                     <div>
                       <p className="font-semibold text-gray-900">Email Support</p>
-                      <p className="text-sm text-gray-600">info@drvivekshetty.com</p>
+                      <p className="text-sm text-gray-600">vivekshetty.headneck@gmail.com</p>
                     </div>
                   </div>
                 </div>
