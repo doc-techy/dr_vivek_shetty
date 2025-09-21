@@ -89,13 +89,15 @@ export function AppointmentBooking({ className = '' }: AppointmentBookingProps) 
 
             {/* Book Appointment Button */}
             <div className="text-center mt-auto flex-shrink-0">
-              <Link
-                href="/appointment"
+              <a
+                href={hospital.website}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-indigo-700 focus:ring-4 focus:ring-blue-200 transition-all duration-300 shadow-lg group-hover:shadow-xl text-sm"
               >
                 <Calendar className="w-4 h-4 mr-2" />
                 Book Appointment
-              </Link>
+              </a>
             </div>
 
             {/* Hover Effect Accent */}
