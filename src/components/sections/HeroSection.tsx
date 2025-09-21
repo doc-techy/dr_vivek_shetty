@@ -93,8 +93,7 @@ export function HeroSection() {
               </h1>
               
               <p className="text-sm md:text-xs lg:text-sm xl:text-base 2xl:text-xl text-gray-600 leading-relaxed text-justify max-w-2xl">
-                Dr. Vivek Shetty delivers exceptional head and neck surgical oncology care with over 11 years of specialized expertise, utilizing cutting-edge advanced techniques, state-of-the-art medical technology, and comprehensive personalized treatment approaches. His dedicated practice focuses on providing compassionate patient-centered care, innovative surgical solutions, and multidisciplinary collaboration at the renowned SPARSH Hospital, Bangalore, ensuring optimal outcomes for complex oncological cases.
-              </p>
+              Dr Vivek Shetty is a Head and Neck Onco Surgeon with over 11 years experience in the field. With a patient-centric, ethical and evidence-based approach to patient care, he has managed over 1000 patients with conditions such as oral cancer, tongue cancer, thyroid nodules, salivary gland tumours, throat cancer and many more head and neck neoplasms.              </p>
             </div>
 
             {/* Features List */}

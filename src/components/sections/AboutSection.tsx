@@ -63,9 +63,9 @@ export function AboutSection() {
             Academic Excellence & <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Professional Mastery</span>
           </h2>
           
-          <p className="hidden md:block text-sm md:text-2xl lg:text-3xl text-gray-600 max-w-5xl mx-auto leading-relaxed px-4">
+          {/* <p className="hidden md:block text-sm md:text-2xl lg:text-3xl text-gray-600 max-w-5xl mx-auto leading-relaxed px-4">
             A dedicated specialist with comprehensive education and extensive clinical experience in head and neck oncology.
-          </p>
+          </p> */}
         </div>
 
         {/* Mobile Toggle Switch - Only visible on mobile */}
