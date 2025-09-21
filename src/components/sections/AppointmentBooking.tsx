@@ -24,7 +24,7 @@ export function AppointmentBooking({ className = '' }: AppointmentBookingProps) 
       name: 'SPARSH Hospital',
       address: 'Hennur Road, Bangalore',
       availableAt: 'Mon, Wed, Fri: 9:30 AM - 4:00 PM',
-      website: 'https://www.sparshhospital.com/book-an-appointment/',
+      website: 'https://www.sparshhospital.com/doctors/dr-vivek-shetty/',
       mapLink: 'https://share.google/6J5ozKbmEHix5mxRR',
       description: 'Multi-specialty hospital with comprehensive oncology care'
     }
