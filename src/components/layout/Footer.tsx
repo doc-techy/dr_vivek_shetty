@@ -191,7 +191,7 @@ export function Footer() {
                 <li className="text-gray-300 text-sm">Parathyroid Problems</li>
                 <li className="text-gray-300 text-sm">Parotid and Submandibular Gland Tumours</li>
                 <li className="text-gray-300 text-sm">Throat Cancer</li>
-                <li className="text-gray-300 text-sm">Jaw Tumours(Ameloblastoma/Sarcoma)</li>
+                <li className="text-gray-300 text-sm">Jaw Tumours</li>
               </ul>
 
             </div>
