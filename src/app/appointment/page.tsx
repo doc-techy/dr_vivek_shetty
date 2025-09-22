@@ -17,7 +17,7 @@ export default function AppointmentPage() {
             {/* Sidebar */}
             <div className="space-y-6 mt-8 mb-8">
               {/* Doctor Info */}
-              <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+              <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hidden md:block">
                 <div className="text-center mb-6">
                   <div className="w-20 h-20 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
                     <User className="w-10 h-10 text-white" />
