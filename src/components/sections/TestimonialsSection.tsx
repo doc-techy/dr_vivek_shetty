@@ -8,90 +8,63 @@ export function TestimonialsSection() {
 
   const testimonials = [
     {
-      name: 'Rajesh Kumar',
+      name: 'Sreekanth MS',
       role: 'Patient',
-      content: 'Dr. Shetty\'s expertise and compassionate care made my recovery smooth. His attention to detail and clear communication throughout the treatment process was exceptional.',
+      content: "Dr Vivek is considered to be one of best doctor in my life in difficult situation. Your consulting and caring and follow up really appreciated. Thank you and wish all the best to your carries.",
       rating: 5,
       treatment: 'Head & Neck Surgery'
     },
     {
-      name: 'Priya Sharma',
-      role: 'Patient',
-      content: 'The entire team at SPARSH Hospital, led by Dr. Shetty, provided outstanding care. The surgical procedure was successful, and the follow-up care was thorough.',
+      name: 'chandan ba95',
+      role: 'Family Member',
+      content: "My grandmother underwent C.A. mandible surgery performed by Dr. Vivek Shetty. Despite having thyroid and hypertension issues, and being 70 years old, the surgery was successfully carried out amidst so many challenges. Now she is comfortably living with us. Thank you very much, Sir.",
       rating: 5,
-      treatment: 'Reconstructive Surgery'
+      treatment: 'Mandible Cancer Surgery'
     },
     {
-      name: 'Amit Patel',
-      role: 'Patient',
-      content: 'Dr. Shetty\'s professionalism and surgical skills are remarkable. He explained everything clearly and made sure I was comfortable throughout the process.',
+      name: 'Abinav',
+      role: 'Parent',
+      content: "My 9-year-old son had swelling in the right parotid gland. Dr. Shetty explained everything in layman's terms, managed the surgery with care, and it's been over 4 years since. My son is doing great. Highly recommend Dr. Shetty!",
       rating: 5,
-      treatment: 'Tumor Surgery'
+      treatment: 'Parotid Gland Surgery'
     },
     {
-      name: 'Sunita Reddy',
-      role: 'Patient',
-      content: 'I am grateful for Dr. Shetty\'s expertise in handling my complex case. His dedication to patient care and surgical excellence is truly commendable.',
+      name: 'Sandy Flies',
+      role: 'Family Member',
+      content: "Dr Vivek Shetty treated my father in 4th stage cancer. While others had no hope, his treatment gave my father 3+ years of happy, pain-free life. A miracle and a blessing. Highly recommend!",
       rating: 5,
-      treatment: 'Cancer Treatment'
+      treatment: 'Stage 4 Cancer Treatment'
     },
     {
-      name: 'Vikram Singh',
+      name: 'Sunil Pathak',
       role: 'Patient',
-      content: 'Dr. Shetty\'s advanced surgical techniques and personalized approach gave me confidence throughout my treatment. The results exceeded my expectations.',
+      content: "I'm extremely satisfied with Dr. Vivek Shetty’s care. His professionalism, empathy, and clear communication made the experience excellent. Highly recommended!",
       rating: 5,
-      treatment: 'Thyroid Surgery'
+      treatment: 'Head & Neck Oncology'
     },
     {
-      name: 'Meera Joshi',
-      role: 'Patient',
-      content: 'The care I received from Dr. Shetty was exceptional. His expertise in head and neck oncology and his compassionate bedside manner made all the difference.',
+      name: 'Lowell Monis',
+      role: 'Family Member',
+      content: "My uncle had metastasis of unknown origin. Dr. Shetty coordinated a multidisciplinary treatment plan with excellent follow-up and results. A compassionate, skilled doctor we trust deeply.",
       rating: 5,
-      treatment: 'Oral Cancer Surgery'
+      treatment: 'Metastasis - Neck Lymph Node'
     },
     {
-      name: 'Arjun Nair',
+      name: 'Shivakumar Baradol',
       role: 'Patient',
-      content: 'Dr. Shetty\'s surgical precision and post-operative care were outstanding. I felt supported throughout my entire journey to recovery.',
+      content: "Good.",
       rating: 5,
-      treatment: 'Laryngeal Surgery'
+      treatment: 'General Consultation'
     },
     {
-      name: 'Kavitha Rao',
+      name: 'Shahid',
       role: 'Patient',
-      content: 'Dr. Shetty\'s multidisciplinary approach and attention to detail ensured the best possible outcome for my complex case. Highly recommended.',
+      content: "Dr. Shetty is genuine, experienced, and kind. Always responsive and helpful. A doctor you can trust blindly. Truly thankful for his professionalism and care.",
       rating: 5,
-      treatment: 'Skull Base Surgery'
-    },
-    {
-      name: 'Ravi Gupta',
-      role: 'Patient',
-      content: 'The entire experience with Dr. Shetty was professional and reassuring. His expertise in minimally invasive techniques made my recovery faster.',
-      rating: 5,
-      treatment: 'Endoscopic Surgery'
-    },
-    {
-      name: 'Deepa Iyer',
-      role: 'Patient',
-      content: 'Dr. Shetty\'s comprehensive approach to treatment and his team\'s coordination made my surgical journey smooth and successful.',
-      rating: 5,
-      treatment: 'Parotid Surgery'
-    },
-    {
-      name: 'Suresh Menon',
-      role: 'Patient',
-      content: 'Dr. Shetty\'s innovative surgical techniques and his commitment to patient care are truly remarkable. I am grateful for his expertise.',
-      rating: 5,
-      treatment: 'Neck Dissection'
-    },
-    {
-      name: 'Anita Desai',
-      role: 'Patient',
-      content: 'Dr. Shetty\'s compassionate care and surgical excellence helped me through a difficult time. His expertise gave me hope and confidence.',
-      rating: 5,
-      treatment: 'Reconstructive Surgery'
+      treatment: 'Head & Neck Oncology'
     }
   ];
+  ;
 
   // Create duplicated testimonials for infinite scroll
   const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials];

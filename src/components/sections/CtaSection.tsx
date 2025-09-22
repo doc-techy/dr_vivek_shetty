@@ -161,7 +161,7 @@ export function CtaSection() {
                 Visit our clinic location
               </p>
               <a
-                href="https://maps.app.goo.gl/BkZc18x4NMYkymwe7"
+                href="https://share.google/GPXZU60TqQCvjn80q"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors text-sm md:text-base"

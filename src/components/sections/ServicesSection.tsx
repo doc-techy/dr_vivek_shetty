@@ -25,7 +25,7 @@ export function ServicesSection() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const itemsPerPageMobile = 4; // 2x2 grid for mobile
+  const itemsPerPageMobile = 2; // 2x1 grid for mobile (top and bottom)
   const itemsPerPageDesktop = 6; // 2x3 grid for desktop
 
 
@@ -265,86 +265,99 @@ export function ServicesSection() {
 
         {/* Services Carousel */}
         <div className="relative mb-8 bg-transparent shadow-none">
-          {/* Services Container */}
-          <div className="relative">
-            <div className="services-grid grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-7 px-4 md:px-12">
-              {services.slice(currentIndex * itemsPerPage, (currentIndex + 1) * itemsPerPage).map((service, index) => {
-                const Icon = service.icon;
-                const isHovered = hoveredIndex === index;
-                
-                return (
-                  <div
-                    key={`${service.id}-${currentIndex}`}
-                    className="group relative"
-                    onMouseEnter={() => setHoveredIndex(index)}
-                    onMouseLeave={() => setHoveredIndex(null)}
-                    style={{ 
-                      animation: `fastFlipIn 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) both`,
-                      animationDelay: `${index * 0.08}s`
-                    }}
-                  >
-                    {/* Card Container */}
-                    <div className="relative h-full bg-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 ease-out hover:shadow-lg hover:-translate-y-1 hover:scale-102 border border-gray-100 group-hover:border-blue-200 transform-gpu will-change-transform">
-                      {/* Subtle Top Border Accent */}
-                      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500"></div>
-                      
-                      {/* Content */}
-                      <div className="relative p-4 md:p-6">
-                        {/* Icon */}
-                        <div className="mb-2 md:mb-3">
-                          <div className={`
-                            w-8 h-8 md:w-12 md:h-12 rounded-lg bg-gray-100 group-hover:bg-blue-50
-                            flex items-center justify-center shadow-sm
-                            transform transition-all duration-200 ease-out will-change-transform
-                            ${isHovered ? 'scale-105' : ''}
-                          `}>
-                            <Icon className="w-4 h-4 md:w-6 md:h-6 text-gray-600 group-hover:text-blue-600" />
-                          </div>
-                        </div>
-
-                        {/* Title */}
-                        <div className="mb-3 md:mb-4">
-                          <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-gray-900 leading-tight group-hover:text-blue-600 transition-colors duration-300">
-                            {service.title}
-                          </h3>
-                          <div className="w-8 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 mt-2 group-hover:w-12 transition-all duration-300"></div>
-                        </div>
-
-                        {/* Features */}
-                        <div className="space-y-2">
-                          {service.features.map((feature, idx) => (
-                            <div key={idx} className="flex items-start">
-                              <div className={`
-                                w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-blue-500 group-hover:bg-blue-600
-                                mt-1.5 mr-3 flex-shrink-0
-                                transform transition-all duration-150 ease-out
-                                ${isHovered ? 'scale-105' : ''}
-                              `}>
-                              </div>
-                              <span className="text-xs md:text-sm leading-relaxed text-gray-600 group-hover:text-gray-700">{feature}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Navigation Arrows and Dots - Same line */}
-          <div className="flex justify-center items-center mt-6 space-x-4">
+          {/* Services Container with Side Arrows */}
+          <div className="relative flex items-center">
+            {/* Left Arrow */}
             <button
               onClick={goToPrev}
               disabled={isTransitioning}
-              className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full shadow-lg hover:shadow-xl flex items-center justify-center text-white hover:from-blue-600 hover:to-purple-600 transition-all duration-200 hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed will-change-transform"
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full shadow-lg hover:shadow-xl flex items-center justify-center text-white hover:from-blue-600 hover:to-purple-600 transition-all duration-200 hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed will-change-transform"
               aria-label="Previous services"
             >
               <ChevronLeft className={`w-5 h-5 md:w-6 md:h-6 transition-transform duration-200 ${isTransitioning ? 'animate-pulse' : ''}`} />
             </button>
 
-            {/* Page Indicators */}
+            {/* Services Grid */}
+            <div className="flex-1 mx-12 md:mx-16">
+              <div className="services-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-7">
+                {services.slice(currentIndex * itemsPerPage, (currentIndex + 1) * itemsPerPage).map((service, index) => {
+                  const Icon = service.icon;
+                  const isHovered = hoveredIndex === index;
+                  
+                  return (
+                    <div
+                      key={`${service.id}-${currentIndex}`}
+                      className="group relative"
+                      onMouseEnter={() => setHoveredIndex(index)}
+                      onMouseLeave={() => setHoveredIndex(null)}
+                      style={{ 
+                        animation: `fastFlipIn 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) both`,
+                        animationDelay: `${index * 0.08}s`
+                      }}
+                    >
+                      {/* Card Container */}
+                      <div className="relative h-full bg-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 ease-out hover:shadow-lg hover:-translate-y-1 hover:scale-102 border border-gray-100 group-hover:border-blue-200 transform-gpu will-change-transform">
+                        {/* Subtle Top Border Accent */}
+                        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500"></div>
+                        
+                        {/* Content */}
+                        <div className="relative p-4 md:p-6">
+                          {/* Icon - Hidden on mobile */}
+                          <div className="mb-2 md:mb-3 hidden md:block">
+                            <div className={`
+                              w-8 h-8 md:w-12 md:h-12 rounded-lg bg-gray-100 group-hover:bg-blue-50
+                              flex items-center justify-center shadow-sm
+                              transform transition-all duration-200 ease-out will-change-transform
+                              ${isHovered ? 'scale-105' : ''}
+                            `}>
+                              <Icon className="w-4 h-4 md:w-6 md:h-6 text-gray-600 group-hover:text-blue-600" />
+                            </div>
+                          </div>
+
+                          {/* Title */}
+                          <div className="mb-3 md:mb-4">
+                            <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-gray-900 leading-tight group-hover:text-blue-600 transition-colors duration-300">
+                              {service.title}
+                            </h3>
+                            <div className="w-8 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 mt-2 group-hover:w-12 transition-all duration-300"></div>
+                          </div>
+
+                          {/* Features */}
+                          <div className="space-y-2">
+                            {service.features.map((feature, idx) => (
+                              <div key={idx} className="flex items-start">
+                                <div className={`
+                                  w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-blue-500 group-hover:bg-blue-600
+                                  mt-1.5 mr-3 flex-shrink-0
+                                  transform transition-all duration-150 ease-out
+                                  ${isHovered ? 'scale-105' : ''}
+                                `}>
+                                </div>
+                                <span className="text-xs md:text-sm leading-relaxed text-gray-600 group-hover:text-gray-700">{feature}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Right Arrow */}
+            <button
+              onClick={goToNext}
+              disabled={isTransitioning}
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-lg hover:shadow-xl flex items-center justify-center text-white hover:from-purple-600 hover:to-pink-600 transition-all duration-200 hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed will-change-transform"
+              aria-label="Next services"
+            >
+              <ChevronRight className={`w-5 h-5 md:w-6 md:h-6 transition-transform duration-200 ${isTransitioning ? 'animate-pulse' : ''}`} />
+            </button>
+          </div>
+
+          {/* Page Indicators - Centered below */}
+          <div className="flex justify-center items-center mt-6">
             <div className="flex space-x-2">
               {Array.from({ length: totalPages }, (_, index) => (
                 <button
@@ -360,15 +373,6 @@ export function ServicesSection() {
                 />
               ))}
             </div>
-
-            <button
-              onClick={goToNext}
-              disabled={isTransitioning}
-              className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-lg hover:shadow-xl flex items-center justify-center text-white hover:from-purple-600 hover:to-pink-600 transition-all duration-200 hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed will-change-transform"
-              aria-label="Next services"
-            >
-              <ChevronRight className={`w-5 h-5 md:w-6 md:h-6 transition-transform duration-200 ${isTransitioning ? 'animate-pulse' : ''}`} />
-            </button>
           </div>
         </div>
 

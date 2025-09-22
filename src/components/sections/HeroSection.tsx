@@ -111,15 +111,15 @@ export function HeroSection() {
             {/* Doctor Availability */}
             <div className="space-y-2 md:space-y-2 lg:space-y-3 max-w-lg mx-auto lg:max-w-none lg:mx-0">
               <h4 className="text-base md:text-sm lg:text-base xl:text-xl font-bold text-gray-800 text-center lg:text-left">Available At:</h4>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-2 lg:gap-3">
+              <div className="flex flex-col items-center lg:grid lg:grid-cols-2 lg:gap-3 space-y-3 lg:space-y-0 md:gap-2 ml-24 mr-0 md:ml-32 md:mr-0 lg:mx-0">
                 {availability.map((location, index) => (
-                  <div key={index} className="flex items-start space-x-2 md:space-x-2 lg:space-x-3 justify-center lg:justify-start">
-                    <div className="w-5 h-5 md:w-4 md:h-4 lg:w-5 lg:h-5 xl:w-6 xl:h-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <div key={index} className="flex items-center space-x-2 md:space-x-2 lg:space-x-3 justify-center lg:justify-start w-full max-w-xs lg:max-w-none">
+                    <div className="w-5 h-5 md:w-4 md:h-4 lg:w-5 lg:h-5 xl:w-6 xl:h-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-full flex items-center justify-center flex-shrink-0">
                       <MapPin className="w-3 h-3 md:w-2 md:h-2 lg:w-3 lg:h-3 xl:w-4 xl:h-4 text-white" />
                     </div>
-                    <div className="text-left">
-                      <div className="text-sm md:text-xs lg:text-sm xl:text-base text-gray-700 font-medium">{location.name}</div>
-                      <div className="text-xs md:text-xs lg:text-xs xl:text-sm text-gray-500 mt-1">{location.timing}</div>
+                    <div className="text-left min-w-0 flex-1">
+                      <div className="text-sm md:text-xs lg:text-sm xl:text-base text-gray-700 font-medium truncate">{location.name}</div>
+                      <div className="text-xs md:text-xs lg:text-xs xl:text-sm text-gray-500 truncate">{location.timing}</div>
                     </div>
                   </div>
                 ))}
