@@ -16,7 +16,7 @@ export function AppointmentBooking({ className = '' }: AppointmentBookingProps) 
       name: 'Doc Cube Koramangala',
       address: 'Koramangala, Bangalore',
       availableAt: 'Mon-Sat: 6:00 PM - 8:00 PM',
-      website: 'https://www.docube.in/our-doctor',
+      website: 'https://www.docube.in/doctor/dr-vivek-shetty',
       mapLink: 'https://share.google/7jT8kmK6ZFohFyoz8',
       description: 'Premium healthcare facility with state-of-the-art diagnostic services'
     },
