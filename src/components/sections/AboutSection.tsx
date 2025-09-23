@@ -59,7 +59,7 @@ export function AboutSection() {
       <div className="container-custom">
         {/* Header */}
         <div className="text-center mb-3 md:mb-4 lg:mb-8">
-          <h2 className="text-3xl md:text-2xl lg:text-6xl xl:text-7xl font-bold text-gray-900 mb-1 md:mb-2 lg:mb-4">
+          <h2 className="text-2xl md:text-xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-1 md:mb-2 lg:mb-4">
             Academic Excellence & <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Professional Mastery</span>
           </h2>
           
@@ -105,20 +105,20 @@ export function AboutSection() {
           <div className="space-y-4 md:grid md:grid-cols-2 md:gap-4 lg:gap-8 md:space-y-0">
             
             {/* Mobile: Dynamic Single Section, Desktop: Education Section */}
-            <div className="space-y-2 md:space-y-3 lg:space-y-6">
+            <div className="space-y-2 md:space-y-3 lg:space-y-6 flex flex-col">
               <div className="text-center">
-                <div className={`inline-flex items-center px-3 py-2 md:px-3 md:py-2 lg:px-6 lg:py-4 text-white rounded-lg md:rounded-xl text-sm md:text-base lg:text-xl xl:text-2xl font-bold mb-1 md:mb-2 lg:mb-4 transition-all duration-500 ease-in-out transform ${
+                <div className={`inline-flex items-center px-2 py-1 md:px-2 md:py-1 lg:px-4 lg:py-2 text-white rounded-lg md:rounded-xl text-xs md:text-sm lg:text-base xl:text-lg font-bold mb-1 md:mb-2 lg:mb-4 transition-all duration-500 ease-in-out transform ${
                   activeTab === 'education' 
                     ? 'bg-black scale-105' 
                     : 'bg-black scale-105'
                 }`}>
                   <div className="transition-all duration-500 ease-in-out">
                     {activeTab === 'education' ? (
-                      <GraduationCap className="w-4 h-4 md:w-4 md:h-4 lg:w-6 lg:h-6 xl:w-7 xl:h-7 mr-2 md:mr-2 lg:mr-3 animate-pulse" />
+                      <GraduationCap className="w-3 h-3 md:w-3 md:h-3 lg:w-4 lg:h-4 xl:w-5 xl:h-5 mr-1 md:mr-1 lg:mr-2 animate-pulse" />
                     ) : (
                       <>
-                        <Calendar className="w-4 h-4 md:w-4 md:h-4 lg:w-6 lg:h-6 mr-2 md:mr-2 lg:mr-3 md:hidden animate-pulse" />
-                        <GraduationCap className="hidden md:block w-4 h-4 lg:w-6 lg:h-6 xl:w-7 xl:h-7 mr-2 lg:mr-3 animate-pulse" />
+                        <Calendar className="w-3 h-3 md:w-3 md:h-3 lg:w-4 lg:h-4 mr-1 md:mr-1 lg:mr-2 md:hidden animate-pulse" />
+                        <GraduationCap className="hidden md:block w-3 h-3 lg:w-4 lg:h-4 xl:w-5 xl:h-5 mr-1 lg:mr-2 animate-pulse" />
                       </>
                     )}
                   </div>
@@ -131,7 +131,7 @@ export function AboutSection() {
                     )}
                   </span>
                 </div>
-                <h3 className="text-lg md:text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl font-bold text-gray-900 mb-1 md:mb-2 lg:mb-3 transition-all duration-500 ease-in-out">
+                <h3 className="text-base md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bold text-gray-900 mb-1 md:mb-2 lg:mb-3 transition-all duration-500 ease-in-out">
                   {activeTab === 'education' ? 'Academic Excellence' : (
                     <>
                       <span className="md:hidden">Clinical Experience</span>
@@ -142,7 +142,7 @@ export function AboutSection() {
               </div>
 
               {/* Dynamic Content Timeline */}
-              <div className="space-y-2 md:space-y-2 lg:space-y-4">
+              <div className="space-y-2 md:space-y-2 lg:space-y-4 flex-1">
                 {/* Education Content - Mobile: Conditional, Desktop: Always show */}
                 <div className={`transition-all duration-500 ease-in-out opacity-100 translate-y-0 md:block ${activeTab === 'education' ? 'block' : 'hidden md:block'}`}>
                     {education.map((edu, index) => (
@@ -152,15 +152,15 @@ export function AboutSection() {
                         style={{ animationDelay: `${index * 100}ms` }}
                       >
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-1">
-                          <h4 className="text-sm md:text-sm lg:text-lg xl:text-xl font-bold text-gray-900 transition-all duration-300">{edu.degree}</h4>
+                          <h4 className="text-xs md:text-xs lg:text-sm xl:text-base font-bold text-gray-900 transition-all duration-300">{edu.degree}</h4>
                           <div className="bg-blue-100 text-blue-800 px-2 py-0.5 md:px-2 md:py-0.5 lg:px-3 lg:py-1.5 rounded-full text-xs md:text-xs lg:text-sm font-semibold mt-1 sm:mt-0 w-fit transition-all duration-300 hover:bg-blue-200">
                             {edu.year}
                           </div>
                         </div>
-                        <h5 className="text-xs md:text-xs lg:text-base xl:text-lg font-semibold text-blue-700 mb-0.5 md:mb-1 transition-all duration-300">
+                        <h5 className="text-xs md:text-xs lg:text-sm xl:text-base font-semibold text-blue-700 mb-0.5 md:mb-1 transition-all duration-300">
                           {edu.institution}
                         </h5>
-                        <p className="text-xs md:text-xs lg:text-sm xl:text-base text-gray-600 flex items-center">
+                        <p className="text-xs md:text-xs lg:text-sm xl:text-sm text-gray-600 flex items-center">
                           <MapPin className="w-3 h-3 md:w-3 md:h-3 lg:w-4 lg:h-4 mr-1 text-blue-500 flex-shrink-0 transition-all duration-300" />
                           {edu.location}
                         </p>
@@ -178,15 +178,15 @@ export function AboutSection() {
                         style={{ animationDelay: `${index * 100}ms` }}
                       >
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-1">
-                          <h4 className="text-sm md:text-sm lg:text-lg xl:text-xl font-bold text-gray-900 transition-all duration-300">{exp.position}</h4>
+                          <h4 className="text-xs md:text-xs lg:text-sm xl:text-base font-bold text-gray-900 transition-all duration-300">{exp.position}</h4>
                           <div className="bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 px-2 py-0.5 md:px-2 md:py-0.5 lg:px-3 lg:py-1.5 rounded-full text-xs md:text-xs lg:text-sm font-semibold mt-1 sm:mt-0 w-fit transition-all duration-300 hover:from-blue-200 hover:to-purple-200">
                             {exp.duration}
                           </div>
                         </div>
-                        <h5 className="text-xs md:text-xs lg:text-base xl:text-lg font-semibold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-0.5 md:mb-1 transition-all duration-300">
+                        <h5 className="text-xs md:text-xs lg:text-sm xl:text-base font-semibold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-0.5 md:mb-1 transition-all duration-300">
                           {exp.hospital}
                         </h5>
-                        <p className="text-xs md:text-xs lg:text-sm xl:text-base text-gray-600 flex items-center">
+                        <p className="text-xs md:text-xs lg:text-sm xl:text-sm text-gray-600 flex items-center">
                           <MapPin className="w-3 h-3 md:w-3 md:h-3 lg:w-4 lg:h-4 mr-1 text-blue-500 flex-shrink-0 transition-all duration-300" />
                           {exp.location}
                         </p>
@@ -198,30 +198,30 @@ export function AboutSection() {
             </div>
 
             {/* Desktop Only: Experience Section */}
-            <div className="hidden md:block space-y-2 md:space-y-3 lg:space-y-6">
+            <div className="hidden md:block space-y-2 md:space-y-3 lg:space-y-6 flex flex-col">
               <div className="text-center">
-                <div className="inline-flex items-center px-3 py-2 md:px-4 md:py-2 lg:px-6 lg:py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white rounded-xl text-base md:text-base lg:text-2xl font-bold mb-1 md:mb-2 lg:mb-4">
-                  <Calendar className="w-4 h-4 md:w-4 md:h-4 lg:w-6 lg:h-6 mr-2 md:mr-2 lg:mr-3" />
+                <div className="inline-flex items-center px-2 py-1 md:px-2 md:py-1 lg:px-4 lg:py-2 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white rounded-lg md:rounded-xl text-xs md:text-sm lg:text-base xl:text-lg font-bold mb-1 md:mb-2 lg:mb-4">
+                  <Calendar className="w-3 h-3 md:w-3 md:h-3 lg:w-4 lg:h-4 xl:w-5 xl:h-5 mr-1 md:mr-1 lg:mr-2" />
                   Professional Journey
                 </div>
-                <h3 className="text-lg md:text-lg lg:text-2xl xl:text-3xl font-bold text-gray-900 mb-1 md:mb-2 lg:mb-3">Clinical Experience</h3>
+                <h3 className="text-base md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bold text-gray-900 mb-1 md:mb-2 lg:mb-3">Clinical Experience</h3>
               </div>
 
               {/* Experience Timeline for Desktop */}
-              <div className="space-y-2 md:space-y-2 lg:space-y-4">
+              <div className="space-y-2 md:space-y-2 lg:space-y-4 flex-1">
                 {experience.map((exp, index) => (
-                  <div key={index} className="bg-white/70 backdrop-blur-sm rounded-xl p-2 md:p-2 lg:p-4 border border-purple-200/50 transition-all duration-500 ease-in-out transform hover:scale-[1.02] hover:shadow-lg">
+                  <div key={index} className="bg-white backdrop-blur-sm rounded-xl p-2 md:p-2 lg:p-4 border border-blue-200/50 transition-all duration-500 ease-in-out transform hover:scale-[1.02] hover:shadow-lg mb-1 md:mb-2 lg:mb-4">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-1">
-                      <h4 className="text-sm md:text-sm lg:text-lg xl:text-xl font-bold text-gray-900 transition-all duration-300">{exp.position}</h4>
-                      <div className="bg-purple-100 text-purple-800 px-2 py-0.5 md:px-2 md:py-0.5 lg:px-3 lg:py-1.5 rounded-full text-xs md:text-xs lg:text-sm font-semibold mt-1 sm:mt-0 w-fit transition-all duration-300 hover:bg-purple-200">
+                      <h4 className="text-xs md:text-xs lg:text-sm xl:text-base font-bold text-gray-900 transition-all duration-300">{exp.position}</h4>
+                      <div className="bg-blue-100 text-blue-800 px-2 py-0.5 md:px-2 md:py-0.5 lg:px-3 lg:py-1.5 rounded-full text-xs md:text-xs lg:text-sm font-semibold mt-1 sm:mt-0 w-fit transition-all duration-300 hover:bg-blue-200">
                         {exp.duration}
                       </div>
                     </div>
-                    <h5 className="text-xs md:text-xs lg:text-base xl:text-lg font-semibold text-purple-700 mb-0.5 md:mb-1 transition-all duration-300">
+                    <h5 className="text-xs md:text-xs lg:text-sm xl:text-base font-semibold text-blue-700 mb-0.5 md:mb-1 transition-all duration-300">
                       {exp.hospital}
                     </h5>
-                    <p className="text-xs md:text-xs lg:text-sm xl:text-base text-gray-600 flex items-center">
-                      <MapPin className="w-3 h-3 md:w-3 md:h-3 lg:w-4 lg:h-4 mr-1 text-purple-500 flex-shrink-0 transition-all duration-300" />
+                    <p className="text-xs md:text-xs lg:text-sm xl:text-sm text-gray-600 flex items-center">
+                      <MapPin className="w-3 h-3 md:w-3 md:h-3 lg:w-4 lg:h-4 mr-1 text-blue-500 flex-shrink-0 transition-all duration-300" />
                       {exp.location}
                     </p>
                   </div>
