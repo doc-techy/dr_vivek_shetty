@@ -238,7 +238,7 @@ if (response.success) {
 const appointmentData = {
   patient_name: "John Doe",
   patient_email: "john@example.com",
-  patient_phone: "9876543210",
+  patient_phone: "‪9886432371‬",
   appointment_date: "2024-01-15",
   appointment_time: "09:00",
   reason: "initial_consultation",
@@ -260,7 +260,7 @@ if (response.success) {
     "appointment_id": "apt_12345678-1234-1234-1234-123456789012",
     "patient_name": "John Doe",
     "patient_email": "john@example.com",
-    "patient_phone": "9876543210",
+    "patient_phone": "‪9886432371‬",
     "appointment_date": "2024-01-15",
     "appointment_time": "09:00",
     "reason": "initial_consultation",

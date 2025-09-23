@@ -7,12 +7,13 @@ export function AboutSection() {
   const [activeTab, setActiveTab] = useState<'education' | 'experience'>('experience');
   const education = [
     {
-      degree: 'MBBS',
-      institution: 'Kasturba Medical College, Mangalore',
-      location: 'Mangalore, Karnataka',
-      year: '2005-2011',
-      description: 'Bachelor of Medicine and Bachelor of Surgery with distinction in surgical subjects'
+      degree: 'Fellowship in head and surgical oncology',
+      institution: 'Rajiv Gandhi University of Health Sciences',
+      location: 'Bangalore, Karnataka',
+      year: '2014-2016',
+      description: 'Head and Neck Surgical Oncology and Reconstructive Surgery Fellowship'
     },
+    
     {
       degree: 'MS General Surgery',
       institution: 'Father Muller Medical College Hospital',
@@ -21,36 +22,39 @@ export function AboutSection() {
       description: 'Master of Surgery with specialization in general and oncological surgery'
     },
     {
-      degree: 'Fellowship in head and surgical oncology',
-      institution: 'Rajiv Gandhi University of Health Sciences',
-      location: 'Bangalore, Karnataka',
-      year: '2014-2016',
-      description: 'Head and Neck Surgical Oncology and Reconstructive Surgery Fellowship'
-    }
+      degree: 'MBBS',
+      institution: 'Kasturba Medical College, Mangalore',
+      location: 'Mangalore, Karnataka',
+      year: '2005-2011',
+      description: 'Bachelor of Medicine and Bachelor of Surgery with distinction in surgical subjects'
+    },
+   
   ];
 
   const experience = [
+    
+  
     {
       position: 'Senior Consultant',
-      hospital: 'Doc Cube Koramangala',
+      hospital: 'Docube Koramangala',
       location: 'Koramangala, Bangalore',
       duration: '2025 - Present',
       description: 'Providing specialized head and neck oncology consultations and surgical care'
     },
     {
-      position: 'Senior Consultant in Head and Neck Oncology and Reconstructive Surgery ',
-      hospital: 'SPARSH Hospital',
-      location: 'Hennur Road, Bangalore',
-      duration: '2025 - Present',
-      description: 'Leading complex head and neck oncology cases with advanced surgical techniques and robotic surgery'
-    },
-    {
       position: 'Head and Neck Oncology and Reconstructive Surgeon',
       hospital: 'SPARSH Hospital',
       location: 'Hennur Road, Bangalore',
-      duration: '2016 - 2025',
+      duration: '2025 - Present',
       description: 'Specialized in surgical oncology with focus on reconstructive procedures and microvascular surgery'
     },
+    {
+      position: 'Consultant Head and Neck Oncology and Reconstructive Surgeon',
+      hospital: 'Mazumdar Shaw Medical Center',
+      location: 'Narayana Health City, Bangalore',
+      duration: '2016 - 2025',
+      description: 'Leading complex head and neck oncology cases with advanced surgical techniques and robotic surgery'
+    }
 
   ];
 
@@ -171,7 +175,7 @@ export function AboutSection() {
                 {/* Experience Content - Mobile: Conditional, Desktop: Hidden */}
                 {activeTab === 'experience' && (
                   <div className="transition-all duration-500 ease-in-out opacity-100 translate-y-0 md:hidden">
-                    {experience.slice().reverse().map((exp, index) => (
+                    {experience.map((exp, index) => (
                       <div 
                         key={`exp-${index}`} 
                         className="bg-white backdrop-blur-sm rounded-xl p-2 md:p-2 lg:p-4 border border-blue-200/50 transition-all duration-500 ease-in-out transform hover:scale-[1.02] hover:shadow-lg mb-1 md:mb-2 lg:mb-4"

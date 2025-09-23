@@ -128,13 +128,13 @@ export function Footer() {
                 <svg className="w-4 h-4 mr-3 text-primary-400 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
                 </svg>
-                <a href="tel:+919876543210" className="hover:text-primary-300 transition-colors text-sm">+91 98765 43210</a>
+                <a href="tel:+91‪9886432371‬" className="hover:text-primary-300 transition-colors text-sm">+91 ‪9886432371‬</a>
               </div>
               <div className="flex items-center text-gray-300">
                 <svg className="w-4 h-4 mr-3 text-primary-400 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                 </svg>
-                <a href="mailto:dr.vivekshetty@sparshhospital.com" className="hover:text-primary-300 transition-colors text-sm break-all">dr.vivekshetty@sparshhospital.com</a>
+                <a href="mailto:vivekshetty.headneck@gmail.com" className="hover:text-primary-300 transition-colors text-sm break-all">vivekshetty.headneck@gmail.com</a>
               </div>
               <div className="flex items-start text-gray-300">
                 <svg className="w-4 h-4 mr-3 text-primary-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">

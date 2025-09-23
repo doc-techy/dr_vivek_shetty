@@ -17,7 +17,7 @@ const MOCK_BOOKED_APPOINTMENTS: BookedAppointment[] = [
     appointment_id: 'apt_001',
     patient_name: 'John Doe',
     patient_email: 'john@example.com',
-    patient_phone: '9876543210',
+    patient_phone: '‪9886432371‬',
     appointment_date: '2024-01-15',
     appointment_time: '10:00',
     reason: 'Follow-up consultation',
