@@ -7,7 +7,7 @@ export function AboutSection() {
   const [activeTab, setActiveTab] = useState<'education' | 'experience'>('experience');
   const education = [
     {
-      degree: 'Fellowship in head and surgical oncology',
+      degree: 'Fellowship in Head and Neck Surgical Oncology',
       institution: 'Rajiv Gandhi University of Health Sciences',
       location: 'Bangalore, Karnataka',
       year: '2014-2016',
