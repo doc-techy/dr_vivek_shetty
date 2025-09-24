@@ -277,20 +277,14 @@ export function VideoSection() {
       setIsMobile(width < 768);
       
       // Determine grid columns based on screen size
-      let columns = 4; // Default for md
-      if (width >= 1280) columns = 6; // xl
-      else if (width >= 1024) columns = 5; // lg
-      else if (width >= 768) columns = 4; // md
-      else columns = 2; // mobile - 2 columns for 2x2 grid
+      let columns = 2; // Default for mobile
+      if (width >= 768) columns = 4; // Desktop: 4 columns
+      else columns = 2; // Mobile: 2 columns
       
       setGridColumns(columns);
       
-      // Set videos to show: 2 rows for desktop, 2x2 for mobile
-      if (width >= 768) {
-        setVideosToShow(columns * 2); // 2 rows for desktop
-      } else {
-        setVideosToShow(4); // 2x2 for mobile
-      }
+      // Set videos to show: Always 2 rows (2 * columns)
+      setVideosToShow(columns * 2); // 2 rows for both mobile and desktop
     };
     checkScreenSize();
     window.addEventListener('resize', checkScreenSize);
@@ -304,16 +298,17 @@ export function VideoSection() {
 
 
   const displayedItems = filteredData.slice(0, videosToShow);
+  const initialVideos = gridColumns * 2; // Initial 2 rows
   const hasMoreItems = videosToShow < filteredData.length;
 
   const loadMore = () => {
-    const increment = isMobile ? 4 : gridColumns * 2; // Load 2 rows worth on desktop, 4 on mobile
+    const increment = gridColumns * 2; // Load 2 rows worth
     setVideosToShow(prev => Math.min(prev + increment, filteredData.length));
   };
 
   const showLess = () => {
-    const minVideos = isMobile ? 4 : gridColumns * 2; // Minimum 2 rows on desktop, 4 on mobile
-    const decrement = isMobile ? 4 : gridColumns * 2; // Decrease by 2 rows on desktop, 4 on mobile
+    const minVideos = gridColumns * 2; // Minimum 2 rows
+    const decrement = gridColumns * 2; // Decrease by 2 rows
     setVideosToShow(prev => Math.max(prev - decrement, minVideos));
   };
 
@@ -479,7 +474,7 @@ export function VideoSection() {
 
 
       {/* Content Layout */}
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 md:gap-3 mb-5">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 mb-5">
         {displayedItems.map((item) => (
           <div key={item.id} className="group h-full">
             <div 
@@ -566,7 +561,7 @@ export function VideoSection() {
           </button>
         )}
         
-        {videosToShow > (isMobile ? 4 : gridColumns * 2) && (
+        {videosToShow > initialVideos && (
           <button 
             onClick={showLess}
             className="flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-gray-600 text-white rounded-xl font-semibold hover:bg-gray-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl text-sm md:text-base"
