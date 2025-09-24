@@ -63,7 +63,7 @@ export function AboutSection() {
       <div className="container-custom">
         {/* Header */}
         <div className="text-center mb-3 md:mb-4 lg:mb-8">
-          <h2 className="text-3xl md:text-xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-gray-900 mb-1 md:mb-2 lg:mb-4">
+          <h2 className="text-4xl md:text-xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-gray-900 mb-1 md:mb-2 lg:mb-4">
             Academic Excellence & <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Professional Mastery</span>
           </h2>
           
@@ -202,7 +202,7 @@ export function AboutSection() {
             </div>
 
             {/* Desktop Only: Experience Section */}
-            <div className="hidden md:block space-y-2 md:space-y-3 lg:space-y-6 flex flex-col">
+            <div className="hidden md:block space-y-2 md:space-y-3 lg:space-y-9 flex flex-col">
               <div className="text-center">
                 <div className="inline-flex items-center px-2 py-1 md:px-2 md:py-1 lg:px-4 lg:py-2 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white rounded-lg md:rounded-xl text-xs md:text-sm lg:text-base xl:text-lg font-bold mb-1 md:mb-2 lg:mb-4">
                   <Calendar className="w-3 h-3 md:w-3 md:h-3 lg:w-4 lg:h-4 xl:w-5 xl:h-5 mr-1 md:mr-1 lg:mr-2" />
