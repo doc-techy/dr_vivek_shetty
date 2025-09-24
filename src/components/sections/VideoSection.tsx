@@ -341,7 +341,7 @@ export function VideoSection() {
     <div className="container-custom pt-4 md:pt-8 pb-8 md:pb-16">
       {/* Header */}
       <div className="text-center mb-4 relative">
-        <h2 className="text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-4 md:mb-6">
+        <h2 className="text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-gray-900 mb-4 md:mb-6">
           Educational <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Videos and Blogs</span>
         </h2>
         
@@ -469,7 +469,7 @@ export function VideoSection() {
 
 
       {/* Content Layout */}
-      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4 mb-5">
+      <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 md:gap-3 mb-5">
         {displayedItems.map((item) => (
           <div key={item.id} className="group h-full">
             <div 
@@ -493,48 +493,48 @@ export function VideoSection() {
                 
                 {/* Play Button for Videos / Read Icon for Blogs */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-8 h-8 md:w-10 md:h-10 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300 group-hover:bg-white">
+                  <div className="w-6 h-6 md:w-7 md:h-7 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300 group-hover:bg-white">
                     {contentType === 'videos' ? (
-                      <Play className="w-4 h-4 md:w-5 md:h-5 text-blue-600 ml-0.5" />
+                      <Play className="w-3 h-3 md:w-4 md:h-4 text-blue-600 ml-0.5" />
                     ) : (
-                      <FileText className="w-4 h-4 md:w-5 md:h-5 text-purple-600" />
+                      <FileText className="w-3 h-3 md:w-4 md:h-4 text-purple-600" />
                     )}
                   </div>
                 </div>
                 
                 {/* Duration/Read Time Badge */}
-                <div className="absolute bottom-2 right-2 bg-black/80 backdrop-blur-sm text-white px-2 py-1 rounded-md text-xs font-medium">
+                <div className="absolute bottom-1 right-1 bg-black/80 backdrop-blur-sm text-white px-1.5 py-0.5 rounded text-xs font-medium">
                   {contentType === 'videos' ? (item as Video).duration : (item as Blog).readTime}
                 </div>
 
                 {/* Category Badge */}
-                <div className="absolute top-2 left-2">
-                  <span className="bg-white/90 backdrop-blur-sm text-gray-800 px-1.5 md:px-2 py-0.5 md:py-1 rounded-full text-xs font-semibold shadow-sm">
+                <div className="absolute top-1 left-1">
+                  <span className="bg-white/90 backdrop-blur-sm text-gray-800 px-1 py-0.5 rounded-full text-xs font-semibold shadow-sm">
                     {item.category}
                   </span>
                 </div>
               </div>
 
               {/* Content */}
-              <div className="p-2 md:p-3 flex-1 flex flex-col">
-                <h3 className={`text-xs md:text-sm font-bold text-gray-900 mb-1 md:mb-2 line-clamp-2 transition-colors duration-200 min-h-[1.75rem] md:min-h-[2.25rem] ${
+              <div className="p-1.5 md:p-2 flex-1 flex flex-col">
+                <h3 className={`text-xs font-bold text-gray-900 mb-1 line-clamp-2 transition-colors duration-200 min-h-[1.5rem] ${
                   contentType === 'videos' ? 'group-hover:text-blue-600' : 'group-hover:text-purple-600'
                 }`}>
                   {item.title}
                 </h3>
                 
-                <p className="text-xs text-gray-600 mb-1 md:mb-2 line-clamp-2 flex-1 min-h-[1.5rem] md:min-h-[1.75rem]">
+                <p className="text-xs text-gray-600 mb-1 line-clamp-1 flex-1 min-h-[1rem]">
                   {item.description}
                 </p>
                 
                 {/* Metadata */}
                 <div className="flex items-center justify-between text-xs text-gray-500 mt-auto">
                   <div className="flex items-center gap-1">
-                    <Calendar className="w-3 h-3" />
+                    <Calendar className="w-2.5 h-2.5" />
                     <span className="text-xs">{formatDate(item.date)}</span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <Eye className="w-3 h-3" />
+                    <Eye className="w-2.5 h-2.5" />
                     <span className="text-xs">{formatViews(item.views)}</span>
                   </div>
                 </div>

@@ -121,7 +121,7 @@ export function TestimonialsSection() {
       {/* Header with container */}
       <div className="container-custom">
         <div className="text-center mb-8 md:mb-16">
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 md:mb-6">
+          <h2 className="text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-gray-900 mb-4 md:mb-6">
             Patient <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Testimonials and Reviews</span>
           </h2>
         </div>
