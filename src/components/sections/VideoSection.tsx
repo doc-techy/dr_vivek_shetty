@@ -268,11 +268,29 @@ export function VideoSection() {
   const [showFilters, setShowFilters] = useState(false);
   const [contentType, setContentType] = useState<'videos' | 'blogs'>('videos');
   const [isMobile, setIsMobile] = useState(false);
+  const [gridColumns, setGridColumns] = useState(4); // Track current grid columns
 
   // Check screen size on mount and resize
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsMobile(window.innerWidth < 768);
+      const width = window.innerWidth;
+      setIsMobile(width < 768);
+      
+      // Determine grid columns based on screen size
+      let columns = 4; // Default for md
+      if (width >= 1280) columns = 6; // xl
+      else if (width >= 1024) columns = 5; // lg
+      else if (width >= 768) columns = 4; // md
+      else columns = 2; // mobile - 2 columns for 2x2 grid
+      
+      setGridColumns(columns);
+      
+      // Set videos to show: 2 rows for desktop, 2x2 for mobile
+      if (width >= 768) {
+        setVideosToShow(columns * 2); // 2 rows for desktop
+      } else {
+        setVideosToShow(4); // 2x2 for mobile
+      }
     };
     checkScreenSize();
     window.addEventListener('resize', checkScreenSize);
@@ -284,26 +302,18 @@ export function VideoSection() {
     return selectedCategory === 'all' || item.category === selectedCategory;
   });
 
-  // Set initial videos based on screen size
-  useEffect(() => {
-    if (!isMobile && videosToShow === 4) {
-      setVideosToShow(8); // Desktop: 8 videos (2x4 grid)
-    } else if (isMobile && videosToShow === 8) {
-      setVideosToShow(4); // Mobile: 4 videos (2x2 grid)
-    }
-  }, [isMobile, videosToShow]);
 
   const displayedItems = filteredData.slice(0, videosToShow);
   const hasMoreItems = videosToShow < filteredData.length;
 
   const loadMore = () => {
-    const increment = isMobile ? 4 : 8; // Load 4 more on mobile, 8 more on desktop
+    const increment = isMobile ? 4 : gridColumns * 2; // Load 2 rows worth on desktop, 4 on mobile
     setVideosToShow(prev => Math.min(prev + increment, filteredData.length));
   };
 
   const showLess = () => {
-    const minVideos = isMobile ? 4 : 8; // Minimum 4 on mobile, 8 on desktop
-    const decrement = isMobile ? 4 : 8; // Decrease by 4 on mobile, 8 on desktop
+    const minVideos = isMobile ? 4 : gridColumns * 2; // Minimum 2 rows on desktop, 4 on mobile
+    const decrement = isMobile ? 4 : gridColumns * 2; // Decrease by 2 rows on desktop, 4 on mobile
     setVideosToShow(prev => Math.max(prev - decrement, minVideos));
   };
 
@@ -469,7 +479,7 @@ export function VideoSection() {
 
 
       {/* Content Layout */}
-      <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 md:gap-3 mb-5">
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 md:gap-3 mb-5">
         {displayedItems.map((item) => (
           <div key={item.id} className="group h-full">
             <div 
@@ -556,7 +566,7 @@ export function VideoSection() {
           </button>
         )}
         
-        {videosToShow > (isMobile ? 4 : 8) && (
+        {videosToShow > (isMobile ? 4 : gridColumns * 2) && (
           <button 
             onClick={showLess}
             className="flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-gray-600 text-white rounded-xl font-semibold hover:bg-gray-700 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl text-sm md:text-base"
