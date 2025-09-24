@@ -69,7 +69,7 @@ export function Header() {
                       <Link
                         key={item.name}
                         href={linkHref}
-                        className="px-5 py-3 rounded-lg text-white hover:text-blue-200 font-semibold text-base transition-all duration-300"
+                        className="px-5 py-3 rounded-lg text-white hover:text-blue-200 font-semibold text-base lg:text-xl transition-all duration-300"
                       >
                         {item.name}
                       </Link>
@@ -80,7 +80,7 @@ export function Header() {
                       <button
                         key={item.name}
                         onClick={() => scrollToSection(item.href)}
-                        className="px-5 py-3 rounded-lg text-white hover:text-blue-200 font-semibold text-base transition-all duration-300"
+                        className="px-5 py-3 rounded-lg text-white hover:text-blue-200 font-semibold text-base lg:text-xl transition-all duration-300"
                       >
                         {item.name}
                       </button>
