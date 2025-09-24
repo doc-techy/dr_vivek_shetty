@@ -351,7 +351,7 @@ export function VideoSection() {
     <div className="container-custom pt-4 md:pt-8 pb-8 md:pb-16">
       {/* Header */}
       <div className="text-center mb-4 relative">
-        <h2 className="text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-gray-900 mb-4 md:mb-6">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-gray-900 mb-4 md:mb-6">
           Educational <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Videos and Blogs</span>
         </h2>
         
