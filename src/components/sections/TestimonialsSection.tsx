@@ -117,7 +117,7 @@ export function TestimonialsSection() {
   }, []);
 
   return (
-    <section className="pt-16 pb-20">
+    <section className="pb-20">
       {/* Header with container */}
       <div className="container-custom">
         <div className="text-center mb-8 md:mb-16">

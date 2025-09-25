@@ -11,7 +11,6 @@ export const metadata: Metadata = {
   description: "Dr. Vivek Shetty is a Senior Consultant in Head & Neck Oncology at SPARSH Hospital, Bangalore. MBBS, MS General Surgery, Fellowship in Head and Neck Surgical Oncology with 9 years of experience.",
   keywords: ["Dr. Vivek Shetty", "Head Neck Oncology", "SPARSH Hospital", "Bangalore", "Surgical Oncology", "Cancer Treatment"],
   authors: [{ name: "Dr. Vivek Shetty" }],
-  themeColor: "#2563eb",
   manifest: "/manifest.json",
   icons: {
     icon: [
@@ -20,9 +19,6 @@ export const metadata: Metadata = {
     ],
   },
   other: {
-    "theme-color": "#2563eb",
-    "msapplication-TileColor": "#2563eb",
-    "msapplication-navbutton-color": "#2563eb",
     "apple-mobile-web-app-status-bar-style": "black-translucent",
   },
   openGraph: {
@@ -52,9 +48,6 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <meta name="theme-color" content="#2563eb" />
-        <meta name="msapplication-TileColor" content="#2563eb" />
-        <meta name="msapplication-navbutton-color" content="#2563eb" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="Dr. Vivek Shetty" />
