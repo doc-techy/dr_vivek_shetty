@@ -181,9 +181,9 @@ export function AboutSection() {
                         className="bg-white backdrop-blur-sm rounded-xl p-2 md:p-2 lg:p-4 border border-blue-200/50 transition-all duration-500 ease-in-out transform hover:scale-[1.02] hover:shadow-lg mb-1 md:mb-2 lg:mb-4"
                         style={{ animationDelay: `${index * 100}ms` }}
                       >
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between sm:flex-nowrap mb-1 gap-1">
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-1 gap-1">
                           <h4 className="text-xs md:text-xs lg:text-sm xl:text-base font-bold text-gray-900 transition-all duration-300 flex-1 min-w-0">{exp.position}</h4>
-                          <div className="bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 px-2 py-0.5 md:px-2 md:py-0.5 lg:px-3 lg:py-1.5 rounded-full text-xs md:text-xs lg:text-sm font-semibold mt-1 sm:mt-0 flex-shrink-0 transition-all duration-300 hover:from-blue-200 hover:to-purple-200">
+                          <div className="bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 px-2 py-0.5 md:px-2 md:py-0.5 lg:px-3 lg:py-1.5 rounded-full text-xs md:text-xs lg:text-sm font-semibold mt-1 sm:mt-0 w-fit transition-all duration-300 hover:from-blue-200 hover:to-purple-200">
                             {exp.duration}
                           </div>
                         </div>
@@ -215,9 +215,9 @@ export function AboutSection() {
               <div className="space-y-2 md:space-y-2 lg:space-y-4 flex-1">
                 {experience.map((exp, index) => (
                   <div key={index} className="bg-white backdrop-blur-sm rounded-xl p-2 md:p-2 lg:p-4 border border-blue-200/50 transition-all duration-500 ease-in-out transform hover:scale-[1.02] hover:shadow-lg mb-1 md:mb-2 lg:mb-4">
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between sm:flex-nowrap mb-1 gap-1">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-1 gap-1">
                       <h4 className="text-xs md:text-xs lg:text-sm xl:text-base font-bold text-gray-900 transition-all duration-300 flex-1 min-w-0">{exp.position}</h4>
-                      <div className="bg-blue-100 text-blue-800 px-2 py-0.5 md:px-2 md:py-0.5 lg:px-3 lg:py-1.5 rounded-full text-xs md:text-xs lg:text-sm font-semibold mt-1 sm:mt-0 flex-shrink-0 transition-all duration-300 hover:bg-blue-200">
+                      <div className="bg-blue-100 text-blue-800 px-2 py-0.5 md:px-2 md:py-0.5 lg:px-3 lg:py-1.5 rounded-full text-xs md:text-xs lg:text-sm font-semibold mt-1 sm:mt-0 w-fit transition-all duration-300 hover:bg-blue-200">
                         {exp.duration}
                       </div>
                     </div>
