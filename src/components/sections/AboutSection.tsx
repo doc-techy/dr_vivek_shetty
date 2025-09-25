@@ -63,8 +63,10 @@ export function AboutSection() {
       <div className="container-custom">
         {/* Header */}
         <div className="text-center mb-3 md:mb-4 lg:mb-8">
-          <h2 className="text-4xl md:text-xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-gray-900 mb-1 md:mb-2 lg:mb-4">
-            Academic Excellence & <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Professional Mastery</span>
+          <h2 className="text-3xl md:text-xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-gray-900 mb-1 md:mb-2 lg:mb-4">
+            <span className="block md:inline">Academic Excellence</span>
+            <span className="block md:inline"><span className="hidden md:inline"> </span>&<span className="hidden md:inline"> </span></span>
+            <span className="block md:inline bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Professional Mastery</span>
           </h2>
           
           {/* <p className="hidden md:block text-sm md:text-2xl lg:text-3xl text-gray-600 max-w-5xl mx-auto leading-relaxed px-4">
