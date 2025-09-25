@@ -87,7 +87,7 @@ export function HeroSection() {
 
             {/* Main Heading */}
             <div className="space-y-2 md:space-y-3 lg:space-y-4 text-center lg:text-left">
-              <h1 className="text-3xl md:text-3xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-gray-900 leading-tight">
+              <h1 className="text-3xl md:text-3xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold text-gray-900 leading-tight">
                 Expert Surgical <span className="xl:block"></span>
                 <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Oncology Care</span>
               </h1>
