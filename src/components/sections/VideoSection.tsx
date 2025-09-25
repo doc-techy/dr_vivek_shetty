@@ -478,13 +478,13 @@ export function VideoSection() {
         {displayedItems.map((item) => (
           <div key={item.id} className="group h-full">
             <div 
-              className={`bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-all duration-300 hover:-translate-y-1 border border-gray-100 group-hover:border-transparent h-full min-h-[200px] md:min-h-[240px] flex flex-col ${
+              className={`bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-200/50 group-hover:border-blue-300/50 h-full min-h-[200px] md:min-h-[240px] flex flex-col backdrop-blur-sm group-hover:bg-gradient-to-br group-hover:from-white group-hover:to-blue-50/30 ${
                 contentType === 'blogs' ? 'cursor-pointer' : ''
               }`}
               onClick={contentType === 'blogs' ? () => handleBlogClick(item as Blog) : undefined}
             >
               {/* Thumbnail */}
-              <div className="relative h-20 md:h-32 bg-gradient-to-br from-blue-100 to-purple-100">
+              <div className="relative h-20 md:h-32 bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 overflow-hidden">
                 <Image 
                   src={item.thumbnail} 
                   alt={item.title} 
@@ -494,11 +494,11 @@ export function VideoSection() {
                     e.currentTarget.style.display = 'none';
                   }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                 
                 {/* Play Button for Videos / Read Icon for Blogs */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-6 h-6 md:w-7 md:h-7 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md hover:scale-110 transition-all duration-300 group-hover:bg-white">
+                  <div className="w-6 h-6 md:w-7 md:h-7 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-all duration-300 group-hover:bg-white group-hover:shadow-xl">
                     {contentType === 'videos' ? (
                       <Play className="w-3 h-3 md:w-4 md:h-4 text-blue-600 ml-0.5" />
                     ) : (
@@ -508,20 +508,20 @@ export function VideoSection() {
                 </div>
                 
                 {/* Duration/Read Time Badge */}
-                <div className="absolute bottom-1 right-1 bg-black/80 backdrop-blur-sm text-white px-1.5 py-0.5 rounded text-xs font-medium">
+                <div className="absolute bottom-1 right-1 bg-black/90 backdrop-blur-sm text-white px-2 py-1 rounded-lg text-xs font-semibold shadow-lg">
                   {contentType === 'videos' ? (item as Video).duration : (item as Blog).readTime}
                 </div>
 
                 {/* Category Badge */}
                 <div className="absolute top-1 left-1">
-                  <span className="bg-white/90 backdrop-blur-sm text-gray-800 px-1 py-0.5 rounded-full text-xs font-semibold shadow-sm">
+                  <span className="bg-white/95 backdrop-blur-sm text-gray-800 px-2 py-1 rounded-full text-xs font-bold shadow-lg border border-white/20">
                     {item.category}
                   </span>
                 </div>
               </div>
 
               {/* Content */}
-              <div className="p-1.5 md:p-2 flex-1 flex flex-col">
+              <div className="p-2 md:p-3 flex-1 flex flex-col bg-gradient-to-b from-white to-gray-50/50">
                 <h3 className={`text-xs font-bold text-gray-900 mb-1 line-clamp-2 transition-colors duration-200 min-h-[1.5rem] ${
                   contentType === 'videos' ? 'group-hover:text-blue-600' : 'group-hover:text-purple-600'
                 }`}>

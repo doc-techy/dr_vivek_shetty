@@ -303,7 +303,7 @@ export function ServicesSection() {
                         {/* Content */}
                         <div className="relative p-4 md:p-6">
                           {/* Icon - Hidden on mobile */}
-                          <div className="mb-2 md:mb-3 hidden md:block">
+                          {/* <div className="mb-2 md:mb-3 hidden md:block">
                             <div className={`
                               w-8 h-8 md:w-12 md:h-12 rounded-lg bg-gray-100 group-hover:bg-blue-50
                               flex items-center justify-center shadow-sm
@@ -312,7 +312,7 @@ export function ServicesSection() {
                             `}>
                               <Icon className="w-4 h-4 md:w-6 md:h-6 text-gray-600 group-hover:text-blue-600" />
                             </div>
-                          </div>
+                          </div> */}
 
                           {/* Title */}
                           <div className="mb-3 md:mb-4">
