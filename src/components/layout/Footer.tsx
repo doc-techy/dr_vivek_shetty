@@ -72,7 +72,7 @@ export function Footer() {
             </div>
             <p className="text-gray-300 text-sm leading-relaxed mb-6">
               Senior Consultant in Head & Neck Oncology at SPARSH Hospital, Bangalore. 
-              MBBS, MS General Surgery, Fellowship in Head and Neck Surgical Oncology with 9 years of experience.
+              MBBS, MS General Surgery, Fellowship in Head and Neck Surgical Oncology with 11 years of experience.
             </p>
             
             {/* Social Media Links */}
