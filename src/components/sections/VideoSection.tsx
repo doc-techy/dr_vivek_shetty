@@ -474,17 +474,17 @@ export function VideoSection() {
 
 
       {/* Content Layout */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 mb-5">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-5">
         {displayedItems.map((item) => (
           <div key={item.id} className="group h-full">
             <div 
-              className={`bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-all duration-300 hover:-translate-y-1 border border-gray-100 group-hover:border-transparent h-full flex flex-col ${
+              className={`bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-all duration-300 hover:-translate-y-1 border border-gray-100 group-hover:border-transparent h-full min-h-[200px] md:min-h-[240px] flex flex-col ${
                 contentType === 'blogs' ? 'cursor-pointer' : ''
               }`}
               onClick={contentType === 'blogs' ? () => handleBlogClick(item as Blog) : undefined}
             >
               {/* Thumbnail */}
-              <div className="relative aspect-video bg-gradient-to-br from-blue-100 to-purple-100">
+              <div className="relative h-20 md:h-32 bg-gradient-to-br from-blue-100 to-purple-100">
                 <Image 
                   src={item.thumbnail} 
                   alt={item.title} 
@@ -533,14 +533,10 @@ export function VideoSection() {
                 </p>
                 
                 {/* Metadata */}
-                <div className="flex items-center justify-between text-xs text-gray-500 mt-auto">
+                <div className="flex items-center justify-start text-xs text-gray-500 mt-auto">
                   <div className="flex items-center gap-1">
                     <Calendar className="w-2.5 h-2.5" />
                     <span className="text-xs">{formatDate(item.date)}</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <Eye className="w-2.5 h-2.5" />
-                    <span className="text-xs">{formatViews(item.views)}</span>
                   </div>
                 </div>
               </div>
