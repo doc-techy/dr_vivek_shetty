@@ -35,13 +35,7 @@ export function AboutSection() {
     
   
     {
-      position: 'Senior Consultant',
-      hospital: 'Docube Koramangala',
-      location: 'Koramangala, Bangalore',
-      duration: '2025 - Present',
-      description: 'Providing specialized head and neck oncology consultations and surgical care'
-    },
-    {
+      title: 'Senior Consultant',
       position: 'Head and Neck Oncology and Reconstructive Surgeon',
       hospital: 'SPARSH Hospital',
       location: 'Hennur Road, Bangalore',
@@ -54,6 +48,9 @@ export function AboutSection() {
       location: 'Narayana Health City, Bangalore',
       duration: '2016 - 2025',
       description: 'Leading complex head and neck oncology cases with advanced surgical techniques and robotic surgery'
+    },
+    {
+      isEmpty: true
     }
 
   ];
@@ -180,22 +177,39 @@ export function AboutSection() {
                     {experience.map((exp, index) => (
                       <div 
                         key={`exp-${index}`} 
-                        className="bg-white backdrop-blur-sm rounded-xl p-2 md:p-2 lg:p-4 border border-blue-200/50 transition-all duration-500 ease-in-out transform hover:scale-[1.02] hover:shadow-lg mb-1 md:mb-2 lg:mb-4"
+                        className={`backdrop-blur-sm rounded-xl p-2 md:p-2 lg:p-4 border transition-all duration-500 ease-in-out transform mb-1 md:mb-2 lg:mb-4 ${
+                          exp.isEmpty 
+                            ? 'bg-gray-100/50 border-gray-200/30 opacity-40' 
+                            : 'bg-white border-blue-200/50 hover:scale-[1.02] hover:shadow-lg'
+                        }`}
                         style={{ animationDelay: `${index * 100}ms` }}
                       >
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-1 gap-1">
-                          <h4 className="text-xs md:text-xs lg:text-sm xl:text-base font-bold text-gray-900 transition-all duration-300 flex-1 min-w-0">{exp.position}</h4>
-                          <div className="bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 px-2 py-0.5 md:px-2 md:py-0.5 lg:px-3 lg:py-1.5 rounded-full text-xs md:text-xs lg:text-sm font-semibold mt-1 sm:mt-0 w-fit transition-all duration-300 hover:from-blue-200 hover:to-purple-200">
-                            {exp.duration}
+                        {exp.isEmpty ? (
+                          <div className="h-16 md:h-20 lg:h-24 bg-gradient-to-b from-white via-white to-gray-100 rounded-lg flex items-center justify-center">
+                            {/* <div className="text-gray-400 text-xs md:text-sm font-medium">Coming Soon</div> */}
                           </div>
-                        </div>
-                        <h5 className="text-xs md:text-xs lg:text-sm xl:text-base font-semibold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-0.5 md:mb-1 transition-all duration-300">
-                          {exp.hospital}
-                        </h5>
-                        <p className="text-xs md:text-xs lg:text-sm xl:text-sm text-gray-600 flex items-center">
-                          <MapPin className="w-3 h-3 md:w-3 md:h-3 lg:w-4 lg:h-4 mr-1 text-blue-500 flex-shrink-0 transition-all duration-300" />
-                          {exp.location}
-                        </p>
+                        ) : (
+                          <>
+                            {exp.title && (
+                              <div className="text-xs md:text-xs lg:text-sm font-semibold text-blue-600 mb-1 transition-all duration-300">
+                                {exp.title}
+                              </div>
+                            )}
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-1 gap-1">
+                              <h4 className="text-xs md:text-xs lg:text-sm xl:text-base font-bold text-gray-900 transition-all duration-300 flex-1 min-w-0">{exp.position}</h4>
+                              <div className="bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 px-2 py-0.5 md:px-2 md:py-0.5 lg:px-3 lg:py-1.5 rounded-full text-xs md:text-xs lg:text-sm font-semibold mt-1 sm:mt-0 w-fit transition-all duration-300 hover:from-blue-200 hover:to-purple-200">
+                                {exp.duration}
+                              </div>
+                            </div>
+                            <h5 className="text-xs md:text-xs lg:text-sm xl:text-base font-semibold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-0.5 md:mb-1 transition-all duration-300">
+                              {exp.hospital}
+                            </h5>
+                            <p className="text-xs md:text-xs lg:text-sm xl:text-sm text-gray-600 flex items-center">
+                              <MapPin className="w-3 h-3 md:w-3 md:h-3 lg:w-4 lg:h-4 mr-1 text-blue-500 flex-shrink-0 transition-all duration-300" />
+                              {exp.location}
+                            </p>
+                          </>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -216,20 +230,37 @@ export function AboutSection() {
               {/* Experience Timeline for Desktop */}
               <div className="space-y-2 md:space-y-2 lg:space-y-4 flex-1">
                 {experience.map((exp, index) => (
-                  <div key={index} className="bg-white backdrop-blur-sm rounded-xl p-2 md:p-2 lg:p-4 border border-blue-200/50 transition-all duration-500 ease-in-out transform hover:scale-[1.02] hover:shadow-lg mb-1 md:mb-2 lg:mb-4">
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-1 gap-1">
-                      <h4 className="text-xs md:text-xs lg:text-sm xl:text-base font-bold text-gray-900 transition-all duration-300 flex-1 min-w-0">{exp.position}</h4>
-                      <div className="bg-blue-100 text-blue-800 px-2 py-0.5 md:px-2 md:py-0.5 lg:px-3 lg:py-1.5 rounded-full text-xs md:text-xs lg:text-sm font-semibold mt-1 sm:mt-0 w-fit transition-all duration-300 hover:bg-blue-200">
-                        {exp.duration}
+                  <div key={index} className={`backdrop-blur-sm rounded-xl p-2 md:p-2 lg:p-4 border transition-all duration-500 ease-in-out transform mb-1 md:mb-2 lg:mb-4 ${
+                    exp.isEmpty 
+                      ? 'bg-gray-100/50 border-gray-200/30 opacity-40' 
+                      : 'bg-white border-blue-200/50 hover:scale-[1.02] hover:shadow-lg'
+                  }`}>
+                    {exp.isEmpty ? (
+                      <div className="h-16 md:h-20 lg:h-24 bg-gradient-to-b from-white via-white to-gray-100 rounded-lg flex items-center justify-center">
+                        {/* <div className="text-gray-400 text-xs md:text-sm font-medium">Coming Soon</div> */}
                       </div>
-                    </div>
-                    <h5 className="text-xs md:text-xs lg:text-sm xl:text-base font-semibold text-blue-700 mb-0.5 md:mb-1 transition-all duration-300">
-                      {exp.hospital}
-                    </h5>
-                    <p className="text-xs md:text-xs lg:text-sm xl:text-sm text-gray-600 flex items-center">
-                      <MapPin className="w-3 h-3 md:w-3 md:h-3 lg:w-4 lg:h-4 mr-1 text-blue-500 flex-shrink-0 transition-all duration-300" />
-                      {exp.location}
-                    </p>
+                    ) : (
+                      <>
+                        {exp.title && (
+                          <div className="text-xs md:text-xs lg:text-sm font-semibold text-blue-600 mb-1 transition-all duration-300">
+                            {exp.title}
+                          </div>
+                        )}
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-1 gap-1">
+                          <h4 className="text-xs md:text-xs lg:text-sm xl:text-base font-bold text-gray-900 transition-all duration-300 flex-1 min-w-0">{exp.position}</h4>
+                          <div className="bg-blue-100 text-blue-800 px-2 py-0.5 md:px-2 md:py-0.5 lg:px-3 lg:py-1.5 rounded-full text-xs md:text-xs lg:text-sm font-semibold mt-1 sm:mt-0 w-fit transition-all duration-300 hover:bg-blue-200">
+                            {exp.duration}
+                          </div>
+                        </div>
+                        <h5 className="text-xs md:text-xs lg:text-sm xl:text-base font-semibold text-blue-700 mb-0.5 md:mb-1 transition-all duration-300">
+                          {exp.hospital}
+                        </h5>
+                        <p className="text-xs md:text-xs lg:text-sm xl:text-sm text-gray-600 flex items-center">
+                          <MapPin className="w-3 h-3 md:w-3 md:h-3 lg:w-4 lg:h-4 mr-1 text-blue-500 flex-shrink-0 transition-all duration-300" />
+                          {exp.location}
+                        </p>
+                      </>
+                    )}
                   </div>
                 ))}
               </div>
