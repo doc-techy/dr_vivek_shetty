@@ -170,12 +170,13 @@ export function Footer() {
             <div className="md:col-span-1">
               <h4 className="text-lg font-semibold mb-4 text-white">Services</h4>
               <ul className="space-y-2 mb-6">
-                <li className="text-gray-300 text-sm">Oral Cancer</li>
-                <li className="text-gray-300 text-sm">Thyroid Nodules</li>
-                <li className="text-gray-300 text-sm">Parathyroid Problems</li>
-                <li className="text-gray-300 text-sm">Parotid and Submandibular Gland Tumours</li>
-                <li className="text-gray-300 text-sm">Throat Cancer</li>
-                <li className="text-gray-300 text-sm">Jaw Tumours</li>
+                <li className="text-gray-300 text-sm">Oral cancer management</li>
+                <li className="text-gray-300 text-sm">Thyroid, parathyroid problems</li>
+                <li className="text-gray-300 text-sm">Throat cancer management</li>
+                <li className="text-gray-300 text-sm">Parotid, salivary gland tumours</li>
+                <li className="text-gray-300 text-sm">Skin and Scalp Tumours</li>
+                <li className="text-gray-300 text-sm">Neck and jaw Tumours</li>
+                <li className="text-gray-300 text-sm">Microvascular Surgery</li>
               </ul>
 
             </div>

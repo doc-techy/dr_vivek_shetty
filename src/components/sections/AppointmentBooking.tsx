@@ -13,7 +13,7 @@ interface AppointmentBookingProps {
 export function AppointmentBooking({ className = '' }: AppointmentBookingProps) {
   const hospitals = [
     {
-      name: 'Doc Cube Koramangala',
+      name: 'Docube Koramangala',
       address: 'Koramangala, Bangalore',
       availableAt: 'Mon-Sat: 6:00 PM - 8:00 PM',
       website: 'https://www.docube.in/doctor/dr-vivek-shetty',

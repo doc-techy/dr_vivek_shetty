@@ -22,7 +22,7 @@ export function HeroSection() {
   ];
 
   const availability = [
-    { name: 'Doc Cube Koramangala', timing: 'Mon-Sat: 6:00 PM - 8:00 PM' },
+    { name: 'Docube Koramangala', timing: 'Mon-Sat: 6:00 PM - 8:00 PM' },
     { name: 'SPARSH Hospital', timing: 'Mon, Wed, Fri: 9:30 AM - 4:00 PM' }
   ];
 
