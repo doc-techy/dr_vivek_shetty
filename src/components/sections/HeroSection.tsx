@@ -175,10 +175,31 @@ export function HeroSection() {
                 <X className="w-5 h-5 md:w-6 md:h-6 text-gray-600" />
               </button>
             </div>
-            <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center border-2 border-dashed border-gray-300">
-              <div className="text-center">
-                <Play className="w-12 h-12 md:w-16 md:h-16 text-gray-400 mx-auto mb-4" />
-                <p className="text-sm md:text-base text-gray-600 font-medium">Video placeholder - Would contain actual introduction video</p>
+            <div className="aspect-video bg-black rounded-2xl overflow-hidden relative group">
+              <video
+                className="w-full h-full object-cover transition-all duration-300"
+                controls
+                preload="metadata"
+                poster="/images/thumbnail.jpg"
+                onPlay={(e) => {
+                  e.currentTarget.classList.add('scale-105');
+                }}
+                onPause={(e) => {
+                  e.currentTarget.classList.remove('scale-105');
+                }}
+              >
+                <source src="/videos/intro.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              
+              {/* Modern overlay gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+              
+              {/* Custom play button overlay when paused */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-2xl opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-90 group-hover:scale-100">
+                  <Play className="w-6 h-6 md:w-8 md:h-8 text-blue-600 ml-1" fill="currentColor" />
+                </div>
               </div>
             </div>
           </div>

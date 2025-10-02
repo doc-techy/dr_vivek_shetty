@@ -64,3 +64,4 @@ if __name__ == "__main__":
         create_download_png()
     except ImportError:
         print("PIL not available. Please install Pillow: pip install Pillow")
+
