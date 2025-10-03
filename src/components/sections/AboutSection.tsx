@@ -61,9 +61,9 @@ export function AboutSection() {
         {/* Header */}
         <div className="text-center mb-3 md:mb-4 lg:mb-8">
           <h2 className="text-3xl md:text-xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-gray-900 mb-1 md:mb-2 lg:mb-4">
-            <span className="block md:inline">Academic Excellence</span>
+            <span className="block md:inline">Academic Qualifications</span>
             <span className="block md:inline"><span className="hidden md:inline"> </span>&<span className="hidden md:inline"> </span></span>
-            <span className="block md:inline bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Professional Mastery</span>
+            <span className="block md:inline bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Professional Journey</span>
           </h2>
           
           {/* <p className="hidden md:block text-sm md:text-2xl lg:text-3xl text-gray-600 max-w-5xl mx-auto leading-relaxed px-4">
@@ -84,7 +84,7 @@ export function AboutSection() {
               style={{ WebkitTapHighlightColor: 'transparent' }}
             >
               <Calendar className={`w-4 h-4 mr-2 transition-all duration-300 ${activeTab === 'experience' ? 'rotate-12' : 'rotate-0'}`} />
-              Professional
+                Professional
             </button>
             <button
               onClick={() => setActiveTab('education')}
@@ -135,10 +135,10 @@ export function AboutSection() {
                   </span>
                 </div>
                 <h3 className="text-base md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-bold text-gray-900 mb-1 md:mb-2 lg:mb-3 transition-all duration-500 ease-in-out">
-                  {activeTab === 'education' ? 'Academic Excellence' : (
+                  {activeTab === 'education' ? 'Academic Qualifications' : (
                     <>
                       <span className="md:hidden">Clinical Experience</span>
-                      <span className="hidden md:block">Academic Excellence</span>
+                      <span className="hidden md:block">Academic Qualifications</span>
                     </>
                   )}
                 </h3>
