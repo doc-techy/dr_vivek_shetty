@@ -114,7 +114,7 @@ const sampleVideos: Video[] = [
     thumbnail: '/images/thumbnail.jpg',
     duration: '1:01',
     date: '2025-10-09',
-    category: 'Education',
+    category: 'Introduction',
     views: 1250,
     videoUrl: '/videos/intro.mp4'
   },
