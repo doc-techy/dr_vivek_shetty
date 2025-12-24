@@ -6,35 +6,72 @@ import { BackgroundPattern } from "@/components/common/BackgroundPattern";
 import ClientProviders from "@/components/providers/ClientProviders";
 import ConditionalLayout from "@/components/layout/ConditionalLayout";
 
+import JsonLd from "@/components/seo/JsonLd";
+
 export const metadata: Metadata = {
-  title: "Dr. Vivek Shetty - Senior Consultant Head & Neck Oncology",
-  description: "Dr. Vivek Shetty is a Senior Consultant in Head & Neck Oncology at SPARSH Hospital, Bangalore. MBBS, MS General Surgery, Fellowship in Head and Neck Surgical Oncology with 9 years of experience.",
-  keywords: ["Dr. Vivek Shetty", "Head Neck Oncology", "SPARSH Hospital", "Bangalore", "Surgical Oncology", "Cancer Treatment"],
+  title: {
+    default: "Dr. Vivek Shetty | Head & Neck Surgical Oncologist Bangalore",
+    template: "%s | Dr. Vivek Shetty"
+  },
+  description: "Dr. Vivek Shetty is a leading Head & Neck Onco Surgeon in Bangalore with 11+ years of experience. Expert in oral cancer, thyroid, and reconstructive surgery at SPARSH Hospital.",
+  keywords: ["Dr. Vivek Shetty", "Head and Neck Surgeon", "Oncologist Bangalore", "Cancer Specialist", "Oral Cancer Surgery", "Thyroid Surgeon", "SPARSH Hospital"],
   authors: [{ name: "Dr. Vivek Shetty" }],
+  creator: "Dr. Vivek Shetty",
+  publisher: "Dr. Vivek Shetty",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL('https://www.drvivekshetty.com'),
+  alternates: {
+    canonical: '/',
+  },
   manifest: "/manifest.json",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
       { url: "/favicon.svg", type: "image/svg+xml" },
     ],
-  },
-  other: {
-    "apple-mobile-web-app-status-bar-style": "black-translucent",
+    apple: [
+      { url: "/apple-touch-icon.png" }
+    ]
   },
   openGraph: {
-    title: "Dr. Vivek Shetty - Senior Consultant Head & Neck Oncology",
-    description: "Expert Head & Neck Oncology care at SPARSH Hospital, Bangalore. 9 years of experience in surgical oncology and reconstructive surgery.",
+    title: "Dr. Vivek Shetty | Head & Neck Surgical Oncologist",
+    description: "Expert cancer care by Dr. Vivek Shetty. Specializing in Head & Neck Oncology, oral cancer, and reconstructive surgery at SPARSH Hospital, Bangalore.",
+    url: 'https://www.drvivekshetty.com',
+    siteName: 'Dr. Vivek Shetty',
+    images: [
+      {
+        url: '/images/dr_vivek_profile_pic.jpg', // Ensure this image is high quality
+        width: 800,
+        height: 600,
+        alt: 'Dr. Vivek Shetty',
+      },
+    ],
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dr. Vivek Shetty - Senior Consultant Head & Neck Oncology",
-    description: "Expert Head & Neck Oncology care at SPARSH Hospital, Bangalore.",
+    title: "Dr. Vivek Shetty - Senior Oncologist",
+    description: "Expert Head & Neck Oncology care in Bangalore by Dr. Vivek Shetty.",
+    images: ['/images/dr_vivek_profile_pic.jpg'],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: "google-site-verification-code", // User needs to replace this
   },
 };
 
@@ -46,6 +83,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
+        <JsonLd />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <meta name="apple-mobile-web-app-capable" content="yes" />

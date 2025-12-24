@@ -86,14 +86,19 @@ export function HeroSection() {
             </div> */}
 
             {/* Main Heading */}
-            <div className="space-y-2 md:space-y-3 lg:space-y-4 text-center lg:text-left">
-              <h1 className="text-3xl md:text-3xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-gray-900 leading-tight">
-                Expert Surgical <span className="xl:block"></span>
-                <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Oncology Care</span>
+            <div className="space-y-3 md:space-y-4 lg:space-y-5 text-center lg:text-left">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold text-gray-900 leading-[1.1]">
+                <span className="block">Dr. Vivek Shetty</span>
+                <span className="block mt-2 md:mt-3 text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-gray-600">
+                  Senior Surgical Oncologist
+                </span>
+                <span className="block mt-2 md:mt-3 text-xl md:text-2xl lg:text-3xl xl:text-4xl bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent font-bold">
+                  Expert Cancer Care
+                </span>
               </h1>
               
-              <p className="text-sm md:text-xs lg:text-sm xl:text-base 2xl:text-xl text-gray-600 leading-relaxed text-justify max-w-2xl">
-              Dr Vivek Shetty is a Head and Neck Onco Surgeon with over 11 years experience in the field. With a patient-centric, ethical and evidence-based approach to patient care, he has managed over 1000 patients with conditions such as oral cancer, tongue cancer, thyroid nodules, salivary gland tumours, throat cancer and many more head and neck neoplasms.              </p>
+              <p className="text-sm md:text-xs lg:text-sm xl:text-base 2xl:text-xl text-gray-600 leading-relaxed text-justify max-w-2xl mt-4 md:mt-5">
+              Dr. Vivek Shetty is a Head and Neck Onco Surgeon with over 11 years experience in the field. With a patient-centric, ethical and evidence-based approach to patient care, he has managed over 1000 patients with conditions such as oral cancer, tongue cancer, thyroid nodules, salivary gland tumours, throat cancer and many more head and neck neoplasms.              </p>
             </div>
 
             {/* Features List */}
