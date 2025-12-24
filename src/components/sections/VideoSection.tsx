@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Play, Clock, Calendar, Filter, ChevronDown, Eye, ArrowRight, ArrowUp, FileText, BookOpen } from 'lucide-react';
+import { Play, Clock, Calendar, Filter, ChevronDown, Eye, ArrowRight, ArrowUp, FileText, BookOpen, X } from 'lucide-react';
 import Image from 'next/image';
 
 interface Video {
@@ -30,137 +30,94 @@ interface Blog {
 
 const sampleVideos: Video[] = [
   {
-    id: '1',
-    title: 'Understanding Head & Neck Cancer: A Comprehensive Overview',
-    description: 'Dr. Vivek Shetty explains the basics of head and neck cancer, including types, symptoms, and early detection methods.',
-    thumbnail: 'https://picsum.photos/400/225?random=1',
-    duration: '12:45',
-    date: '2024-01-15',
+    id: '7',
+    title: 'Hereditary Mutations',
+    description: 'Exploring genetic factors and hereditary mutations that can increase the risk of developing cancer.',
+    thumbnail: '/images/thumbnail.jpg',
+    duration: '0:57',
+    date: '2025-12-17',
     category: 'Education',
-    views: 1250,
-    videoUrl: '#'
-  },
-  {
-    id: '2',
-    title: 'Surgical Techniques in Head & Neck Oncology',
-    description: 'Advanced surgical procedures and techniques used in head and neck cancer treatment, with detailed explanations.',
-    thumbnail: 'https://picsum.photos/400/225?random=2',
-    duration: '18:30',
-    date: '2024-01-10',
-    category: 'Surgery',
-    views: 890,
-    videoUrl: '#'
+    views: 1420,
+    videoUrl: '/videos/Hereditary_mutations.mp4'
   },
   {
     id: '3',
-    title: 'Post-Surgical Care and Recovery',
-    description: 'Essential information for patients and families about post-surgical care, recovery process, and what to expect.',
-    thumbnail: 'https://picsum.photos/400/225?random=3',
-    duration: '15:20',
-    date: '2024-01-05',
-    category: 'Patient Care',
-    views: 2100,
-    videoUrl: '#'
+    title: 'What Causes Cancer?',
+    description: 'Exploring the various factors and causes that can lead to the development of cancer.',
+    thumbnail: '/images/thumbnail.jpg',
+    duration: '01:11',
+    date: '2025-12-09',
+    category: 'Education',
+    views: 1890,
+    videoUrl: '/videos/what_causes_cancer.mp4'
   },
   {
     id: '4',
-    title: 'Reconstructive Surgery in Head & Neck Oncology',
-    description: 'Understanding reconstructive procedures and their role in restoring function and appearance after cancer surgery.',
-    thumbnail: 'https://picsum.photos/400/225?random=4',
-    duration: '22:15',
-    date: '2023-12-28',
-    category: 'Reconstruction',
+    title: 'What Makes Cancer Cells Different from Normal Cells?',
+    description: 'Understanding the key differences between cancer cells and normal cells, and how these differences affect treatment.',
+    thumbnail: '/images/thumbnail.jpg',
+    duration: '0:46',
+    date: '2025-12-03',
+    category: 'Education',
     views: 1560,
-    videoUrl: '#'
-  },
-  {
-    id: '5',
-    title: 'Nutrition and Lifestyle After Head & Neck Surgery',
-    description: 'Dietary recommendations and lifestyle modifications for optimal recovery and long-term health.',
-    thumbnail: 'https://picsum.photos/400/225?random=5',
-    duration: '14:40',
-    date: '2023-12-20',
-    category: 'Lifestyle',
-    views: 980,
-    videoUrl: '#'
-  },
-  {
-    id: '6',
-    title: 'Latest Advances in Head & Neck Oncology',
-    description: 'Recent developments, new treatment modalities, and emerging technologies in head and neck cancer care.',
-    thumbnail: 'https://picsum.photos/400/225?random=6',
-    duration: '20:10',
-    date: '2023-12-15',
-    category: 'Research',
-    views: 1750,
-    videoUrl: '#'
-  },
-  {
-    id: '7',
-    title: 'Minimally Invasive Surgery Techniques',
-    description: 'Exploring the latest minimally invasive approaches in head and neck surgical oncology for better patient outcomes.',
-    thumbnail: 'https://picsum.photos/400/225?random=7',
-    duration: '16:30',
-    date: '2023-12-10',
-    category: 'Surgery',
-    views: 1420,
-    videoUrl: '#'
+    videoUrl: '/videos/what_makes_cancer_cell_different_from_normal_cells.mp4'
   },
   {
     id: '8',
-    title: 'Patient Communication and Counseling',
-    description: 'Effective communication strategies for discussing treatment options and managing patient expectations.',
-    thumbnail: 'https://picsum.photos/400/225?random=8',
-    duration: '13:45',
-    date: '2023-12-05',
-    category: 'Patient Care',
-    views: 980,
-    videoUrl: '#'
-  },
-  {
-    id: '9',
-    title: 'Advanced Imaging in Head & Neck Cancer',
-    description: 'Understanding the role of modern imaging techniques in diagnosis and treatment planning.',
-    thumbnail: 'https://picsum.photos/400/225?random=9',
-    duration: '19:20',
-    date: '2023-11-28',
+    title: 'Is There Any Hope After Cancer Diagnosis?',
+    description: 'Providing hope and information about treatment options, recovery, and life after a cancer diagnosis.',
+    thumbnail: '/images/thumbnail.jpg',
+    duration: '1:11',
+    date: '2025-11-26',
     category: 'Education',
-    views: 1650,
-    videoUrl: '#'
+    views: 3200,
+    videoUrl: '/videos/Is_there_any_hope_afetr_cancer_diagnosis.mp4'
   },
   {
-    id: '10',
-    title: 'Multidisciplinary Team Approach',
-    description: 'The importance of collaborative care in head and neck oncology treatment.',
-    thumbnail: 'https://picsum.photos/400/225?random=10',
-    duration: '14:15',
-    date: '2023-11-20',
+    id: '6',
+    title: 'How is Cancer Diagnosed?',
+    description: 'Understanding the various methods and techniques used in diagnosing cancer, from screening to confirmation.',
+    thumbnail: '/images/thumbnail.jpg',
+    duration: '01:20',
+    date: '2025-11-19',
     category: 'Education',
-    views: 1200,
-    videoUrl: '#'
+    views: 1980,
+    videoUrl: '/videos/How_does_cancer_diagnosed.mp4'
   },
   {
-    id: '11',
-    title: 'Quality of Life After Treatment',
-    description: 'Supporting patients in maintaining quality of life during and after head and neck cancer treatment.',
-    thumbnail: 'https://picsum.photos/400/225?random=11',
-    duration: '17:50',
-    date: '2023-11-15',
-    category: 'Lifestyle',
-    views: 1350,
-    videoUrl: '#'
+    id: '5',
+    title: 'How Does Cancer Spread?',
+    description: 'Learning about the process of cancer metastasis and how cancer cells spread to other parts of the body.',
+    thumbnail: '/images/thumbnail.jpg',
+    duration: '0:38',
+    date: '2025-11-12',
+    category: 'Education',
+    views: 1750,
+    videoUrl: '/videos/How_does_cancer_spread.mp4'
+  },
+
+  {
+    id: '2',
+    title: 'What is Cancer?',
+    description: 'Understanding the fundamentals of cancer - what it is, how it develops, and its basic characteristics.',
+    thumbnail: '/images/thumbnail.jpg',
+    duration: '1:11',
+    date: '2025-11-05',
+    category: 'Education',
+    views: 2100,
+    videoUrl: '/videos/what_is_cancer.mp4'
   },
   {
-    id: '12',
-    title: 'Innovative Reconstructive Techniques',
-    description: 'Latest advances in reconstructive surgery for head and neck cancer patients.',
-    thumbnail: 'https://picsum.photos/400/225?random=12',
-    duration: '21:30',
-    date: '2023-11-10',
-    category: 'Reconstruction',
-    views: 1100,
-    videoUrl: '#'
-  }
+    id: '1',
+    title: 'Introduction',
+    description: 'Dr. Vivek Shetty introduces himself and provides an overview of his expertise in Head & Neck Oncology.',
+    thumbnail: '/images/thumbnail.jpg',
+    duration: '1:01',
+    date: '2025-10-09',
+    category: 'Education',
+    views: 1250,
+    videoUrl: '/videos/intro.mp4'
+  },
 ];
 
 const sampleBlogs: Blog[] = [
@@ -269,6 +226,8 @@ export function VideoSection() {
   const [contentType, setContentType] = useState<'videos' | 'blogs'>('videos');
   const [isMobile, setIsMobile] = useState(false);
   const [gridColumns, setGridColumns] = useState(4); // Track current grid columns
+  const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   // Check screen size on mount and resize
   useEffect(() => {
@@ -340,6 +299,11 @@ export function VideoSection() {
     const slug = generateSlug(blog.title);
     const blogUrl = `/blogs/${slug}`;
     window.open(blogUrl, '_blank');
+  };
+
+  const handleVideoClick = (video: Video) => {
+    setSelectedVideo(video);
+    setIsVideoOpen(true);
   };
 
   return (
@@ -479,9 +443,9 @@ export function VideoSection() {
           <div key={item.id} className="group h-full">
             <div 
               className={`bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-200/50 group-hover:border-blue-300/50 h-full min-h-[200px] md:min-h-[240px] flex flex-col backdrop-blur-sm group-hover:bg-gradient-to-br group-hover:from-white group-hover:to-blue-50/30 ${
-                contentType === 'blogs' ? 'cursor-pointer' : ''
+                contentType === 'blogs' || contentType === 'videos' ? 'cursor-pointer' : ''
               }`}
-              onClick={contentType === 'blogs' ? () => handleBlogClick(item as Blog) : undefined}
+              onClick={contentType === 'blogs' ? () => handleBlogClick(item as Blog) : contentType === 'videos' ? () => handleVideoClick(item as Video) : undefined}
             >
               {/* Thumbnail */}
               <div className="relative h-20 md:h-32 bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 overflow-hidden">
@@ -576,6 +540,41 @@ export function VideoSection() {
           </div>
           <h3 className="text-lg font-semibold text-gray-900 mb-2">No {contentType} found</h3>
           <p className="text-gray-600">Try adjusting your filters to see more content.</p>
+        </div>
+      )}
+
+      {/* Video Modal */}
+      {isVideoOpen && selectedVideo && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-3xl p-4 md:p-6 lg:p-8 max-w-4xl w-full shadow-2xl border border-gray-200">
+            <div className="flex justify-between items-center mb-4 md:mb-6">
+              <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-gray-900">{selectedVideo.title}</h3>
+              <button
+                onClick={() => {
+                  setIsVideoOpen(false);
+                  setSelectedVideo(null);
+                }}
+                className="w-8 h-8 md:w-10 md:h-10 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-colors duration-200"
+              >
+                <X className="w-5 h-5 md:w-6 md:h-6 text-gray-600" />
+              </button>
+            </div>
+            <div className="aspect-video bg-black rounded-2xl overflow-hidden">
+              <video
+                className="w-full h-full object-cover"
+                controls
+                preload="metadata"
+                poster={selectedVideo.thumbnail}
+                autoPlay
+              >
+                <source src={selectedVideo.videoUrl} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div className="mt-4">
+              <p className="text-gray-600 text-sm md:text-base">{selectedVideo.description}</p>
+            </div>
+          </div>
         </div>
       )}
     </div>
