@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Play, Clock, Calendar, Filter, ChevronDown, Eye, ArrowRight, ArrowUp, FileText, BookOpen, X } from 'lucide-react';
+import { Play, Clock, Calendar, Eye, ArrowRight, ArrowUp, FileText, BookOpen, X } from 'lucide-react';
 import Image from 'next/image';
 
 interface Video {
@@ -28,19 +28,12 @@ interface Blog {
   blogUrl: string;
 }
 
-// Helper function to generate thumbnail path from video URL
-const getThumbnailPath = (videoUrl: string): string => {
-  const videoFileName = videoUrl.split('/').pop()?.replace('.mp4', '') || '';
-  // Handle case sensitivity - try lowercase first, then check for title case
-  return `/images/${videoFileName}.jpg`;
-};
-
 const sampleVideos: Video[] = [
   {
     id: '7',
     title: 'Hereditary Mutations',
     description: 'Exploring genetic factors and hereditary mutations that can increase the risk of developing cancer.',
-    thumbnail: getThumbnailPath('/videos/Hereditary_mutations.mp4'),
+    thumbnail: '/images/Heriditary_mutation.jpg',
     duration: '0:57',
     date: '2025-12-17',
     category: 'Education',
@@ -51,7 +44,7 @@ const sampleVideos: Video[] = [
     id: '3',
     title: 'What Causes Cancer?',
     description: 'Exploring the various factors and causes that can lead to the development of cancer.',
-    thumbnail: getThumbnailPath('/videos/what_causes_cancer.mp4'),
+    thumbnail: '/images/What_causes_cancer.jpg',
     duration: '01:11',
     date: '2025-12-09',
     category: 'Education',
@@ -62,7 +55,7 @@ const sampleVideos: Video[] = [
     id: '4',
     title: 'What Makes Cancer Cells Different from Normal Cells?',
     description: 'Understanding the key differences between cancer cells and normal cells, and how these differences affect treatment.',
-    thumbnail: getThumbnailPath('/videos/what_makes_cancer_cell_different_from_normal_cells.mp4'),
+    thumbnail: '/images/What_makes_a_cancer_cell_different_from_normal_cell.jpg',
     duration: '0:46',
     date: '2025-12-03',
     category: 'Education',
@@ -73,7 +66,7 @@ const sampleVideos: Video[] = [
     id: '8',
     title: 'Is There Any Hope After Cancer Diagnosis?',
     description: 'Providing hope and information about treatment options, recovery, and life after a cancer diagnosis.',
-    thumbnail: getThumbnailPath('/videos/Is_there_any_hope_afetr_cancer_diagnosis.mp4'),
+    thumbnail: '/images/Is_there_a_hope_after_cancer_diagnosis.jpg',
     duration: '1:11',
     date: '2025-11-26',
     category: 'Education',
@@ -84,7 +77,7 @@ const sampleVideos: Video[] = [
     id: '6',
     title: 'How is Cancer Diagnosed?',
     description: 'Understanding the various methods and techniques used in diagnosing cancer, from screening to confirmation.',
-    thumbnail: getThumbnailPath('/videos/How_does_cancer_diagnosed.mp4'),
+    thumbnail: '/images/How_is_cancer_diagnosed.jpg',
     duration: '01:20',
     date: '2025-11-19',
     category: 'Education',
@@ -95,7 +88,7 @@ const sampleVideos: Video[] = [
     id: '5',
     title: 'How Does Cancer Spread?',
     description: 'Learning about the process of cancer metastasis and how cancer cells spread to other parts of the body.',
-    thumbnail: getThumbnailPath('/videos/How_does_cancer_spread.mp4'),
+    thumbnail: '/images/How_does_cancer_spread.jpg',
     duration: '0:38',
     date: '2025-11-12',
     category: 'Education',
@@ -107,7 +100,7 @@ const sampleVideos: Video[] = [
     id: '2',
     title: 'What is Cancer?',
     description: 'Understanding the fundamentals of cancer - what it is, how it develops, and its basic characteristics.',
-    thumbnail: getThumbnailPath('/videos/what_is_cancer.mp4'),
+    thumbnail: '/images/What_is_cancer.jpg',
     duration: '1:11',
     date: '2025-11-05',
     category: 'Education',
@@ -118,7 +111,7 @@ const sampleVideos: Video[] = [
     id: '1',
     title: 'Introduction',
     description: 'Dr. Vivek Shetty introduces himself and provides an overview of his expertise in Head & Neck Oncology.',
-    thumbnail: getThumbnailPath('/videos/intro.mp4'),
+    thumbnail: '/images/intro.jpg',
     duration: '1:01',
     date: '2025-10-09',
     category: 'Introduction',
@@ -218,18 +211,8 @@ const sampleBlogs: Blog[] = [
   }
 ];
 
-const categories = [
-  { id: 'all', label: 'All', icon: '🎯' },
-  { id: 'Education', label: 'Education', icon: '📚' },
-  { id: 'Surgery', label: 'Surgery', icon: '⚕️' },
-  { id: 'Patient Care', label: 'Patient Care', icon: '❤️' },
-  { id: 'Reconstruction', label: 'Reconstruction', icon: '🔧' }
-];
-
 export function VideoSection() {
-  const [selectedCategory, setSelectedCategory] = useState('all');
   const [videosToShow, setVideosToShow] = useState(4); // Start with 4 videos (2x2 grid)
-  const [showFilters, setShowFilters] = useState(false);
   const [contentType, setContentType] = useState<'videos' | 'blogs'>('videos');
   const [isMobile, setIsMobile] = useState(false);
   const [gridColumns, setGridColumns] = useState(4); // Track current grid columns
@@ -260,18 +243,14 @@ export function VideoSection() {
   }, []);
 
   const currentData = contentType === 'videos' ? sampleVideos : sampleBlogs;
-  const filteredData = currentData.filter(item => {
-    return selectedCategory === 'all' || item.category === selectedCategory;
-  });
 
-
-  const displayedItems = filteredData.slice(0, videosToShow);
+  const displayedItems = currentData.slice(0, videosToShow);
   const initialVideos = gridColumns * 2; // Initial 2 rows
-  const hasMoreItems = videosToShow < filteredData.length;
+  const hasMoreItems = videosToShow < currentData.length;
 
   const loadMore = () => {
     const increment = gridColumns * 2; // Load 2 rows worth
-    setVideosToShow(prev => Math.min(prev + increment, filteredData.length));
+    setVideosToShow(prev => Math.min(prev + increment, currentData.length));
   };
 
   const showLess = () => {
@@ -332,8 +311,8 @@ export function VideoSection() {
           Educational <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Videos and Blogs</span>
         </h2>
         
-        {/* Content Type Toggle Switch and Filter - Mobile Same Line */}
-        <div className="flex md:flex-col justify-center md:items-center items-center gap-3 mb-2 px-4">
+        {/* Content Type Toggle Switch */}
+        <div className="flex justify-center items-center gap-3 mb-6 md:mb-8 px-4">
           {/* Toggle Switch */}
           <div className="bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 rounded-xl p-1 flex border border-gray-200/50 shadow-md backdrop-blur-sm w-full max-w-[320px] md:min-w-[320px]">
             <button
@@ -377,80 +356,6 @@ export function VideoSection() {
               <span className="relative z-10">Blogs</span>
             </button>
           </div>
-
-          {/* Filter Icon - Mobile only - Same Line */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setShowFilters(!showFilters)}
-              className="flex items-center justify-center w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
-            >
-              <Filter className="w-5 h-5" />
-              {selectedCategory !== 'all' && (
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
-                  !
-                </span>
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Filter Dropdown */}
-        {showFilters && (
-          <div className="md:hidden mb-4">
-            <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-4 mx-4">
-              <div className="grid grid-cols-2 gap-2">
-                {categories.map((category) => (
-                  <button
-                    key={category.id}
-                    onClick={() => {
-                      setSelectedCategory(category.id);
-                      setShowFilters(false);
-                    }}
-                    className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                      selectedCategory === category.id
-                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg scale-105'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:scale-105'
-                    }`}
-                  >
-                    <span className="text-base">{category.icon}</span>
-                    <span>{category.label}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Modern Filter Section - Desktop only */}
-      <div className="hidden md:block mb-6">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
-          {/* Filter Toggle */}
-          <div className="flex items-center gap-3">
-            {/* <div className="text-sm text-gray-500">
-              {filteredData.length} {contentType === 'videos' ? 'video' : 'blog'}{filteredData.length !== 1 ? 's' : ''} found
-            </div> */}
-          </div>
-        </div>
-
-        {/* Filter Options - Desktop only */}
-        <div className="mt-4 flex justify-center">
-          <div className="flex flex-wrap gap-2 justify-center">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => setSelectedCategory(category.id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
-                  selectedCategory === category.id
-                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg scale-105'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:scale-105'
-                }`}
-              >
-                <span className="text-base">{category.icon}</span>
-                <span>{category.label}</span>
-              </button>
-            ))}
-          </div>
         </div>
       </div>
 
@@ -460,35 +365,49 @@ export function VideoSection() {
         {displayedItems.map((item) => (
           <div key={item.id} className="group h-full">
             <div 
-              className={`bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-200/50 group-hover:border-blue-300/50 h-full min-h-[200px] md:min-h-[240px] flex flex-col backdrop-blur-sm group-hover:bg-gradient-to-br group-hover:from-white group-hover:to-blue-50/30 ${
+              className={`bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 border border-gray-200/50 group-hover:border-blue-300/50 h-full min-h-[200px] md:min-h-[240px] flex flex-col ${
                 contentType === 'blogs' || contentType === 'videos' ? 'cursor-pointer' : ''
               }`}
+              style={{
+                willChange: 'transform, box-shadow',
+                transform: 'translateZ(0)',
+              }}
               onClick={contentType === 'blogs' ? () => handleBlogClick(item as Blog) : contentType === 'videos' ? () => handleVideoClick(item as Video) : undefined}
             >
               {/* Thumbnail */}
-              <div className="relative h-20 md:h-32 bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 overflow-hidden">
-                <Image 
-                  src={item.thumbnail} 
-                  alt={item.title} 
-                  fill 
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-300" 
-                  unoptimized
-                  onError={(e) => {
-                    // Fallback to default thumbnail if specific thumbnail fails to load
-                    const target = e.currentTarget as HTMLImageElement;
-                    if (target.src && !target.src.includes('thumbnail.jpg')) {
-                      target.src = '/images/thumbnail.jpg';
-                    } else {
-                      target.style.display = 'none';
-                    }
-                  }}
-                />
+              <div className="relative w-full aspect-video bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 overflow-hidden p-1 md:p-1.5">
+                <div className="relative w-full h-full rounded-lg overflow-hidden flex items-center justify-center">
+                  <Image 
+                    src={item.thumbnail} 
+                    alt={item.title} 
+                    fill 
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                    className="object-contain group-hover:scale-105 transition-transform duration-300" 
+                    unoptimized
+                    style={{
+                      willChange: 'transform',
+                    }}
+                    onError={(e) => {
+                      // Fallback to default thumbnail if specific thumbnail fails to load
+                      const target = e.currentTarget as HTMLImageElement;
+                      if (target.src && !target.src.includes('thumbnail.jpg')) {
+                        target.src = '/images/thumbnail.jpg';
+                      } else {
+                        target.style.display = 'none';
+                      }
+                    }}
+                  />
+                </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                 
                 {/* Play Button for Videos / Read Icon for Blogs */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-6 h-6 md:w-7 md:h-7 bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-all duration-300 group-hover:bg-white group-hover:shadow-xl">
+                  <div className="w-6 h-6 md:w-7 md:h-7 bg-white/95 rounded-full flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:bg-white group-hover:shadow-xl"
+                    style={{
+                      willChange: 'transform',
+                      transform: 'translateZ(0)',
+                    }}
+                  >
                     {contentType === 'videos' ? (
                       <Play className="w-3 h-3 md:w-4 md:h-4 text-blue-600 ml-0.5" />
                     ) : (
@@ -498,15 +417,8 @@ export function VideoSection() {
                 </div>
                 
                 {/* Duration/Read Time Badge */}
-                <div className="absolute bottom-1 right-1 bg-black/90 backdrop-blur-sm text-white px-2 py-1 rounded-lg text-xs font-semibold shadow-lg">
+                <div className="absolute bottom-1 right-1 bg-black/90 text-white px-2 py-1 rounded-lg text-xs font-semibold shadow-lg">
                   {contentType === 'videos' ? (item as Video).duration : (item as Blog).readTime}
-                </div>
-
-                {/* Category Badge */}
-                <div className="absolute top-1 left-1">
-                  <span className="bg-white/95 backdrop-blur-sm text-gray-800 px-2 py-1 rounded-full text-xs font-bold shadow-lg border border-white/20">
-                    {item.category}
-                  </span>
                 </div>
               </div>
 
@@ -518,7 +430,7 @@ export function VideoSection() {
                   {item.title}
                 </h3>
                 
-                <p className="text-xs text-gray-600 mb-1 line-clamp-1 flex-1 min-h-[1rem]">
+                <p className="text-xs text-gray-600 mb-1 line-clamp-2 flex-1 min-h-[2rem]">
                   {item.description}
                 </p>
                 
@@ -558,21 +470,40 @@ export function VideoSection() {
         )}
       </div>
 
-      {/* No Content Message */}
-      {filteredData.length === 0 && (
-        <div className="text-center py-12">
-          <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Filter className="w-8 h-8 text-gray-400" />
-          </div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">No {contentType} found</h3>
-          <p className="text-gray-600">Try adjusting your filters to see more content.</p>
-        </div>
-      )}
 
       {/* Video Modal */}
       {isVideoOpen && selectedVideo && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-3xl p-4 md:p-6 lg:p-8 max-w-4xl w-full shadow-2xl border border-gray-200">
+        <div 
+          className="fixed inset-0 bg-black/80 z-50"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '1rem',
+            overflowY: 'auto',
+            top: '0',
+            left: '0',
+            right: '0',
+            bottom: '0',
+            width: '100%',
+            height: '100%',
+          }}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setIsVideoOpen(false);
+              setSelectedVideo(null);
+            }
+          }}
+        >
+          <div 
+            className="bg-white rounded-3xl p-4 md:p-6 lg:p-8 shadow-2xl border border-gray-200"
+            style={{
+              width: '100%',
+              maxWidth: '56rem',
+              margin: 'auto',
+              flexShrink: 0,
+            }}
+          >
             <div className="flex justify-between items-center mb-4 md:mb-6">
               <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-gray-900">{selectedVideo.title}</h3>
               <button
@@ -590,7 +521,8 @@ export function VideoSection() {
               style={{
                 aspectRatio: videoAspectRatio ? `${videoAspectRatio}` : '16/9',
                 maxHeight: '80vh',
-                maxWidth: '100%'
+                maxWidth: '100%',
+                willChange: 'auto'
               }}
             >
               <video
@@ -600,7 +532,11 @@ export function VideoSection() {
                 preload="metadata"
                 poster={selectedVideo.thumbnail}
                 autoPlay
+                playsInline
                 onLoadedMetadata={handleVideoLoadedMetadata}
+                style={{
+                  willChange: 'auto'
+                }}
               >
                 <source src={selectedVideo.videoUrl} type="video/mp4" />
                 Your browser does not support the video tag.

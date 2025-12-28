@@ -3,6 +3,9 @@
 Script to extract thumbnails from video files and save them in the images folder.
 The thumbnails will be named after the video files (e.g., intro.mp4 -> intro.jpg)
 
+Thumbnails are automatically cropped and resized to 16:9 aspect ratio (landscape)
+with a maximum width of 1280px, which is optimal for the video card layout.
+
 Requirements:
     pip install opencv-python pillow
 
@@ -14,14 +17,16 @@ import os
 import cv2
 from pathlib import Path
 
-def extract_thumbnail(video_path: str, output_path: str, frame_time: float = 1.0):
+def extract_thumbnail(video_path: str, output_path: str, frame_time: float = 1.0, target_ratio: float = 16/9, max_width: int = 1280):
     """
-    Extract a thumbnail from a video at a specific time.
+    Extract a thumbnail from a video at a specific time and resize to target aspect ratio.
     
     Args:
         video_path: Path to the input video file
         output_path: Path where the thumbnail will be saved
         frame_time: Time in seconds to extract the frame (default: 1 second)
+        target_ratio: Target aspect ratio (width/height), default 16/9 (1.78:1)
+        max_width: Maximum width for the thumbnail (default: 1280px)
     """
     try:
         # Open the video file
@@ -55,19 +60,36 @@ def extract_thumbnail(video_path: str, output_path: str, frame_time: float = 1.0
                 cap.release()
                 return False
         
-        # Resize if needed (optional - keep original size)
-        # You can uncomment and adjust if you want to resize thumbnails
-        # height, width = frame.shape[:2]
-        # if height > 720:
-        #     scale = 720 / height
-        #     new_width = int(width * scale)
-        #     frame = cv2.resize(frame, (new_width, 720))
+        # Get original dimensions
+        height, width = frame.shape[:2]
+        original_ratio = width / height
+        
+        # Crop and resize to target aspect ratio
+        if original_ratio > target_ratio:
+            # Video is wider than target - crop width (center crop)
+            new_width = int(height * target_ratio)
+            x_offset = (width - new_width) // 2
+            frame = frame[:, x_offset:x_offset + new_width]
+        elif original_ratio < target_ratio:
+            # Video is taller than target - crop height (center crop)
+            new_height = int(width / target_ratio)
+            y_offset = (height - new_height) // 2
+            frame = frame[y_offset:y_offset + new_height, :]
+        
+        # Resize to max_width while maintaining aspect ratio
+        final_height, final_width = frame.shape[:2]
+        if final_width > max_width:
+            scale = max_width / final_width
+            new_width = max_width
+            new_height = int(final_height * scale)
+            frame = cv2.resize(frame, (new_width, new_height), interpolation=cv2.INTER_AREA)
         
         # Save the frame as JPEG
         cv2.imwrite(output_path, frame, [cv2.IMWRITE_JPEG_QUALITY, 90])
         
         cap.release()
-        print(f"✓ Extracted thumbnail: {output_path}")
+        final_h, final_w = frame.shape[:2]
+        print(f"✓ Extracted thumbnail: {output_path} ({final_w}x{final_h}, ratio: {final_w/final_h:.2f}:1)")
         return True
         
     except Exception as e:
@@ -95,6 +117,8 @@ def main():
         return
     
     print(f"Found {len(video_files)} video file(s)")
+    print("Thumbnail aspect ratio: 16:9 (landscape)")
+    print("Max width: 1280px")
     print("-" * 50)
     
     # Process each video file
@@ -104,13 +128,8 @@ def main():
         video_name = video_file.stem  # Get filename without extension
         output_file = images_dir / f"{video_name}.jpg"
         
-        # Skip if thumbnail already exists
-        if output_file.exists():
-            print(f"⊘ Thumbnail already exists: {output_file.name}")
-            continue
-        
-        # Extract thumbnail
-        if extract_thumbnail(str(video_file), str(output_file)):
+        # Extract thumbnail (will overwrite existing)
+        if extract_thumbnail(str(video_file), str(output_file), target_ratio=16/9, max_width=1280):
             success_count += 1
     
     print("-" * 50)
