@@ -28,12 +28,19 @@ interface Blog {
   blogUrl: string;
 }
 
+// Helper function to generate thumbnail path from video URL
+const getThumbnailPath = (videoUrl: string): string => {
+  const videoFileName = videoUrl.split('/').pop()?.replace('.mp4', '') || '';
+  // Handle case sensitivity - try lowercase first, then check for title case
+  return `/images/${videoFileName}.jpg`;
+};
+
 const sampleVideos: Video[] = [
   {
     id: '7',
     title: 'Hereditary Mutations',
     description: 'Exploring genetic factors and hereditary mutations that can increase the risk of developing cancer.',
-    thumbnail: '/images/thumbnail.jpg',
+    thumbnail: getThumbnailPath('/videos/Hereditary_mutations.mp4'),
     duration: '0:57',
     date: '2025-12-17',
     category: 'Education',
@@ -44,7 +51,7 @@ const sampleVideos: Video[] = [
     id: '3',
     title: 'What Causes Cancer?',
     description: 'Exploring the various factors and causes that can lead to the development of cancer.',
-    thumbnail: '/images/thumbnail.jpg',
+    thumbnail: getThumbnailPath('/videos/what_causes_cancer.mp4'),
     duration: '01:11',
     date: '2025-12-09',
     category: 'Education',
@@ -55,7 +62,7 @@ const sampleVideos: Video[] = [
     id: '4',
     title: 'What Makes Cancer Cells Different from Normal Cells?',
     description: 'Understanding the key differences between cancer cells and normal cells, and how these differences affect treatment.',
-    thumbnail: '/images/thumbnail.jpg',
+    thumbnail: getThumbnailPath('/videos/what_makes_cancer_cell_different_from_normal_cells.mp4'),
     duration: '0:46',
     date: '2025-12-03',
     category: 'Education',
@@ -66,7 +73,7 @@ const sampleVideos: Video[] = [
     id: '8',
     title: 'Is There Any Hope After Cancer Diagnosis?',
     description: 'Providing hope and information about treatment options, recovery, and life after a cancer diagnosis.',
-    thumbnail: '/images/thumbnail.jpg',
+    thumbnail: getThumbnailPath('/videos/Is_there_any_hope_afetr_cancer_diagnosis.mp4'),
     duration: '1:11',
     date: '2025-11-26',
     category: 'Education',
@@ -77,7 +84,7 @@ const sampleVideos: Video[] = [
     id: '6',
     title: 'How is Cancer Diagnosed?',
     description: 'Understanding the various methods and techniques used in diagnosing cancer, from screening to confirmation.',
-    thumbnail: '/images/thumbnail.jpg',
+    thumbnail: getThumbnailPath('/videos/How_does_cancer_diagnosed.mp4'),
     duration: '01:20',
     date: '2025-11-19',
     category: 'Education',
@@ -88,7 +95,7 @@ const sampleVideos: Video[] = [
     id: '5',
     title: 'How Does Cancer Spread?',
     description: 'Learning about the process of cancer metastasis and how cancer cells spread to other parts of the body.',
-    thumbnail: '/images/thumbnail.jpg',
+    thumbnail: getThumbnailPath('/videos/How_does_cancer_spread.mp4'),
     duration: '0:38',
     date: '2025-11-12',
     category: 'Education',
@@ -100,7 +107,7 @@ const sampleVideos: Video[] = [
     id: '2',
     title: 'What is Cancer?',
     description: 'Understanding the fundamentals of cancer - what it is, how it develops, and its basic characteristics.',
-    thumbnail: '/images/thumbnail.jpg',
+    thumbnail: getThumbnailPath('/videos/what_is_cancer.mp4'),
     duration: '1:11',
     date: '2025-11-05',
     category: 'Education',
@@ -111,7 +118,7 @@ const sampleVideos: Video[] = [
     id: '1',
     title: 'Introduction',
     description: 'Dr. Vivek Shetty introduces himself and provides an overview of his expertise in Head & Neck Oncology.',
-    thumbnail: '/images/thumbnail.jpg',
+    thumbnail: getThumbnailPath('/videos/intro.mp4'),
     duration: '1:01',
     date: '2025-10-09',
     category: 'Introduction',
@@ -464,9 +471,17 @@ export function VideoSection() {
                   src={item.thumbnail} 
                   alt={item.title} 
                   fill 
+                  sizes="(max-width: 768px) 50vw, 25vw"
                   className="object-cover group-hover:scale-105 transition-transform duration-300" 
+                  unoptimized
                   onError={(e) => {
-                    e.currentTarget.style.display = 'none';
+                    // Fallback to default thumbnail if specific thumbnail fails to load
+                    const target = e.currentTarget as HTMLImageElement;
+                    if (target.src && !target.src.includes('thumbnail.jpg')) {
+                      target.src = '/images/thumbnail.jpg';
+                    } else {
+                      target.style.display = 'none';
+                    }
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />

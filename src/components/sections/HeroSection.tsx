@@ -89,9 +89,9 @@ export function HeroSection() {
 
             {/* Main Heading */}
             <div className="space-y-3 md:space-y-4 lg:space-y-5 text-center lg:text-left">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold text-gray-900 leading-[1.1]">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-gray-900 leading-[1.1]">
                 <span className="block">Dr. Vivek Shetty</span>
-                <span className="block mt-2 md:mt-3 text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-gray-600">
+                <span className="block mt-2 md:mt-3 text-xl md:text-2xl lg:text-3xl xl:text-4xl bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent font-bold">
                   Senior Surgical Oncologist
                 </span>
                 <span className="block mt-2 md:mt-3 text-xl md:text-2xl lg:text-3xl xl:text-4xl bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent font-bold">
@@ -198,7 +198,7 @@ export function HeroSection() {
                 className="w-full h-full object-contain"
                 controls
                 preload="metadata"
-                poster="/images/thumbnail.jpg"
+                poster="/images/intro.jpg"
                 onLoadedMetadata={() => {
                   if (videoRef.current) {
                     const video = videoRef.current;
