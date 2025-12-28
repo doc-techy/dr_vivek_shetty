@@ -3,12 +3,14 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, Play, Star, Award, Users, X, CheckCircle, Phone, Calendar, MapPin } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export function HeroSection() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [dimensionOption, setDimensionOption] = useState(1);
+  const [videoAspectRatio, setVideoAspectRatio] = useState<number | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     setIsVisible(true);
@@ -155,7 +157,10 @@ export function HeroSection() {
               </Link>
               
               <button
-                onClick={() => setIsVideoOpen(true)}
+                onClick={() => {
+                  setIsVideoOpen(true);
+                  setVideoAspectRatio(null); // Reset aspect ratio when opening video
+                }}
                 className="group inline-flex items-center justify-center px-6 md:px-5 lg:px-6 xl:px-8 py-3 md:py-2 lg:py-3 xl:py-4 bg-white/90 backdrop-blur-sm border-2 border-gray-200 text-gray-700 rounded-2xl font-semibold hover:bg-white hover:border-blue-300 hover:text-blue-600 transition-all duration-300 hover:scale-105 lg:flex-1 text-sm md:text-xs lg:text-sm xl:text-base"
               >
                 <Play className="w-4 h-4 md:w-3 md:h-3 lg:w-4 lg:h-4 xl:w-5 xl:h-5 mr-2 group-hover:scale-110 transition-transform duration-300" />
@@ -180,12 +185,27 @@ export function HeroSection() {
                 <X className="w-5 h-5 md:w-6 md:h-6 text-gray-600" />
               </button>
             </div>
-            <div className="aspect-video bg-black rounded-2xl overflow-hidden">
+            <div 
+              className="bg-black rounded-2xl overflow-hidden flex items-center justify-center"
+              style={{
+                aspectRatio: videoAspectRatio ? `${videoAspectRatio}` : '16/9',
+                maxHeight: '80vh',
+                maxWidth: '100%'
+              }}
+            >
               <video
-                className="w-full h-full object-cover"
+                ref={videoRef}
+                className="w-full h-full object-contain"
                 controls
                 preload="metadata"
                 poster="/images/thumbnail.jpg"
+                onLoadedMetadata={() => {
+                  if (videoRef.current) {
+                    const video = videoRef.current;
+                    const aspectRatio = video.videoWidth / video.videoHeight;
+                    setVideoAspectRatio(aspectRatio);
+                  }
+                }}
               >
                 <source src="/videos/intro.mp4" type="video/mp4" />
                 Your browser does not support the video tag.

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Play, Clock, Calendar, Filter, ChevronDown, Eye, ArrowRight, ArrowUp, FileText, BookOpen, X } from 'lucide-react';
 import Image from 'next/image';
 
@@ -228,6 +228,8 @@ export function VideoSection() {
   const [gridColumns, setGridColumns] = useState(4); // Track current grid columns
   const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const [videoAspectRatio, setVideoAspectRatio] = useState<number | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   // Check screen size on mount and resize
   useEffect(() => {
@@ -304,6 +306,15 @@ export function VideoSection() {
   const handleVideoClick = (video: Video) => {
     setSelectedVideo(video);
     setIsVideoOpen(true);
+    setVideoAspectRatio(null); // Reset aspect ratio when opening new video
+  };
+
+  const handleVideoLoadedMetadata = () => {
+    if (videoRef.current) {
+      const video = videoRef.current;
+      const aspectRatio = video.videoWidth / video.videoHeight;
+      setVideoAspectRatio(aspectRatio);
+    }
   };
 
   return (
@@ -559,13 +570,22 @@ export function VideoSection() {
                 <X className="w-5 h-5 md:w-6 md:h-6 text-gray-600" />
               </button>
             </div>
-            <div className="aspect-video bg-black rounded-2xl overflow-hidden">
+            <div 
+              className="bg-black rounded-2xl overflow-hidden flex items-center justify-center"
+              style={{
+                aspectRatio: videoAspectRatio ? `${videoAspectRatio}` : '16/9',
+                maxHeight: '80vh',
+                maxWidth: '100%'
+              }}
+            >
               <video
-                className="w-full h-full object-cover"
+                ref={videoRef}
+                className="w-full h-full object-contain"
                 controls
                 preload="metadata"
                 poster={selectedVideo.thumbnail}
                 autoPlay
+                onLoadedMetadata={handleVideoLoadedMetadata}
               >
                 <source src={selectedVideo.videoUrl} type="video/mp4" />
                 Your browser does not support the video tag.
