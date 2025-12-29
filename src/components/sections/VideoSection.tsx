@@ -304,6 +304,7 @@ export function VideoSection() {
   };
 
   return (
+    <>
     <div className="container-custom pt-4 md:pt-8 pb-8 md:pb-16">
       {/* Header */}
       <div className="text-center mb-4 relative">
@@ -474,19 +475,20 @@ export function VideoSection() {
       {/* Video Modal */}
       {isVideoOpen && selectedVideo && (
         <div 
-          className="fixed inset-0 bg-black/80 z-50"
+          className="fixed bg-black/80 z-[9999]"
           style={{
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            width: '100vw',
+            height: '100vh',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             padding: '1rem',
             overflowY: 'auto',
-            top: '0',
-            left: '0',
-            right: '0',
-            bottom: '0',
-            width: '100%',
-            height: '100%',
+            boxSizing: 'border-box',
           }}
           onClick={(e) => {
             if (e.target === e.currentTarget) {
@@ -500,8 +502,11 @@ export function VideoSection() {
             style={{
               width: '100%',
               maxWidth: '56rem',
-              margin: 'auto',
+              margin: '0',
+              position: 'relative',
               flexShrink: 0,
+              boxSizing: 'border-box',
+              alignSelf: 'center',
             }}
           >
             <div className="flex justify-between items-center mb-4 md:mb-6">
@@ -517,12 +522,15 @@ export function VideoSection() {
               </button>
             </div>
             <div 
-              className="bg-black rounded-2xl overflow-hidden flex items-center justify-center"
+              className="bg-black rounded-2xl overflow-hidden"
               style={{
                 aspectRatio: videoAspectRatio ? `${videoAspectRatio}` : '16/9',
                 maxHeight: '80vh',
-                maxWidth: '100%',
-                willChange: 'auto'
+                width: '100%',
+                position: 'relative',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
               <video
@@ -535,7 +543,10 @@ export function VideoSection() {
                 playsInline
                 onLoadedMetadata={handleVideoLoadedMetadata}
                 style={{
-                  willChange: 'auto'
+                  display: 'block',
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
                 }}
               >
                 <source src={selectedVideo.videoUrl} type="video/mp4" />
@@ -549,5 +560,6 @@ export function VideoSection() {
         </div>
       )}
     </div>
+    </>
   );
 }
