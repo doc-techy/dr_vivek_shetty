@@ -13,14 +13,6 @@ interface AppointmentBookingProps {
 export function AppointmentBooking({ className = '' }: AppointmentBookingProps) {
   const hospitals = [
     {
-      name: 'Docube Koramangala',
-      address: 'Koramangala, Bangalore',
-      availableAt: 'Mon-Sat: 6:00 PM - 8:00 PM',
-      website: 'https://www.docube.in/doctor/dr-vivek-shetty',
-      mapLink: 'https://share.google/7jT8kmK6ZFohFyoz8',
-      description: 'Premium healthcare facility with state-of-the-art diagnostic services'
-    },
-    {
       name: 'SPARSH Hospital',
       address: 'Hennur Road, Bangalore',
       availableAt: 'Mon, Wed, Fri: 9:30 AM - 4:00 PM',
@@ -42,12 +34,12 @@ export function AppointmentBooking({ className = '' }: AppointmentBookingProps) 
           Choose Your Preferred Location
         </h2>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          Dr. Vivek Shetty is available at two premium healthcare facilities in Bangalore
+          Dr. Vivek Shetty is available at this premium healthcare facility in Bangalore
         </p>
       </div>
 
       {/* Hospital Sections */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+      <div className="grid grid-cols-1 gap-6 items-stretch max-w-xl mx-auto">
         {hospitals.map((hospital, index) => (
           <div key={index} className="group relative bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-2xl p-6 hover:shadow-xl hover:border-blue-200 transition-all duration-300 flex flex-col h-full">
             {/* Hospital Header */}
