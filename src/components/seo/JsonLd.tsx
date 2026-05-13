@@ -9,31 +9,22 @@ export default function JsonLd() {
     description: 'Senior Consultant Head & Neck Onco Surgeon with over 11 years of experience in oral cancer, thyroid, and reconstructive surgery.',
     url: 'https://www.drvivekshetty.com',
     telephone: '+919886432371',
-    address: [
-      {
-        '@type': 'PostalAddress',
-        streetAddress: 'SPARSH Hospital',
-        addressLocality: 'Bangalore',
-        addressRegion: 'Karnataka',
-        postalCode: '560001',
-        addressCountry: 'IN'
-      },
-      {
-        '@type': 'PostalAddress',
-        streetAddress: 'Docube, Koramangala',
-        addressLocality: 'Bangalore',
-        addressRegion: 'Karnataka',
-        addressCountry: 'IN'
-      }
-    ],
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'SPARSH Hospital',
+      addressLocality: 'Bangalore',
+      addressRegion: 'Karnataka',
+      postalCode: '560001',
+      addressCountry: 'IN'
+    },
     medicalSpecialty: ['Head and Neck Surgery', 'Surgical Oncology', 'Oncology'],
     priceRange: '$$',
     openingHoursSpecification: [
       {
         '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-        opens: '18:00',
-        closes: '20:00'
+        dayOfWeek: ['Monday', 'Wednesday', 'Friday'],
+        opens: '09:30',
+        closes: '16:00'
       }
     ],
     sameAs: [
